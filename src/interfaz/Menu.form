@@ -9,21 +9,24 @@
             <Property name="text" type="java.lang.String" value="Datos"/>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="mClientes">
+            <MenuItem class="javax.swing.JMenuItem" name="miClientes">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Clientes"/>
               </Properties>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="mFuncionario">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miClientesActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="miFuncionarios">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Funcionarios"/>
               </Properties>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="mTarifa">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="miTarifa">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Tarifa"/>
               </Properties>
-            </Menu>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mPaquetes">
@@ -31,21 +34,21 @@
             <Property name="text" type="java.lang.String" value="Paquetes"/>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="mIngreso">
+            <MenuItem class="javax.swing.JMenuItem" name="miIngreso">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ingreso"/>
               </Properties>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="mEnvio">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="miEnvio">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Env&#xed;o"/>
               </Properties>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="mRecepcion">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="miRecepcion">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Recepci&#xf3;n"/>
               </Properties>
-            </Menu>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mReportes">
@@ -53,21 +56,21 @@
             <Property name="text" type="java.lang.String" value="Reportes"/>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="mPaquetesEstado">
+            <MenuItem class="javax.swing.JMenuItem" name="miPaquetesEstado">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Paquetes por estado"/>
               </Properties>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="mConsultaCliente">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="miConsultaCliente">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Consulta por cliente"/>
+                <Property name="text" type="java.lang.String" value="Consulta por Cliente"/>
               </Properties>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="mLogTransaccion">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="miLogTransacciones">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Log de transacci&#xf3;n"/>
+                <Property name="text" type="java.lang.String" value="Log de transacciones"/>
               </Properties>
-            </Menu>
+            </MenuItem>
           </SubComponents>
         </Menu>
       </SubComponents>
@@ -101,20 +104,17 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="pContenedor" alignment="0" max="32767" attributes="0"/>
+          <Component id="jLayeredPane1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              <Component id="pContenedor" min="-2" max="-2" attributes="0"/>
-          </Group>
+          <Component id="jLayeredPane1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="pContenedor">
+    <Container class="javax.swing.JLayeredPane" name="jLayeredPane1">
 
       <Layout>
         <DimensionLayout dim="0">

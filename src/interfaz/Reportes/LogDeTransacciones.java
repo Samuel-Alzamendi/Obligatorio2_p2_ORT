@@ -2,20 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Interzaf;
+package interfaz.Reportes;
 
 /**
  *
  * @author samue
  */
-public class ComenzarCon extends javax.swing.JFrame {
+public class LogDeTransacciones extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ComenzarCon.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LogDeTransacciones.class.getName());
 
     /**
-     * Creates new form ComenzarCon
+     * Creates new form LogDeTransacciones
      */
-    public ComenzarCon() {
+    public LogDeTransacciones() {
         initComponents();
     }
 
@@ -29,23 +29,38 @@ public class ComenzarCon extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jrbSistemaNuevo = new javax.swing.JRadioButton();
-        jrbUltimosDatos = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
+        spLogs = new javax.swing.JScrollPane();
+        txtLogs = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Comenzar con...");
-        setName("Comenzar con..."); // NOI18N
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setName("Comenzar Con..."); // NOI18N
-        jPanel1.setLayout(null);
+        jButton1.setText("Borrar todo contenido");
 
-        jrbSistemaNuevo.setText("Un sistema nuevo");
-        jPanel1.add(jrbSistemaNuevo);
-        jrbSistemaNuevo.setBounds(80, 80, 240, 21);
+        txtLogs.setColumns(20);
+        txtLogs.setRows(5);
+        spLogs.setViewportView(txtLogs);
 
-        jrbUltimosDatos.setText("Los datos de la ultima ejecución");
-        jPanel1.add(jrbUltimosDatos);
-        jrbUltimosDatos.setBounds(80, 50, 240, 21);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(spLogs, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addGap(282, 282, 282))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(spLogs, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -55,10 +70,10 @@ public class ComenzarCon extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setBounds(0, 0, 416, 160);
+        setBounds(0, 0, 614, 357);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -83,12 +98,13 @@ public class ComenzarCon extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ComenzarCon().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new LogDeTransacciones().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jrbSistemaNuevo;
-    private javax.swing.JRadioButton jrbUltimosDatos;
+    private javax.swing.JScrollPane spLogs;
+    private javax.swing.JTextArea txtLogs;
     // End of variables declaration//GEN-END:variables
 }
