@@ -1,5 +1,8 @@
 package interfaz;
+import dominio.Sistema;
+import interfaz.Reportes.*;
 import interfaz.datos.*;
+import interfaz.paquetes.*;
 /**
  * Michelle Katz 220144
  * Samuel Alzamendi 355626
@@ -7,14 +10,13 @@ import interfaz.datos.*;
 public class Menu extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Menu.class.getName());
-    private Menu modelo;
     
-    public Menu(Menu unModelo) {
-        this.modelo = unModelo;
+    private Sistema modelo;
+    
+    public Menu() {
         objetoAPantalla();
         initComponents();
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -56,9 +58,11 @@ public class Menu extends javax.swing.JFrame {
         mDatos.add(miClientes);
 
         miFuncionarios.setText("Funcionarios");
+        miFuncionarios.addActionListener(this::miFuncionariosActionPerformed);
         mDatos.add(miFuncionarios);
 
         miTarifa.setText("Tarifa");
+        miTarifa.addActionListener(this::miTarifaActionPerformed);
         mDatos.add(miTarifa);
 
         jMenuBar1.add(mDatos);
@@ -66,12 +70,15 @@ public class Menu extends javax.swing.JFrame {
         mPaquetes.setText("Paquetes");
 
         miIngreso.setText("Ingreso");
+        miIngreso.addActionListener(this::miIngresoActionPerformed);
         mPaquetes.add(miIngreso);
 
         miEnvio.setText("Envío");
+        miEnvio.addActionListener(this::miEnvioActionPerformed);
         mPaquetes.add(miEnvio);
 
         miRecepcion.setText("Recepción");
+        miRecepcion.addActionListener(this::miRecepcionActionPerformed);
         mPaquetes.add(miRecepcion);
 
         jMenuBar1.add(mPaquetes);
@@ -79,12 +86,15 @@ public class Menu extends javax.swing.JFrame {
         mReportes.setText("Reportes");
 
         miPaquetesEstado.setText("Paquetes por estado");
+        miPaquetesEstado.addActionListener(this::miPaquetesEstadoActionPerformed);
         mReportes.add(miPaquetesEstado);
 
         miConsultaCliente.setText("Consulta por Cliente");
+        miConsultaCliente.addActionListener(this::miConsultaClienteActionPerformed);
         mReportes.add(miConsultaCliente);
 
         miLogTransacciones.setText("Log de transacciones");
+        miLogTransacciones.addActionListener(this::miLogTransaccionesActionPerformed);
         mReportes.add(miLogTransacciones);
 
         jMenuBar1.add(mReportes);
@@ -104,13 +114,61 @@ public class Menu extends javax.swing.JFrame {
 
         setBounds(0, 0, 609, 380);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    //-----------------------------
+    // datos
     private void miClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miClientesActionPerformed
-
-        ClienteInterfaz ci = new ClienteInterfaz();
-        ci.setVisible(true);
-        
+        ClienteInterfaz v = new ClienteInterfaz(modelo);
+        v.setVisible(true);
     }//GEN-LAST:event_miClientesActionPerformed
+
+    private void miFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miFuncionariosActionPerformed
+        FuncionarioInterfaz v = new FuncionarioInterfaz(modelo);
+        v.setVisible(true);
+    }//GEN-LAST:event_miFuncionariosActionPerformed
+
+    private void miTarifaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTarifaActionPerformed
+        Tarifa v = new Tarifa(modelo);
+        v.setVisible(true);
+    }//GEN-LAST:event_miTarifaActionPerformed
+
+    //-----------------------------
+    // paquetes
+    private void miIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miIngresoActionPerformed
+        Ingreso v = new Ingreso(modelo);
+        v.setVisible(true);
+    }//GEN-LAST:event_miIngresoActionPerformed
+
+    private void miEnvioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEnvioActionPerformed
+        Envio v = new Envio(modelo);
+        v.setVisible(true);
+    }//GEN-LAST:event_miEnvioActionPerformed
+
+    private void miRecepcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRecepcionActionPerformed
+        Recepcion v = new Recepcion(modelo);
+        v.setVisible(true);
+    }//GEN-LAST:event_miRecepcionActionPerformed
+    
+    //-----------------------------
+    // reportes
+    private void miPaquetesEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miPaquetesEstadoActionPerformed
+        PaquetesPorEstado v = new PaquetesPorEstado(modelo);
+        v.setVisible(true);
+    }//GEN-LAST:event_miPaquetesEstadoActionPerformed
+
+    private void miConsultaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miConsultaClienteActionPerformed
+        ConsultaPorCliente v = new ConsultaPorCliente(modelo);
+        v.setVisible(true);
+    }//GEN-LAST:event_miConsultaClienteActionPerformed
+
+    private void miLogTransaccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLogTransaccionesActionPerformed
+        LogDeTransacciones v = new LogDeTransacciones(modelo);
+        v.setVisible(true);
+    }//GEN-LAST:event_miLogTransaccionesActionPerformed
+
+
+    
+    
     
     private void objetoAPantalla(){
         

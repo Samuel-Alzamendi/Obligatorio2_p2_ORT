@@ -1,14 +1,18 @@
 package interfaz.datos;
 
+import dominio.Sistema;
+
 /**
- * Michelle Katz 220144
- * Samuel Alzamendi 355626
+ * Michelle Katz 220144 Samuel Alzamendi 355626
  */
 public class ClienteInterfaz extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClienteInterfaz.class.getName());
 
-    public ClienteInterfaz() {
+    private Sistema modelo;
+
+    public ClienteInterfaz(Sistema modelo) {
+        this.modelo = modelo;
         initComponents();
     }
 
@@ -28,7 +32,7 @@ public class ClienteInterfaz extends javax.swing.JFrame {
         btnModficarCliente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("ClienteInterfaz");
+        setTitle("Clientes");
 
         lblNombre.setText("Nombre");
 

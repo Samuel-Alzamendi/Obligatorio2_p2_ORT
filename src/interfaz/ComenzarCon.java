@@ -7,7 +7,7 @@ package interfaz;
 public class ComenzarCon extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ComenzarCon.class.getName());
-
+    
     public ComenzarCon() {
         initComponents();
     }
@@ -35,6 +35,7 @@ public class ComenzarCon extends javax.swing.JFrame {
 
         bgGrupoOps.add(jrbUltimosDatos);
         jrbUltimosDatos.setText("Los datos de la ultima ejecución");
+        jrbUltimosDatos.addActionListener(this::jrbUltimosDatosActionPerformed);
         jPanel1.add(jrbUltimosDatos);
         jrbUltimosDatos.setBounds(80, 50, 240, 21);
 
@@ -51,6 +52,12 @@ public class ComenzarCon extends javax.swing.JFrame {
 
         setBounds(0, 0, 416, 160);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jrbUltimosDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbUltimosDatosActionPerformed
+        Menu menu = new Menu();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jrbUltimosDatosActionPerformed
 
 
 

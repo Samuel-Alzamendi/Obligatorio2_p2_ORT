@@ -1,0 +1,19 @@
+package interfaz;
+
+import dominio.Sistema;
+import interfaz.Reportes.PaquetesPorEstado;
+
+public class Programa {
+
+    public static void main(String[] args) {
+        ComenzarCon ventana = new ComenzarCon();
+        ventana.setVisible(true);
+        
+//        Menu menu = new Menu();
+//        menu.setVisible(true);
+//        Sistema modelo = new Sistema();
+//        PaquetesPorEstado v = new PaquetesPorEstado(modelo);
+//        v.setVisible(true);
+        
+    }
+}
