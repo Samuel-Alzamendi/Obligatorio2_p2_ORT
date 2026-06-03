@@ -124,7 +124,7 @@ public class Ingreso extends javax.swing.JFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
 
-        
+        this.dispose();
         
     }//GEN-LAST:event_btnCancelarActionPerformed
 

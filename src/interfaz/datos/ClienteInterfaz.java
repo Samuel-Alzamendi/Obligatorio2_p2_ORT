@@ -1,6 +1,13 @@
 package interfaz.datos;
 
+import dominio.Cliente;
 import dominio.Sistema;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 /**
  * Michelle Katz 220144 Samuel Alzamendi 355626
@@ -30,6 +37,7 @@ public class ClienteInterfaz extends javax.swing.JFrame {
         liClientes = new javax.swing.JList<>();
         btnCrearCliente = new javax.swing.JButton();
         btnModficarCliente = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clientes");
@@ -45,9 +53,13 @@ public class ClienteInterfaz extends javax.swing.JFrame {
 
         btnCrearCliente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnCrearCliente.setText("Crear cliente");
+        btnCrearCliente.addActionListener(this::btnCrearClienteActionPerformed);
 
         btnModficarCliente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnModficarCliente.setText("Modificar cliente");
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -69,7 +81,9 @@ public class ClienteInterfaz extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnCrearCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnModficarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnModficarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -94,16 +108,100 @@ public class ClienteInterfaz extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCrearCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnModficarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCrearClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearClienteActionPerformed
+        String nombre = txtNombre.getText();
+        String telefono = txtTel.getText();
+        String email = txtEmail.getText();
+
+        serializar(nombre, telefono, email);
+    }//GEN-LAST:event_btnCrearClienteActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    //        public static void serializar(){
+//        Persona p1 = new Persona();
+//        p1.setNombre("Luis");
+//        p1.setEdad(55);
+//        //p1.setMascota(a1);
+//        
+//        Persona p2 = new Persona();
+//        p2.setNombre("Ana");
+//        p2.setEdad(22);
+//        //p2.setMascota(a2);
+//        try{
+//            ObjectOutputStream out = new ObjectOutputStream(new 
+//                FileOutputStream("sistema.ser"));
+//            out.writeObject(p1);
+//            out.writeObject(p2);
+//            out.close();
+//        }catch(IOException e){
+//            e.printStackTrace();
+//        }
+//    }
+//    
+//    private static void deserializar(){
+//        
+//        try{
+//            ObjectInputStream in = new ObjectInputStream(
+//                new FileInputStream("sistema.ser"));
+//            Persona p3 = (Persona) in.readObject();
+//            Persona p4 = (Persona) in.readObject();
+//            System.out.println(p3);
+//            System.out.println(p4);
+//        }catch(IOException | ClassNotFoundException ex){
+//            ex.printStackTrace();
+//        }
+//        
+//    }
+    private static void serializar(String nombre, String telefono, String email) {
+
+        Cliente c = new Cliente();
+        ArrayList<Integer> paquetes = new ArrayList<>();
+
+        c.setNombre(nombre);
+        c.setTelefono(telefono);
+        c.setMail(email);
+        c.setPaquetes(paquetes);
+
+        try {
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("clientes.ser"));
+            out.writeObject(c);
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void deserializar() {
+        try {
+            ObjectInputStream in = new ObjectInputStream(
+                    new FileInputStream("clientes.ser"));
+            try{
+                Cliente c = (Cliente) in.readObject();
+            }catch(ClassNotFoundException e){
+                System.out.println(e);
+            }
+            System.out.println();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } 
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrearCliente;
     private javax.swing.JButton btnModficarCliente;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblTel;

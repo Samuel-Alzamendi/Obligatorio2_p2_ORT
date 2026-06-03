@@ -11,13 +11,14 @@ import java.util.ArrayList;
  * @author michellekatzzador
  */
 public class Sistema {
+    
+    private ArrayList<Cliente> clientes = new ArrayList <>();
     private ArrayList<Paquete> paquetes = new ArrayList <>();
     private ArrayList<Departamento> departamentos = new ArrayList <>();
     private ArrayList<Envio> envios = new ArrayList <>();
     private ArrayList<Funcionario> funcionarios = new ArrayList <>();
     private ArrayList<Tarifa> tarifas = new ArrayList <>();
     private ArrayList<Zona> zonas = new ArrayList <>();
-
     
     //contructor
     public Sistema() {

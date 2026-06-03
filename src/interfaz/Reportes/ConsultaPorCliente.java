@@ -61,6 +61,7 @@ public class ConsultaPorCliente extends javax.swing.JFrame {
 
         btnCancelar.setText("Cancelar");
         btnCancelar.setToolTipText("");
+        btnCancelar.addActionListener(this::btnCancelarActionPerformed);
         pMain.add(btnCancelar);
         btnCancelar.setBounds(510, 320, 76, 23);
 
@@ -93,6 +94,10 @@ public class ConsultaPorCliente extends javax.swing.JFrame {
 
         setBounds(0, 0, 614, 357);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
