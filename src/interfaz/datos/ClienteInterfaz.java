@@ -186,14 +186,10 @@ public class ClienteInterfaz extends javax.swing.JFrame {
         try {
             ObjectInputStream in = new ObjectInputStream(
                     new FileInputStream("clientes.ser"));
-            try{
                 Cliente c = (Cliente) in.readObject();
-            }catch(ClassNotFoundException e){
-                System.out.println(e);
-            }
             System.out.println();
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
         } 
     }
 
