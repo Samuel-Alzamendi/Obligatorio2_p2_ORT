@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 
 /**
  * Michelle Katz 220144 Samuel Alzamendi 355626
@@ -37,7 +39,6 @@ public class ClienteInterfaz extends javax.swing.JFrame {
         liClientes = new javax.swing.JList<>();
         btnCrearCliente = new javax.swing.JButton();
         btnModficarCliente = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clientes");
@@ -57,9 +58,6 @@ public class ClienteInterfaz extends javax.swing.JFrame {
 
         btnModficarCliente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnModficarCliente.setText("Modificar cliente");
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -81,9 +79,7 @@ public class ClienteInterfaz extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnCrearCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnModficarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(btnModficarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -108,26 +104,41 @@ public class ClienteInterfaz extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCrearCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnModficarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+//BOTON CREAR CLIENTE
     private void btnCrearClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearClienteActionPerformed
         String nombre = txtNombre.getText();
         String telefono = txtTel.getText();
         String email = txtEmail.getText();
-
-        serializar(nombre, telefono, email);
+        
+        
+        boolean correcto = modelo.agregarCliente(nombre, email, telefono);
+       // se borran datos y se actualiza lista
+        if(correcto){
+            actualizarLista();
+            txtNombre.setText("");
+            txtTel.setText("");
+            txtEmail.setText("");
+         
+        }else {
+            JOptionPane.showMessageDialog(this, "El nombre ya existe o está vacío");
+        }
+        
+        
+        
     }//GEN-LAST:event_btnCrearClienteActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+ //metodo actualizarLista (creamos string de largo cleintes y en for ponemos dentro. Luego la mostramos en lista
+    private void actualizarLista() {
+    String[] nombres = new String[modelo.getClientes().size()];
+    for (int i = 0; i < modelo.getClientes().size(); i++) {
+        nombres[i] = modelo.getClientes().get(i).getNombre();
+    }
+    liClientes.setListData(nombres);
+}
     //        public static void serializar(){
 //        Persona p1 = new Persona();
 //        p1.setNombre("Luis");
@@ -163,41 +174,9 @@ public class ClienteInterfaz extends javax.swing.JFrame {
 //        }
 //        
 //    }
-    private static void serializar(String nombre, String telefono, String email) {
-
-        Cliente c = new Cliente();
-        ArrayList<Integer> paquetes = new ArrayList<>();
-
-        c.setNombre(nombre);
-        c.setTelefono(telefono);
-        c.setMail(email);
-        c.setPaquetes(paquetes);
-
-        try {
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("clientes.ser"));
-            out.writeObject(c);
-            out.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void deserializar() {
-        try {
-            ObjectInputStream in = new ObjectInputStream(
-                    new FileInputStream("clientes.ser"));
-                Cliente c = (Cliente) in.readObject();
-            System.out.println();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        } 
-    }
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrearCliente;
     private javax.swing.JButton btnModficarCliente;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblTel;

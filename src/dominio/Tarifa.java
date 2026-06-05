@@ -12,19 +12,17 @@ import java.util.ArrayList;
  */
 public class Tarifa {
     private Zona zona;
-    private ArrayList<Paquete> paquetes = new ArrayList <>();
     private int[] precios = new int[4];
    
     
     
     //constructor
+
     public Tarifa(Zona zona) {
         this.zona = zona;
     }
-    
-    
-    //getter y setter
 
+    //getter y setter
     public Zona getZona() {
         return zona;
     }
@@ -33,13 +31,7 @@ public class Tarifa {
         this.zona = zona;
     }
 
-    public ArrayList<Paquete> getPaquetes() {
-        return paquetes;
-    }
-
-    public void setPaquetes(ArrayList<Paquete> paquetes) {
-        this.paquetes = paquetes;
-    }
+ 
 
     public int[] getPrecios() {
         return precios;
@@ -49,6 +41,8 @@ public class Tarifa {
         this.precios = precios;
     }
     
+    
+    //metodos
     
     
     

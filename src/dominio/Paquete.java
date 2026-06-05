@@ -4,6 +4,8 @@
  */
 package dominio;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author michellekatzzador
@@ -15,22 +17,27 @@ public class Paquete {
     private String direccion;
     private String fecha;
     private int peso;
+    private int precio;
     private Departamento departamento;
     private String estado;
+    private ArrayList<Tarifa> tarifa = new ArrayList <>();
 
     
     //Constructor
 
-    public Paquete(int id, Cliente cliente, String NombreDestinatario, String direccion, String fecha, int peso, Departamento departamento, String estado) {
+    public Paquete(int id, Cliente cliente, String NombreDestinatario, String direccion, String fecha, int peso, int precio, Departamento departamento, String estado) {
         this.id = id;
         this.cliente = cliente;
         this.NombreDestinatario = NombreDestinatario;
         this.direccion = direccion;
         this.fecha = fecha;
         this.peso = peso;
+        this.precio = precio;
         this.departamento = departamento;
         this.estado = estado;
     }
+
+  
     
     
     
@@ -85,6 +92,14 @@ public class Paquete {
         this.peso = peso;
     }
 
+    public int getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
+    }
+
     public Departamento getDepartamento() {
         return departamento;
     }
@@ -100,7 +115,18 @@ public class Paquete {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-     
+
+    public ArrayList<Tarifa> getTarifa() {
+        return tarifa;
+    }
+
+    public void setTarifa(ArrayList<Tarifa> tarifa) {
+        this.tarifa = tarifa;
+    }
+  
+    
+    //metodos
+
     
     
 }

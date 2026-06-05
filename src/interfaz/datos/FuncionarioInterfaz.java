@@ -1,6 +1,8 @@
 package interfaz.datos;
 
 import dominio.Sistema;
+import java.util.InputMismatchException;
+import javax.swing.JOptionPane;
 
 /**
  * Michelle Katz 220144
@@ -30,8 +32,6 @@ public class FuncionarioInterfaz extends javax.swing.JFrame {
         lblTel = new javax.swing.JLabel();
         txtAñoIngreso = new javax.swing.JTextField();
         lblNombre1 = new javax.swing.JLabel();
-        lblNombre2 = new javax.swing.JLabel();
-        txtId = new javax.swing.JTextField();
         btnCrearFuncionario = new javax.swing.JButton();
         btnModificarFuncionario = new javax.swing.JButton();
 
@@ -47,13 +47,13 @@ public class FuncionarioInterfaz extends javax.swing.JFrame {
 
         lblNombre1.setText("Año de ingreso");
 
-        lblNombre2.setText("ID de funcionario");
-
         btnCrearFuncionario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnCrearFuncionario.setText("Crear funcionario");
+        btnCrearFuncionario.addActionListener(this::btnCrearFuncionarioActionPerformed);
 
         btnModificarFuncionario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnModificarFuncionario.setText("Modificar funcionario");
+        btnModificarFuncionario.addActionListener(this::btnModificarFuncionarioActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -69,8 +69,6 @@ public class FuncionarioInterfaz extends javax.swing.JFrame {
                             .addComponent(txtNombre)
                             .addComponent(txtTel)
                             .addComponent(txtAñoIngreso)
-                            .addComponent(txtId)
-                            .addComponent(lblNombre2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblNombre1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblTel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -87,18 +85,14 @@ public class FuncionarioInterfaz extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(spListaFun)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblNombre2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(31, 31, 31)
                         .addComponent(lblTel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(33, 33, 33)
                         .addComponent(lblNombre1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtAñoIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -106,24 +100,77 @@ public class FuncionarioInterfaz extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCrearFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnModificarFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+//BOTON CREAR FUNCIONARIO
+    private void btnCrearFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearFuncionarioActionPerformed
+            String nombre = txtNombre.getText();
+            String telefono = txtTel.getText();
+            int ano = 0;
+            try{
+                ano = Integer.parseInt(txtAñoIngreso.getText());
+            } catch(InputMismatchException e){
+                System.out.println(e);
+                 JOptionPane.showMessageDialog(this, "Ingrese solamente numeros en año");
+            }
+            
+        
+        
+        boolean correcto = modelo.agregarFuncionario(nombre, ano, telefono);
+       // se borran datos y se actualiza lista
+        if(correcto){
+            actualizarLista();
+            txtNombre.setText("");
+            txtTel.setText("");
+            txtAñoIngreso.setText("");
+         
+        }else {
+            JOptionPane.showMessageDialog(this, "El nombre ya existe o está vacío");
+        }
+    }//GEN-LAST:event_btnCrearFuncionarioActionPerformed
+    //BOTON MODIFICAR
+    private void btnModificarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarFuncionarioActionPerformed
+       String nombre = txtNombre.getText();
+       String telefono = txtTel.getText();
+       int ano = 0;
+       try{
+                ano = Integer.parseInt(txtAñoIngreso.getText());
+            } catch(InputMismatchException e){
+                System.out.println(e);
+                 JOptionPane.showMessageDialog(this, "Ingrese solamente numeros en año");
+            }
+      
+       boolean correcto = modelo.eliminarFuncionario(nombre);
+       correcto = modelo.agregarFuncionario(nombre, ano, telefono);
+       if (correcto){
+           JOptionPane.showMessageDialog(this, "se modifico correctamente");
+       }else{
+            JOptionPane.showMessageDialog(this, "No se pudo modificar correctamente");
+       }
+           
+        
+    }//GEN-LAST:event_btnModificarFuncionarioActionPerformed
 
+        private void actualizarLista() {
+            String[] nombres = new String[modelo.getFuncionarios().size()];
+            for (int i = 0; i < modelo.getFuncionarios().size(); i++) {
+            nombres[i] = modelo.getFuncionarios().get(i).getNombre();
+        }
+        liFun.setListData(nombres);
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrearFuncionario;
     private javax.swing.JButton btnModificarFuncionario;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombre1;
-    private javax.swing.JLabel lblNombre2;
     private javax.swing.JLabel lblTel;
     private javax.swing.JList<Object> liFun;
     private javax.swing.JScrollPane spListaFun;
     private javax.swing.JTextField txtAñoIngreso;
-    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTel;
     // End of variables declaration//GEN-END:variables

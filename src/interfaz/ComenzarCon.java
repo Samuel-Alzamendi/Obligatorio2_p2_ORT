@@ -1,5 +1,7 @@
 package interfaz;
 
+import dominio.Sistema;
+
 /**
  * Michelle Katz 220144
  * Samuel Alzamendi 355626
@@ -7,6 +9,7 @@ package interfaz;
 public class ComenzarCon extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ComenzarCon.class.getName());
+    private Sistema modelo= new Sistema();
     
     public ComenzarCon() {
         initComponents();
@@ -54,7 +57,7 @@ public class ComenzarCon extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrbUltimosDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbUltimosDatosActionPerformed
-        Menu menu = new Menu();
+        Menu menu = new Menu(modelo);
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jrbUltimosDatosActionPerformed

@@ -13,7 +13,8 @@ public class Menu extends javax.swing.JFrame {
     
     private Sistema modelo;
     
-    public Menu() {
+    public Menu(Sistema modelo) {
+        this.modelo = modelo;
         objetoAPantalla();
         initComponents();
     }

@@ -11,17 +11,22 @@ package dominio;
 public class Departamento {
     private int numero;
     private String nombre;
+    private Zona zona;
 
     
     //contructor
-    public Departamento(int numero, String nombre) {
+
+    public Departamento(int numero, String nombre, Zona zona) {
         this.numero = numero;
         this.nombre = nombre;
+        this.zona = zona;
     }
+   
 
     
     
     //getter y setter
+
     public int getNumero() {
         return numero;
     }
@@ -37,6 +42,17 @@ public class Departamento {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public Zona getZona() {
+        return zona;
+    }
+
+    public void setZona(Zona zona) {
+        this.zona = zona;
+    }
+   
+    
+    //metodos
     
     
     

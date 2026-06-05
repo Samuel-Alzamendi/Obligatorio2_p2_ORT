@@ -11,10 +11,10 @@ import java.util.ArrayList;
  * @author michellekatzzador
  */
 public class Envio {
-    private String id;
+    private int id;
     private Zona zona;
     private Funcionario funcionario;
-    private ArrayList<Paquete> paquetes = new ArrayList <>();
+    private ArrayList<Paquete> paquetes;
     private String fechaEnvio;
     private int pesoTotalPaquetes;
     private int precio;
@@ -22,10 +22,11 @@ public class Envio {
     
     //constructor    
 
-    public Envio(String id, Zona zona, Funcionario funcionario, String fechaEnvio, int pesoTotalPaquetes, int precio) {
+    public Envio(int id, Zona zona, Funcionario funcionario, String fechaEnvio, int pesoTotalPaquetes, int precio) {
         this.id = id;
         this.zona = zona;
         this.funcionario = funcionario;
+        paquetes = new ArrayList <>();
         this.fechaEnvio = fechaEnvio;
         this.pesoTotalPaquetes = pesoTotalPaquetes;
         this.precio = precio;
@@ -35,11 +36,11 @@ public class Envio {
     
     //getter y setter
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

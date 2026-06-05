@@ -22,6 +22,10 @@ public class Funcionario {
         this.anoIngreso = anoIngreso;
     }
     
+    public Funcionario() {
+       
+    }
+    
     
     //getter y setter
 
