@@ -16,29 +16,19 @@ import java.util.ArrayList;
  *
  * @author michellekatzzador
  */
-
-
-
 public class Sistema implements Serializable {
-    
-  
-    
-    
-    private ArrayList<Cliente> clientes = new ArrayList <>();
-    private ArrayList<Paquete> paquetes = new ArrayList <>();
-    private ArrayList<Departamento> departamentos = new ArrayList <>();
-    private ArrayList<Envio> envios = new ArrayList <>();
-    private ArrayList<Funcionario> funcionarios = new ArrayList <>();
-    private ArrayList<Tarifa> tarifas = new ArrayList <>();
-    private ArrayList<Zona> zonas = new ArrayList <>();
-    
-    //contructor
 
+    private ArrayList<Cliente> clientes = new ArrayList<>();
+    private ArrayList<Paquete> paquetes = new ArrayList<>();
+    private ArrayList<Departamento> departamentos = new ArrayList<>();
+    private ArrayList<Envio> envios = new ArrayList<>();
+    private ArrayList<Funcionario> funcionarios = new ArrayList<>();
+    private ArrayList<Tarifa> tarifas = new ArrayList<>();
+    private ArrayList<Zona> zonas = new ArrayList<>();
+
+    //contructor
     public Sistema() {
     }
-    
-    
-    
 
     public ArrayList<Cliente> getClientes() {
         return clientes;
@@ -95,92 +85,123 @@ public class Sistema implements Serializable {
     public void setZonas(ArrayList<Zona> zonas) {
         this.zonas = zonas;
     }
-    
-    
-    
+
     //Metodos
-    
     //Metodo para agregar cliente al sistema
-    public boolean agregarCliente(String unNombre, String unMail, String unTelefono){
+    public boolean agregarCliente(String unNombre, String unMail, String unTelefono) {
         boolean correcto = true;
-        if (unNombre.equals("")){
+        if (unNombre.equals("")) {
             correcto = false;
             System.out.println("Error, faltó el ingreso del nombre");
         } else if (existeNombre(unNombre)) {
-        correcto = false;
-        } else{
-          Cliente c = new Cliente();  
-          c.setNombre(unNombre);
-          c.setTelefono(unTelefono);
-          c.setMail(unMail);
-          clientes.add(c);
-          
+            correcto = false;
+        } else {
+            Cliente c = new Cliente();
+            c.setNombre(unNombre);
+            c.setTelefono(unTelefono);
+            c.setMail(unMail);
+            clientes.add(c);
+
         }
         return correcto;
     }
-    
-        //Metodo para agregar cliente al sistema
-    public boolean agregarFuncionario(String unNombre,
-    int unAnoIngreso , String unTelefono){
+
+    public boolean eliminarCliente(String nombre) {
         boolean correcto = true;
-        if (unNombre.equals("")){
+        if (existeNombre(nombre)) {
+            Cliente c = new Cliente();
+            for (int i = 0; i < clientes.size(); i++) {
+                if (clientes.get(i).getNombre().equalsIgnoreCase(nombre)) {
+                    c = clientes.get(i);
+                    clientes.remove(c);
+                }
+            }
+        } else {
+            correcto = false;
+        }
+        return correcto;
+    }
+
+    //Metodo para agregar funcionario al sistema
+    public boolean agregarFuncionario(String unNombre, int unAnoIngreso, String unTelefono) {
+        boolean correcto = true;
+        if (unNombre.equals("")) {
             correcto = false;
             System.out.println("Error, faltó el ingreso del nombre");
         } else if (existeNombre(unNombre)) {
-        correcto = false;
-        } else{
-          Funcionario f = new Funcionario();  
-          f.setNombre(unNombre);
-          f.setCelular(unTelefono);
-          f.setAnoIngreso(unAnoIngreso);
-          
-          funcionarios.add(f);
-          
-        }
-        return correcto;
-    }
-    
-    public boolean eliminarFuncionario(String nombre){
-        boolean correcto = true;
-        if(existeNombre(nombre)){
+            correcto = false;
+        } else {
             Funcionario f = new Funcionario();
-            for(int i = 0; i<funcionarios.size(); i++) {
-                 if (funcionarios.get(i).getNombre().equalsIgnoreCase(nombre)) {
+            f.setNombre(unNombre);
+            f.setCelular(unTelefono);
+            f.setAnoIngreso(unAnoIngreso);
+
+            funcionarios.add(f);
+
+        }
+        return correcto;
+    }
+
+    public boolean eliminarFuncionario(String nombre) {
+        boolean correcto = true;
+        if (existeNombre(nombre)) {
+            Funcionario f = new Funcionario();
+            for (int i = 0; i < funcionarios.size(); i++) {
+                if (funcionarios.get(i).getNombre().equalsIgnoreCase(nombre)) {
+                    f = funcionarios.get(i);
                     funcionarios.remove(f);
-                    
-      
-                 }
-             }
-            
-        }else{
+                }
+            }
+        } else {
             correcto = false;
         }
         return correcto;
     }
-    
+
     //metodo para ver que nombre no se repita
-    private boolean existeNombre(String nombre){  
-        boolean existe= false;
-        for (int i = 0 ; i<clientes.size(); i++ ){
-            if (clientes.get(i).getNombre().equalsIgnoreCase(nombre)){
+    private boolean existeNombre(String nombre) {
+        boolean existe = false;
+        for (int i = 0; i < clientes.size(); i++) {
+            if (clientes.get(i).getNombre().equalsIgnoreCase(nombre)) {
                 existe = true;
             }
         }
-        
+
         for (int i = 0; i < funcionarios.size(); i++) {
             if (funcionarios.get(i).getNombre().equalsIgnoreCase(nombre)) {
                 existe = true;
             }
         }
-        return  existe;
+        return existe;
     }
     
     
+    // ----------------------------------------------
+    // paquetes
+     
+    public void calcularPrecio(){
+        
+    }
     
-   
+    public boolean AgregarPaquete(Paquete paquete){
+        boolean agregar = true;
+        if(existePaquete(paquete.getId())){
+            agregar = false;
+        }else{
+            
+        }
+        return agregar;
+    }
     
+    //metodo para ver que nombre no se repita
+    private boolean existePaquete(String id) {
+        boolean existe = false;
+        for (int i = 0; i < paquetes.size(); i++) {
+            if (paquetes.get(i).getId().equalsIgnoreCase(id)) {
+                existe = true;
+            }
+        }
+        return existe;
+    }
 
-    
-      
-    
 }

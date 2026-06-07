@@ -11,13 +11,11 @@ import java.util.ArrayList;
  * @author michellekatzzador
  */
 public class Tarifa {
+    
     private Zona zona;
     private int[] precios = new int[4];
    
-    
-    
     //constructor
-
     public Tarifa(Zona zona) {
         this.zona = zona;
     }

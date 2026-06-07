@@ -10,7 +10,6 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-
 /**
  * Michelle Katz 220144 Samuel Alzamendi 355626
  */
@@ -50,6 +49,7 @@ public class ClienteInterfaz extends javax.swing.JFrame {
         lblEmail.setText("Email");
 
         liClientes.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        liClientes.addListSelectionListener(this::liClientesValueChanged);
         spLista.setViewportView(liClientes);
 
         btnCrearCliente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -58,6 +58,7 @@ public class ClienteInterfaz extends javax.swing.JFrame {
 
         btnModficarCliente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnModficarCliente.setText("Modificar cliente");
+        btnModficarCliente.addActionListener(this::btnModficarClienteActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,71 +110,70 @@ public class ClienteInterfaz extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-//BOTON CREAR CLIENTE
+    //BOTON CREAR CLIENTE
     private void btnCrearClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearClienteActionPerformed
         String nombre = txtNombre.getText();
         String telefono = txtTel.getText();
         String email = txtEmail.getText();
-        
-        
+
         boolean correcto = modelo.agregarCliente(nombre, email, telefono);
-       // se borran datos y se actualiza lista
-        if(correcto){
+        // se borran datos y se actualiza lista
+        if (correcto) {
             actualizarLista();
             txtNombre.setText("");
             txtTel.setText("");
             txtEmail.setText("");
-         
-        }else {
+
+        } else {
             JOptionPane.showMessageDialog(this, "El nombre ya existe o está vacío");
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_btnCrearClienteActionPerformed
- //metodo actualizarLista (creamos string de largo cleintes y en for ponemos dentro. Luego la mostramos en lista
+
+    // boton para traer datos de la lista a los txt
+    private void liClientesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_liClientesValueChanged
+
+        String nombreSeleccionado = (String) liClientes.getSelectedValue();
+        if (nombreSeleccionado != null) {
+            for (int i = 0; i < modelo.getClientes().size(); i++) {
+                if (modelo.getClientes().get(i).getNombre().equalsIgnoreCase(nombreSeleccionado)) {
+                    txtNombre.setText(modelo.getClientes().get(i).getNombre());
+                    txtEmail.setText(modelo.getClientes().get(i).getMail());
+                    txtTel.setText(modelo.getClientes().get(i).getTelefono());
+                }
+            }
+        }
+
+    }//GEN-LAST:event_liClientesValueChanged
+
+    // boton para modificar al cliente
+    private void btnModficarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModficarClienteActionPerformed
+        String nombre = txtNombre.getText();
+        String telefono = txtTel.getText();
+        String mail = txtEmail.getText();
+        String nombreSeleccionado = (String) liClientes.getSelectedValue();
+
+        boolean correcto = modelo.eliminarCliente(nombreSeleccionado);
+        correcto = modelo.agregarCliente(nombre, mail, telefono);
+
+        if (correcto) {
+            JOptionPane.showMessageDialog(this, "Se modifico correctamente");
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo modificar correctamente");
+        }
+        actualizarLista();
+    }//GEN-LAST:event_btnModficarClienteActionPerformed
+
+//metodo actualizarLista (creamos string de largo cleintes y en for ponemos dentro. Luego la mostramos en lista
     private void actualizarLista() {
-    String[] nombres = new String[modelo.getClientes().size()];
-    for (int i = 0; i < modelo.getClientes().size(); i++) {
-        nombres[i] = modelo.getClientes().get(i).getNombre();
+        String[] nombres = new String[modelo.getClientes().size()];
+        for (int i = 0; i < modelo.getClientes().size(); i++) {
+            nombres[i] = modelo.getClientes().get(i).getNombre();
+        }
+        liClientes.setListData(nombres);
     }
-    liClientes.setListData(nombres);
-}
-    //        public static void serializar(){
-//        Persona p1 = new Persona();
-//        p1.setNombre("Luis");
-//        p1.setEdad(55);
-//        //p1.setMascota(a1);
-//        
-//        Persona p2 = new Persona();
-//        p2.setNombre("Ana");
-//        p2.setEdad(22);
-//        //p2.setMascota(a2);
-//        try{
-//            ObjectOutputStream out = new ObjectOutputStream(new 
-//                FileOutputStream("sistema.ser"));
-//            out.writeObject(p1);
-//            out.writeObject(p2);
-//            out.close();
-//        }catch(IOException e){
-//            e.printStackTrace();
-//        }
-//    }
-//    
-//    private static void deserializar(){
-//        
-//        try{
-//            ObjectInputStream in = new ObjectInputStream(
-//                new FileInputStream("sistema.ser"));
-//            Persona p3 = (Persona) in.readObject();
-//            Persona p4 = (Persona) in.readObject();
-//            System.out.println(p3);
-//            System.out.println(p4);
-//        }catch(IOException | ClassNotFoundException ex){
-//            ex.printStackTrace();
-//        }
-//        
-//    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrearCliente;
     private javax.swing.JButton btnModficarCliente;

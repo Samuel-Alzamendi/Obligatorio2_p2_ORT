@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author michellekatzzador
  */
 public class Paquete {
-    private int id;
+    private String id;
     private Cliente cliente; 
     private String NombreDestinatario;
     private String direccion;
@@ -25,7 +25,7 @@ public class Paquete {
     
     //Constructor
 
-    public Paquete(int id, Cliente cliente, String NombreDestinatario, String direccion, String fecha, int peso, int precio, Departamento departamento, String estado) {
+    public Paquete(String id, Cliente cliente, String NombreDestinatario, String direccion, String fecha, int peso, int precio, Departamento departamento, String estado) {
         this.id = id;
         this.cliente = cliente;
         this.NombreDestinatario = NombreDestinatario;
@@ -44,11 +44,11 @@ public class Paquete {
     
     
     //Getter y Setter
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

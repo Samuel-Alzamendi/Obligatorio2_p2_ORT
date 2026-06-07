@@ -8,25 +8,27 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Cliente implements Serializable{
+public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
+    private int id;
     private String nombre;
     private String telefono;
     private String email;
     private ArrayList<Integer> idPaquetes = new ArrayList<>();
 
-    public Cliente(){
-        
+    public Cliente() {
+
     }
-    
+
     //constructor
-    public Cliente(String nombre, String telefono, String email, ArrayList<Integer> idPaquetes) {
+    public Cliente(String nombre, String telefono, String email, ArrayList<Integer> idPaquetes, int id) {
         this.nombre = nombre;
         this.telefono = telefono;
         this.email = email;
         this.idPaquetes = idPaquetes;
+        
     }
 
     //getter y setter
@@ -62,10 +64,7 @@ public class Cliente implements Serializable{
         this.idPaquetes = idPaquetes;
     }
 
-    
-    
-    public void agregarCliente(String unNombre, String unMail, String unTelefono){
-        
-        
+    public void agregarCliente(String unNombre, String unMail, String unTelefono) {
+
     }
 }

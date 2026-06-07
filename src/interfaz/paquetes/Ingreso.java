@@ -11,14 +11,15 @@ import dominio.Sistema;
  * @author samue
  */
 public class Ingreso extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Ingreso.class.getName());
 
     private Sistema modelo;
-    
+
     public Ingreso(Sistema modelo) {
         this.modelo = modelo;
         initComponents();
+        actualizarLista();
     }
 
     @SuppressWarnings("unchecked")
@@ -35,7 +36,6 @@ public class Ingreso extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         btnConfirmar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        txtIdPaquete = new javax.swing.JTextField();
         txtFecha = new javax.swing.JTextField();
         txtDestinatario = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
@@ -45,6 +45,13 @@ public class Ingreso extends javax.swing.JFrame {
         liClientes = new javax.swing.JList<>();
         lblPrecioTotal = new javax.swing.JLabel();
         lblPrecioMuestra = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
+        lblTel = new javax.swing.JLabel();
+        txtTel = new javax.swing.JTextField();
+        lblEmail = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+        txtId = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Hacer ingreso");
@@ -82,6 +89,7 @@ public class Ingreso extends javax.swing.JFrame {
         jLabel7.setBounds(6, 296, 140, 16);
 
         btnConfirmar.setText("Confirmar");
+        btnConfirmar.addActionListener(this::btnConfirmarActionPerformed);
         jPanel1.add(btnConfirmar);
         btnConfirmar.setBounds(201, 321, 84, 23);
 
@@ -89,8 +97,6 @@ public class Ingreso extends javax.swing.JFrame {
         btnCancelar.addActionListener(this::btnCancelarActionPerformed);
         jPanel1.add(btnCancelar);
         btnCancelar.setBounds(291, 321, 88, 23);
-        jPanel1.add(txtIdPaquete);
-        txtIdPaquete.setBounds(152, 6, 180, 22);
         jPanel1.add(txtFecha);
         txtFecha.setBounds(152, 181, 180, 22);
         jPanel1.add(txtDestinatario);
@@ -115,6 +121,26 @@ public class Ingreso extends javax.swing.JFrame {
         jPanel1.add(lblPrecioMuestra);
         lblPrecioMuestra.setBounds(430, 296, 164, 16);
 
+        lblNombre.setText("Nombre");
+        jPanel1.add(lblNombre);
+        lblNombre.setBounds(350, 30, 44, 16);
+        jPanel1.add(txtNombre);
+        txtNombre.setBounds(350, 50, 160, 22);
+
+        lblTel.setText("Telefono");
+        jPanel1.add(lblTel);
+        lblTel.setBounds(350, 80, 46, 16);
+        jPanel1.add(txtTel);
+        txtTel.setBounds(350, 100, 160, 22);
+
+        lblEmail.setText("Email");
+        jPanel1.add(lblEmail);
+        lblEmail.setBounds(350, 130, 29, 16);
+        jPanel1.add(txtEmail);
+        txtEmail.setBounds(350, 150, 160, 22);
+        jPanel1.add(txtId);
+        txtId.setBounds(150, 10, 180, 22);
+
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 600, 350);
 
@@ -125,9 +151,35 @@ public class Ingreso extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
 
         this.dispose();
-        
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+
+
+    }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void liClientesValueChanged(javax.swing.event.ListSelectionEvent evt) {
+
+        String nombreSeleccionado = (String) liClientes.getSelectedValue();
+        if (nombreSeleccionado != null) {
+            for (int i = 0; i < modelo.getClientes().size(); i++) {
+                if (modelo.getClientes().get(i).getNombre().equalsIgnoreCase(nombreSeleccionado)) {
+                    txtNombre.setText(modelo.getClientes().get(i).getNombre());
+                    txtEmail.setText(modelo.getClientes().get(i).getMail());
+                    txtTel.setText(modelo.getClientes().get(i).getTelefono());
+                }
+            }
+        }
+
+    }
+
+    private void actualizarLista() {
+        String[] nombres = new String[modelo.getClientes().size()];
+        for (int i = 0; i < modelo.getClientes().size(); i++) {
+            nombres[i] = modelo.getClientes().get(i).getNombre();
+        }
+        liClientes.setListData(nombres);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -140,15 +192,21 @@ public class Ingreso extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblPrecioMuestra;
     private javax.swing.JLabel lblPrecioTotal;
+    private javax.swing.JLabel lblTel;
     private javax.swing.JList<String> liClientes;
     private javax.swing.JScrollPane spCliente;
     private javax.swing.JTextField txtDepaDestino;
     private javax.swing.JTextField txtDestinatario;
     private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFecha;
-    private javax.swing.JTextField txtIdPaquete;
+    private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPeso;
+    private javax.swing.JTextField txtTel;
     // End of variables declaration//GEN-END:variables
 }

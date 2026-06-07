@@ -5,20 +5,18 @@ import java.util.InputMismatchException;
 import javax.swing.JOptionPane;
 
 /**
- * Michelle Katz 220144
- * Samuel Alzamendi 355626
+ * Michelle Katz 220144 Samuel Alzamendi 355626
  */
 public class FuncionarioInterfaz extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FuncionarioInterfaz.class.getName());
 
     private Sistema modelo;
-    
+
     public FuncionarioInterfaz(Sistema modelo) {
-        this.modelo = modelo;        
+        this.modelo = modelo;
         initComponents();
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -39,6 +37,7 @@ public class FuncionarioInterfaz extends javax.swing.JFrame {
         setTitle("Funcionarios");
 
         liFun.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        liFun.addListSelectionListener(this::liFunValueChanged);
         spListaFun.setViewportView(liFun);
 
         lblNombre.setText("Nombre");
@@ -107,60 +106,73 @@ public class FuncionarioInterfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 //BOTON CREAR FUNCIONARIO
     private void btnCrearFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearFuncionarioActionPerformed
-            String nombre = txtNombre.getText();
-            String telefono = txtTel.getText();
-            int ano = 0;
-            try{
-                ano = Integer.parseInt(txtAñoIngreso.getText());
-            } catch(InputMismatchException e){
-                System.out.println(e);
-                 JOptionPane.showMessageDialog(this, "Ingrese solamente numeros en año");
-            }
-            
-        
-        
+        String nombre = txtNombre.getText();
+        String telefono = txtTel.getText();
+        int ano = 0;
+        try {
+            ano = Integer.parseInt(txtAñoIngreso.getText());
+        } catch (InputMismatchException e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(this, "Ingrese solamente numeros en año");
+        }
+
         boolean correcto = modelo.agregarFuncionario(nombre, ano, telefono);
-       // se borran datos y se actualiza lista
-        if(correcto){
+        // se borran datos y se actualiza lista
+        if (correcto) {
             actualizarLista();
             txtNombre.setText("");
             txtTel.setText("");
             txtAñoIngreso.setText("");
-         
-        }else {
+
+        } else {
             JOptionPane.showMessageDialog(this, "El nombre ya existe o está vacío");
         }
     }//GEN-LAST:event_btnCrearFuncionarioActionPerformed
     //BOTON MODIFICAR
     private void btnModificarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarFuncionarioActionPerformed
-       String nombre = txtNombre.getText();
-       String telefono = txtTel.getText();
-       int ano = 0;
-       try{
-                ano = Integer.parseInt(txtAñoIngreso.getText());
-            } catch(InputMismatchException e){
-                System.out.println(e);
-                 JOptionPane.showMessageDialog(this, "Ingrese solamente numeros en año");
-            }
-      
-       boolean correcto = modelo.eliminarFuncionario(nombre);
-       correcto = modelo.agregarFuncionario(nombre, ano, telefono);
-       if (correcto){
-           JOptionPane.showMessageDialog(this, "se modifico correctamente");
-       }else{
+        String nombre = txtNombre.getText();
+        String telefono = txtTel.getText();
+        int ano = 0;
+        String nombreSeleccionado = (String) liFun.getSelectedValue();
+
+        try {
+            ano = Integer.parseInt(txtAñoIngreso.getText());
+        } catch (InputMismatchException e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(this, "Ingrese solamente numeros en año");
+        }
+
+        boolean correcto = modelo.eliminarFuncionario(nombreSeleccionado);
+        correcto = modelo.agregarFuncionario(nombre, ano, telefono);
+        if (correcto) {
+            JOptionPane.showMessageDialog(this, "se modifico correctamente");
+        } else {
             JOptionPane.showMessageDialog(this, "No se pudo modificar correctamente");
-       }
-           
-        
+        }
+        actualizarLista();
     }//GEN-LAST:event_btnModificarFuncionarioActionPerformed
 
-        private void actualizarLista() {
-            String[] nombres = new String[modelo.getFuncionarios().size()];
+    private void liFunValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_liFunValueChanged
+
+        String nombreSeleccionado = (String) liFun.getSelectedValue();
+        if (nombreSeleccionado != null) {
             for (int i = 0; i < modelo.getFuncionarios().size(); i++) {
+                if (modelo.getFuncionarios().get(i).getNombre().equalsIgnoreCase(nombreSeleccionado)) {
+                    txtNombre.setText(modelo.getFuncionarios().get(i).getNombre());
+                    txtTel.setText(modelo.getFuncionarios().get(i).getCelular());
+                    txtAñoIngreso.setText(String.valueOf(modelo.getFuncionarios().get(i).getAnoIngreso()));
+                }
+            }
+        }
+    }//GEN-LAST:event_liFunValueChanged
+
+    private void actualizarLista() {
+        String[] nombres = new String[modelo.getFuncionarios().size()];
+        for (int i = 0; i < modelo.getFuncionarios().size(); i++) {
             nombres[i] = modelo.getFuncionarios().get(i).getNombre();
         }
         liFun.setListData(nombres);
-}
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrearFuncionario;
