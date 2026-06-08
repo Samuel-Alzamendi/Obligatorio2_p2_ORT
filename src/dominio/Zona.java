@@ -11,22 +11,22 @@ import java.util.ArrayList;
  * @author michellekatzzador
  */
 public class Zona {
+
     private ArrayList<Departamento> departamentos;
     private String nombre;
-    
-    //contstructor
 
-    public Zona(String nombre) {
-        this.nombre = nombre;
-        departamentos = new ArrayList <>();   
+    //contstructor
+    public Zona(){
         
     }
     
+    public Zona(String nombre) {
+        this.nombre = nombre;
+        departamentos = new ArrayList<>();
 
-    
-    
+    }
+
     //setter y getter
-
     public ArrayList<Departamento> getDepartamentos() {
         return departamentos;
     }
@@ -44,9 +44,4 @@ public class Zona {
     }
 
 //metodos
-   
-    
-    
-    
-    
 }

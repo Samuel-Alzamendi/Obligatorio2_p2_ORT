@@ -11,21 +11,24 @@ import java.util.ArrayList;
  * @author michellekatzzador
  */
 public class Paquete {
+
     private String id;
-    private Cliente cliente; 
+    private Cliente cliente;
     private String NombreDestinatario;
     private String direccion;
     private String fecha;
     private int peso;
-    private int precio;
+    private float precio;
     private Departamento departamento;
     private String estado;
-    private ArrayList<Tarifa> tarifa = new ArrayList <>();
+    private ArrayList<Tarifa> tarifa = new ArrayList<>();
 
-    
     //Constructor
+    public Paquete() {
 
-    public Paquete(String id, Cliente cliente, String NombreDestinatario, String direccion, String fecha, int peso, int precio, Departamento departamento, String estado) {
+    }
+
+    public Paquete(String id, Cliente cliente, String NombreDestinatario, String direccion, String fecha, int peso, float precio, Departamento departamento, String estado) {
         this.id = id;
         this.cliente = cliente;
         this.NombreDestinatario = NombreDestinatario;
@@ -37,12 +40,6 @@ public class Paquete {
         this.estado = estado;
     }
 
-  
-    
-    
-    
-    
-    
     //Getter y Setter
     public String getId() {
         return id;
@@ -92,11 +89,11 @@ public class Paquete {
         this.peso = peso;
     }
 
-    public int getPrecio() {
+    public float getPrecio() {
         return precio;
     }
 
-    public void setPrecio(int precio) {
+    public void setPrecio(float precio) {
         this.precio = precio;
     }
 
@@ -123,10 +120,6 @@ public class Paquete {
     public void setTarifa(ArrayList<Tarifa> tarifa) {
         this.tarifa = tarifa;
     }
-  
-    
-    //metodos
 
-    
-    
+    //metodos
 }

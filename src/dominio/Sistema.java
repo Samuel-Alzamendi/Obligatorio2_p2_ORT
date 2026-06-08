@@ -28,6 +28,7 @@ public class Sistema implements Serializable {
 
     //contructor
     public Sistema() {
+        cargarDatos();
     }
 
     public ArrayList<Cliente> getClientes() {
@@ -88,6 +89,37 @@ public class Sistema implements Serializable {
 
     //Metodos
     //Metodo para agregar cliente al sistema
+    private void cargarDatos() {
+        Zona norte = new Zona("Norte");
+        Zona oeste = new Zona("Oeste");
+        Zona este = new Zona("Este");
+        Zona sur = new Zona("Sur");
+        zonas.add(norte);
+        zonas.add(oeste);
+        zonas.add(este);
+        zonas.add(sur);
+
+        departamentos.add(new Departamento(1, "Artigas", norte));
+        departamentos.add(new Departamento(2, "Salto", norte));
+        departamentos.add(new Departamento(3, "Paysandú", norte));
+        departamentos.add(new Departamento(4, "Rivera", norte));
+        departamentos.add(new Departamento(5, "Tacuarembó", norte));
+        departamentos.add(new Departamento(6, "Río Negro", oeste));
+        departamentos.add(new Departamento(7, "Soriano", oeste));
+        departamentos.add(new Departamento(8, "Colonia", oeste));
+        departamentos.add(new Departamento(9, "San José", oeste));
+        departamentos.add(new Departamento(10, "Cerro Largo", este));
+        departamentos.add(new Departamento(11, "Treinta y Tres", este));
+        departamentos.add(new Departamento(12, "Lavalleja", este));
+        departamentos.add(new Departamento(13, "Rocha", este));
+        departamentos.add(new Departamento(14, "Maldonado", este));
+        departamentos.add(new Departamento(15, "Durazno", sur));
+        departamentos.add(new Departamento(16, "Flores", sur));
+        departamentos.add(new Departamento(17, "Florida", sur));
+        departamentos.add(new Departamento(18, "Canelones", sur));
+        departamentos.add(new Departamento(19, "Montevideo", sur));
+    }
+
     public boolean agregarCliente(String unNombre, String unMail, String unTelefono) {
         boolean correcto = true;
         if (unNombre.equals("")) {
@@ -105,7 +137,19 @@ public class Sistema implements Serializable {
         }
         return correcto;
     }
-
+    
+    public Cliente obtenerCliente(String nombre){
+        Cliente c = new Cliente();
+        
+        for(int i = 0; i < clientes.size(); i++){
+            if(clientes.get(i).getNombre().equalsIgnoreCase(nombre)){
+                c = clientes.get(i);
+            }
+        }
+        
+        return c;
+    }
+    
     public boolean eliminarCliente(String nombre) {
         boolean correcto = true;
         if (existeNombre(nombre)) {
@@ -174,25 +218,31 @@ public class Sistema implements Serializable {
         }
         return existe;
     }
-    
-    
+
     // ----------------------------------------------
     // paquetes
-     
-    public void calcularPrecio(){
-        
+    public float calcularPrecio() {
+
+        return 0;
     }
-    
-    public boolean AgregarPaquete(Paquete paquete){
+
+    public boolean AgregarPaquete(Paquete paquete) {
         boolean agregar = true;
-        if(existePaquete(paquete.getId())){
+        if (existePaquete(paquete.getId()) || paquete.getId().equalsIgnoreCase(null)) {
             agregar = false;
-        }else{
-            
+        } else if (paquete.getCliente().getNombre().trim().equalsIgnoreCase(null)) {
+            agregar = false;
+        } else if (paquete.getDireccion().equalsIgnoreCase(null) || paquete.getFecha().equalsIgnoreCase(null)
+                || paquete.getEstado().equalsIgnoreCase(null) || paquete.getNombreDestinatario().equalsIgnoreCase(null)
+                || paquete.getPeso() <= 0 || paquete.getPrecio() <= 0 || paquete.getTarifa().size() <= 0) {
+
+            agregar = false;
+        } else {
+            paquetes.add(paquete);
         }
         return agregar;
     }
-    
+
     //metodo para ver que nombre no se repita
     private boolean existePaquete(String id) {
         boolean existe = false;

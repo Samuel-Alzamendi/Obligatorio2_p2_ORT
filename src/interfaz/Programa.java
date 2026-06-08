@@ -6,7 +6,8 @@ import interfaz.Reportes.PaquetesPorEstado;
 public class Programa {
 
     public static void main(String[] args) {
-        ComenzarCon ventana = new ComenzarCon();
+        Sistema modelo = new Sistema();
+        ComenzarCon ventana = new ComenzarCon(modelo);
         ventana.setVisible(true);
         
 //        Menu menu = new Menu();

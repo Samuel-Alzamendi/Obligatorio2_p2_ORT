@@ -11,7 +11,8 @@ public class ComenzarCon extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ComenzarCon.class.getName());
     private Sistema modelo= new Sistema();
     
-    public ComenzarCon() {
+    public ComenzarCon(Sistema modelo) {
+        this.modelo = modelo;
         initComponents();
     }
 
@@ -62,7 +63,7 @@ public class ComenzarCon extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jrbUltimosDatosActionPerformed
 
-
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgGrupoOps;

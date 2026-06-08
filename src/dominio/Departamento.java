@@ -9,24 +9,23 @@ package dominio;
  * @author michellekatzzador
  */
 public class Departamento {
+
     private int numero;
     private String nombre;
     private Zona zona;
 
-    
     //contructor
+    public Departamento() {
+
+    }
 
     public Departamento(int numero, String nombre, Zona zona) {
         this.numero = numero;
         this.nombre = nombre;
         this.zona = zona;
     }
-   
 
-    
-    
     //getter y setter
-
     public int getNumero() {
         return numero;
     }
@@ -50,10 +49,6 @@ public class Departamento {
     public void setZona(Zona zona) {
         this.zona = zona;
     }
-   
-    
+
     //metodos
-    
-    
-    
 }
