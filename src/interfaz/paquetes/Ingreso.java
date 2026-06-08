@@ -40,7 +40,7 @@ public class Ingreso extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         btnConfirmar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        txtFecha = new javax.swing.JTextField();
+        txtDia = new javax.swing.JTextField();
         txtDestinatario = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
         txtPeso = new javax.swing.JTextField();
@@ -50,6 +50,8 @@ public class Ingreso extends javax.swing.JFrame {
         lblPrecioMuestra = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
         cbDepartamentos = new javax.swing.JComboBox<>();
+        txtMes = new javax.swing.JTextField();
+        txtAno = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Hacer ingreso");
@@ -60,31 +62,31 @@ public class Ingreso extends javax.swing.JFrame {
 
         jLabel1.setText("Identificador de paquete");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(6, 9, 140, 16);
+        jLabel1.setBounds(6, 9, 140, 17);
 
         jLabel2.setText("Cliente");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(6, 34, 140, 16);
+        jLabel2.setBounds(6, 34, 140, 17);
 
         jLabel3.setText("Fecha");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(10, 190, 140, 16);
+        jLabel3.setBounds(10, 190, 140, 17);
 
         jLabel4.setText("Destinatario");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(10, 220, 140, 16);
+        jLabel4.setBounds(10, 220, 140, 17);
 
         jLabel5.setText("Direccion");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(10, 250, 140, 16);
+        jLabel5.setBounds(10, 250, 140, 17);
 
         jLabel6.setText("Departameno de destino");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(10, 280, 140, 16);
+        jLabel6.setBounds(10, 280, 140, 17);
 
         jLabel7.setText("Peso en gramos");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(10, 310, 140, 16);
+        jLabel7.setBounds(10, 310, 140, 17);
 
         btnConfirmar.setText("Confirmar");
         btnConfirmar.addActionListener(this::btnConfirmarActionPerformed);
@@ -95,14 +97,20 @@ public class Ingreso extends javax.swing.JFrame {
         btnCancelar.addActionListener(this::btnCancelarActionPerformed);
         jPanel1.add(btnCancelar);
         btnCancelar.setBounds(500, 310, 88, 23);
-        jPanel1.add(txtFecha);
-        txtFecha.setBounds(150, 190, 180, 22);
+
+        txtDia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDiaKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtDia);
+        txtDia.setBounds(150, 190, 40, 23);
         jPanel1.add(txtDestinatario);
-        txtDestinatario.setBounds(150, 220, 180, 22);
+        txtDestinatario.setBounds(150, 220, 180, 23);
         jPanel1.add(txtDireccion);
-        txtDireccion.setBounds(150, 250, 180, 22);
+        txtDireccion.setBounds(150, 250, 180, 23);
         jPanel1.add(txtPeso);
-        txtPeso.setBounds(150, 310, 180, 22);
+        txtPeso.setBounds(150, 310, 180, 23);
 
         spCliente.setViewportView(liClientes);
 
@@ -111,16 +119,20 @@ public class Ingreso extends javax.swing.JFrame {
 
         lblPrecioTotal.setText("Precio total");
         jPanel1.add(lblPrecioTotal);
-        lblPrecioTotal.setBounds(350, 280, 80, 16);
+        lblPrecioTotal.setBounds(350, 280, 80, 17);
 
         lblPrecioMuestra.setText("_________");
         jPanel1.add(lblPrecioMuestra);
-        lblPrecioMuestra.setBounds(430, 280, 164, 16);
+        lblPrecioMuestra.setBounds(430, 280, 164, 17);
         jPanel1.add(txtId);
-        txtId.setBounds(150, 10, 180, 22);
+        txtId.setBounds(150, 10, 180, 23);
 
         jPanel1.add(cbDepartamentos);
-        cbDepartamentos.setBounds(150, 280, 180, 22);
+        cbDepartamentos.setBounds(150, 280, 180, 23);
+        jPanel1.add(txtMes);
+        txtMes.setBounds(200, 190, 60, 23);
+        jPanel1.add(txtAno);
+        txtAno.setBounds(270, 190, 60, 23);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 610, 400);
@@ -134,15 +146,18 @@ public class Ingreso extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-
+        
         Cliente c = new Cliente();
         String nombreSeleccionado = (String) liClientes.getSelectedValue();
         c = modelo.obtenerCliente(nombreSeleccionado);
-
+        boolean cumple = true;
+        if(Integer.parseInt(txtDia.getText())<1 || Integer.parseInt(txtDia.getText())>31 || Integer.parseInt(txtMes.getText())<1 || Integer.parseInt(txtMes.getText())>12 || Integer.parseInt(txtAno.getText())<2026|| Integer.parseInt(txtAno.getText())>2080){
+            cumple= false;
+        }else{
         Paquete p = new Paquete();
         p.setDepartamento((Departamento) cbDepartamentos.getSelectedItem());
         p.setDireccion(txtDireccion.getText());
-        p.setFecha(txtFecha.getText());
+        p.setFecha(txtDia.getText()+"/" +txtMes.getText() +"/" +txtAno.getText());
         p.setId(txtId.getText());
         p.setNombreDestinatario(txtDestinatario.getText());
         p.setPeso(Integer.parseInt(txtPeso.getText()));
@@ -153,8 +168,17 @@ public class Ingreso extends javax.swing.JFrame {
         p.setCliente(c);
 
         modelo.AgregarPaquete(p);
+        }
+        
+        
+        
 
     }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void txtDiaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDiaKeyTyped
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtDiaKeyTyped
 
     private void actualizarLista() {
         String[] nombres = new String[modelo.getClientes().size()];
@@ -186,10 +210,12 @@ public class Ingreso extends javax.swing.JFrame {
     private javax.swing.JLabel lblPrecioTotal;
     private javax.swing.JList<String> liClientes;
     private javax.swing.JScrollPane spCliente;
+    private javax.swing.JTextField txtAno;
     private javax.swing.JTextField txtDestinatario;
+    private javax.swing.JTextField txtDia;
     private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtMes;
     private javax.swing.JTextField txtPeso;
     // End of variables declaration//GEN-END:variables
 }

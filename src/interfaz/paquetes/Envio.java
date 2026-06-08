@@ -30,7 +30,7 @@ public class Envio extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtFecha = new javax.swing.JTextField();
+        txtDia = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         spEnvio = new javax.swing.JScrollPane();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -48,6 +48,8 @@ public class Envio extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         cbFuncionarios = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
+        TxtMes = new javax.swing.JTextField();
+        TxtAno = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Hacer envio");
@@ -56,6 +58,8 @@ public class Envio extends javax.swing.JFrame {
         jLabel1.setText("Numero de envio");
 
         jLabel2.setText("Fecha");
+
+        txtDia.addActionListener(this::txtDiaActionPerformed);
 
         jLabel3.setText("Zona");
 
@@ -69,6 +73,7 @@ public class Envio extends javax.swing.JFrame {
         spPaPendientes.setViewportView(liPendientes);
 
         btnConfirmar.setText("Confirmar envio");
+        btnConfirmar.addActionListener(this::btnConfirmarActionPerformed);
 
         btnCancelar.setText("Cancelar envio");
         btnCancelar.setToolTipText("");
@@ -82,6 +87,8 @@ public class Envio extends javax.swing.JFrame {
         btnAgregar.setText("Agregar paquete");
 
         jLabel5.setText("Funcionario");
+
+        TxtMes.addActionListener(this::TxtMesActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -106,8 +113,13 @@ public class Envio extends javax.swing.JFrame {
                                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbFuncionarios, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(TxtMes, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(TxtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cbFuncionarios, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(6, 6, 6))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -115,12 +127,12 @@ public class Envio extends javax.swing.JFrame {
                         .addComponent(lblNumEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblListaEnvio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(spListaPaquetes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                    .addComponent(spListaPaquetes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnAgregar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -156,14 +168,16 @@ public class Envio extends javax.swing.JFrame {
                                 .addComponent(btnCancelar)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(cbFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2))
+                                    .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(TxtMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TxtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -174,14 +188,14 @@ public class Envio extends javax.swing.JFrame {
                                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(spPaPendientes, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 5, Short.MAX_VALUE)))))
+                                .addGap(0, 9, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 600, 350);
+        jPanel1.setBounds(0, 0, 620, 360);
 
-        setBounds(0, 0, 614, 357);
+        setBounds(0, 0, 614, 386);
     }// </editor-fold>//GEN-END:initComponents
 
     private void liZonasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_liZonasValueChanged
@@ -201,6 +215,25 @@ public class Envio extends javax.swing.JFrame {
 
     }//GEN-LAST:event_liZonasValueChanged
 
+    private void txtDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDiaActionPerformed
+
+    private void TxtMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtMesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtMesActionPerformed
+
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        
+        boolean cumple = true;
+        if(Integer.parseInt(txtDia.getText())<1 || Integer.parseInt(txtDia.getText())>31 || Integer.parseInt(TxtMes.getText())<1 || Integer.parseInt(TxtMes.getText())>12 || Integer.parseInt(TxtAno.getText())<2026|| Integer.parseInt(TxtAno.getText())>2080){
+            cumple= false;
+        }else{     
+            
+
+        }
+    }//GEN-LAST:event_btnConfirmarActionPerformed
+
     // cargar los funcionarios en el combo box
     private void comboFun() {
         for (int i = 0; i < modelo.getFuncionarios().size(); i++) {
@@ -215,6 +248,8 @@ public class Envio extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField TxtAno;
+    private javax.swing.JTextField TxtMes;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConfirmar;
@@ -235,6 +270,6 @@ public class Envio extends javax.swing.JFrame {
     private javax.swing.JScrollPane spEnvio;
     private javax.swing.JScrollPane spListaPaquetes;
     private javax.swing.JScrollPane spPaPendientes;
-    private javax.swing.JTextField txtFecha;
+    private javax.swing.JTextField txtDia;
     // End of variables declaration//GEN-END:variables
 }
