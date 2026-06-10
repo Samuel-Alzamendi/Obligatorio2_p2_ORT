@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import persistencia.ArchivoLectura;
 
 /**
  *
@@ -27,6 +28,7 @@ public class Sistema extends Observable implements Serializable {
     //contructor
     public Sistema() {
         cargarDatos();
+        cargarTarifas();
     }
 
     public ArrayList<Cliente> getClientes() {
@@ -325,6 +327,31 @@ public class Sistema extends Observable implements Serializable {
             }
         }
         return e;
+    }
+    
+    //-----------------------------------------------------------------------
+    //TARIFAS
+    public void cargarTarifas(){
+        ArchivoLectura archivo = new ArchivoLectura ("TARIFAS.TXT");
+       
+        while (archivo.hayMasLineas()){
+            String[] datos = archivo.linea().split("#");
+            String nombreZona = datos[0];
+            String[] precios = datos[1].split(",");
+            
+            Zona z = obtenerZona(nombreZona);
+            Tarifa t = new Tarifa(z);
+            int[] precioPeso =  new int [4];
+            for (int i =0 ; i <precios.length ; i++){
+                precioPeso[i]= Integer.parseInt(precios [i]);
+            }
+            t.setPrecios(precioPeso);
+            tarifas.add(t);
+           
+            
+        }
+        archivo.cerrar();
+     
     }
 
 }

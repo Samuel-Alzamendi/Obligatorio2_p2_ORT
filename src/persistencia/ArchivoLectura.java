@@ -37,6 +37,10 @@ public class ArchivoLectura {
     }
 
     public String linea() { // devuelve la última linea leida return linea; } public void cerrar() { in.close(); }
-        return null;
+        return linea;
+    }
+    
+    public void cerrar() {
+        in.close();
     }
 }

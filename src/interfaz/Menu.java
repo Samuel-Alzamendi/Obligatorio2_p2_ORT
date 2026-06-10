@@ -129,7 +129,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_miFuncionariosActionPerformed
 
     private void miTarifaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTarifaActionPerformed
-        Tarifa v = new Tarifa(modelo);
+        VerTarifa v = new VerTarifa(modelo);
         v.setVisible(true);
     }//GEN-LAST:event_miTarifaActionPerformed
 

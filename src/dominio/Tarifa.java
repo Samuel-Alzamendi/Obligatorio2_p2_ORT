@@ -14,6 +14,7 @@ public class Tarifa {
     
     private Zona zona;
     private int[] precios = new int[4];
+    private static int porcentaje;
    
     //constructor
     public Tarifa(Zona zona) {
@@ -21,6 +22,7 @@ public class Tarifa {
     }
 
     //getter y setter
+ 
     public Zona getZona() {
         return zona;
     }
@@ -29,8 +31,6 @@ public class Tarifa {
         this.zona = zona;
     }
 
- 
-
     public int[] getPrecios() {
         return precios;
     }
@@ -38,9 +38,20 @@ public class Tarifa {
     public void setPrecios(int[] precios) {
         this.precios = precios;
     }
-    
+
+    public static int getPorcentaje() {
+        return porcentaje;
+    }
+
+    public static void setPorcentaje(int porcentaje) {
+        Tarifa.porcentaje = porcentaje;
+    }
     
     //metodos
+
+ 
+
+   
     
     
     
