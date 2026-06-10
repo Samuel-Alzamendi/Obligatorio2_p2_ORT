@@ -141,7 +141,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_miIngresoActionPerformed
 
     private void miEnvioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEnvioActionPerformed
-        Envio v = new Envio(modelo);
+        IngresarEnvio v = new IngresarEnvio(modelo);
         v.setVisible(true);
     }//GEN-LAST:event_miEnvioActionPerformed
 

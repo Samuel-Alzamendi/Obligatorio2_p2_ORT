@@ -8,12 +8,14 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JOptionPane;
 
 /**
  * Michelle Katz 220144 Samuel Alzamendi 355626
  */
-public class ClienteInterfaz extends javax.swing.JFrame {
+public class ClienteInterfaz extends javax.swing.JFrame implements Observer {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ClienteInterfaz.class.getName());
 
@@ -21,6 +23,7 @@ public class ClienteInterfaz extends javax.swing.JFrame {
 
     public ClienteInterfaz(Sistema modelo) {
         this.modelo = modelo;
+        modelo.addObserver(this);
         initComponents();
     }
 
@@ -174,6 +177,8 @@ public class ClienteInterfaz extends javax.swing.JFrame {
         liClientes.setListData(nombres);
     }
 
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrearCliente;
     private javax.swing.JButton btnModficarCliente;
@@ -186,4 +191,9 @@ public class ClienteInterfaz extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTel;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object arg) {
+        actualizarLista();
+    }
 }

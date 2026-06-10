@@ -8,12 +8,15 @@ import dominio.Cliente;
 import dominio.Departamento;
 import dominio.Paquete;
 import dominio.Sistema;
+import java.util.Observable;
+import java.util.Observer;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author samue
  */
-public class Ingreso extends javax.swing.JFrame {
+public class Ingreso extends javax.swing.JFrame implements Observer {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Ingreso.class.getName());
 
@@ -24,6 +27,7 @@ public class Ingreso extends javax.swing.JFrame {
         initComponents();
         actualizarLista();
         comboDepa();
+        modelo.addObserver(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -62,31 +66,31 @@ public class Ingreso extends javax.swing.JFrame {
 
         jLabel1.setText("Identificador de paquete");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(6, 9, 140, 17);
+        jLabel1.setBounds(6, 9, 140, 16);
 
         jLabel2.setText("Cliente");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(6, 34, 140, 17);
+        jLabel2.setBounds(6, 34, 140, 16);
 
         jLabel3.setText("Fecha");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(10, 190, 140, 17);
+        jLabel3.setBounds(10, 190, 140, 16);
 
         jLabel4.setText("Destinatario");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(10, 220, 140, 17);
+        jLabel4.setBounds(10, 220, 140, 16);
 
         jLabel5.setText("Direccion");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(10, 250, 140, 17);
+        jLabel5.setBounds(10, 250, 140, 16);
 
         jLabel6.setText("Departameno de destino");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(10, 280, 140, 17);
+        jLabel6.setBounds(10, 280, 140, 16);
 
         jLabel7.setText("Peso en gramos");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(10, 310, 140, 17);
+        jLabel7.setBounds(10, 310, 140, 16);
 
         btnConfirmar.setText("Confirmar");
         btnConfirmar.addActionListener(this::btnConfirmarActionPerformed);
@@ -104,13 +108,13 @@ public class Ingreso extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtDia);
-        txtDia.setBounds(150, 190, 40, 23);
+        txtDia.setBounds(150, 190, 40, 22);
         jPanel1.add(txtDestinatario);
-        txtDestinatario.setBounds(150, 220, 180, 23);
+        txtDestinatario.setBounds(150, 220, 180, 22);
         jPanel1.add(txtDireccion);
-        txtDireccion.setBounds(150, 250, 180, 23);
+        txtDireccion.setBounds(150, 250, 180, 22);
         jPanel1.add(txtPeso);
-        txtPeso.setBounds(150, 310, 180, 23);
+        txtPeso.setBounds(150, 310, 180, 22);
 
         spCliente.setViewportView(liClientes);
 
@@ -119,20 +123,20 @@ public class Ingreso extends javax.swing.JFrame {
 
         lblPrecioTotal.setText("Precio total");
         jPanel1.add(lblPrecioTotal);
-        lblPrecioTotal.setBounds(350, 280, 80, 17);
+        lblPrecioTotal.setBounds(350, 280, 80, 16);
 
         lblPrecioMuestra.setText("_________");
         jPanel1.add(lblPrecioMuestra);
-        lblPrecioMuestra.setBounds(430, 280, 164, 17);
+        lblPrecioMuestra.setBounds(430, 280, 164, 16);
         jPanel1.add(txtId);
-        txtId.setBounds(150, 10, 180, 23);
+        txtId.setBounds(150, 10, 180, 22);
 
         jPanel1.add(cbDepartamentos);
-        cbDepartamentos.setBounds(150, 280, 180, 23);
+        cbDepartamentos.setBounds(150, 280, 180, 22);
         jPanel1.add(txtMes);
-        txtMes.setBounds(200, 190, 60, 23);
+        txtMes.setBounds(200, 190, 60, 22);
         jPanel1.add(txtAno);
-        txtAno.setBounds(270, 190, 60, 23);
+        txtAno.setBounds(270, 190, 60, 22);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 610, 400);
@@ -142,43 +146,121 @@ public class Ingreso extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        //modelo.remove(this);
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        
-        Cliente c = new Cliente();
-        String nombreSeleccionado = (String) liClientes.getSelectedValue();
-        c = modelo.obtenerCliente(nombreSeleccionado);
-        boolean cumple = true;
-        if(Integer.parseInt(txtDia.getText())<1 || Integer.parseInt(txtDia.getText())>31 || Integer.parseInt(txtMes.getText())<1 || Integer.parseInt(txtMes.getText())>12 || Integer.parseInt(txtAno.getText())<2026|| Integer.parseInt(txtAno.getText())>2080){
-            cumple= false;
-        }else{
-        Paquete p = new Paquete();
-        p.setDepartamento((Departamento) cbDepartamentos.getSelectedItem());
-        p.setDireccion(txtDireccion.getText());
-        p.setFecha(txtDia.getText()+"/" +txtMes.getText() +"/" +txtAno.getText());
-        p.setId(txtId.getText());
-        p.setNombreDestinatario(txtDestinatario.getText());
-        p.setPeso(Integer.parseInt(txtPeso.getText()));
-        p.setEstado("Pendiente");
-        
-        // calcular
-        p.setPrecio(modelo.calcularPrecio());
-        p.setCliente(c);
 
-        modelo.AgregarPaquete(p);
+        Cliente c = new Cliente();
+        boolean clienteCumple = true;
+        boolean cumpleFecha = true;
+        boolean cumple = true;
+
+        String id = txtId.getText();
+        if (!modelo.existePaquete(id)) {
+            if (liClientes.getSelectedValue() == null) {
+                JOptionPane.showMessageDialog(this, "Seleccione un cliente");
+                clienteCumple = false;
+            } else {
+                String nombreSeleccionado = (String) liClientes.getSelectedValue();
+                c = modelo.obtenerCliente(nombreSeleccionado);
+            }
+
+            if (clienteCumple) {
+                Departamento d = new Departamento();
+                d = modelo.obtenerDepartamento(cbDepartamentos.getSelectedItem().toString());
+                int dia = 0;
+                int mes = 0;
+                int ano = 0;
+
+                if (txtDia.getText().trim().isEmpty()
+                        || txtMes.getText().trim().isEmpty()
+                        || txtAno.getText().trim().isEmpty()) {
+                    cumple = false;
+                } else {
+                    try {
+                        dia = Integer.parseInt(txtDia.getText());
+                        mes = Integer.parseInt(txtMes.getText());
+                        ano = Integer.parseInt(txtAno.getText());
+//                if (dia <= 0 || dia >= 32 || mes <= 0 || mes >= 13
+//                        || txtAno.getText().length() >= 5 || txtAno.getText().length() <= 3) {
+//                    cumpleFecha = false;
+//                }
+                        if (dia < 1 || dia > 31
+                                || mes < 1 || mes > 12
+                                || ano < 2026 || ano > 2080) {
+                            JOptionPane.showMessageDialog(this, "Error... Fecha mal ingresada");
+                            cumpleFecha = false;
+                            cumple = false;
+                        }
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "La fecha debe contener solo números");
+                        cumple = false;
+                    }
+
+                    if (cumpleFecha && cumple) {
+                        Paquete p = new Paquete();
+                        p.setDepartamento(d);
+                        p.setDireccion(txtDireccion.getText());
+                        p.setFecha(dia + "/" + mes + "/" + ano);
+                        p.setId(txtId.getText());
+                        p.setNombreDestinatario(txtDestinatario.getText());
+                        if (txtPeso.getText().trim().isEmpty()) {
+                            JOptionPane.showMessageDialog(this, "Error... No se ingreso peso");
+                            cumple = false;
+                        } else {
+                            try {
+                                int peso = Integer.parseInt(txtPeso.getText());
+
+                                if (peso < 0) {
+                                    JOptionPane.showMessageDialog(this, "Error... Se ingreso un peso negativo");
+                                    cumple = false;
+                                } else {
+                                    p.setPeso(peso);
+                                }
+                            } catch (NumberFormatException e) {
+                                JOptionPane.showMessageDialog(this, "Error... El peso debe ser un número");
+                                cumple = false;
+                            }
+                        }
+
+                        p.setEstado("Pendiente");
+                        // calcular
+                        p.setPrecio(modelo.calcularPrecio());
+                        p.setCliente(c);
+
+                        if (cumple) {
+                            modelo.AgregarPaquete(p);
+                        }
+                        //actualizarListaPaquetes();
+                    }
+
+                }
+            }
+
+            if (cumple && cumpleFecha && clienteCumple) {
+                JOptionPane.showMessageDialog(this, "Ingreso exitoso");
+            } else {
+                JOptionPane.showMessageDialog(this, "Ingreso inválido");
+            }
+        } else if (modelo.existePaquete(id)) {
+            JOptionPane.showMessageDialog(this, "Identificador de paquete ya existente\nIngreso inválido");
         }
-        
-        
-        
+
 
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void txtDiaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDiaKeyTyped
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_txtDiaKeyTyped
+
+    @Override
+    public void update(Observable o, Object arg) {
+        // se ejecuta automáticamente cuando el modelo llama notifyObservers()
+        actualizarLista();  // refrescás las listas
+    }
 
     private void actualizarLista() {
         String[] nombres = new String[modelo.getClientes().size()];
@@ -188,6 +270,13 @@ public class Ingreso extends javax.swing.JFrame {
         liClientes.setListData(nombres);
     }
 
+//    private void actualizarListaPaquetes() {
+//        String[] nombres = new String[modelo.getPaquetes().size()];
+//        for (int i = 0; i < modelo.getPaquetes().size(); i++) {
+//            nombres[i] = modelo.getPaquetes().get(i).getId();
+//        }
+//        listaP.setListData(nombres);
+//    }
     private void comboDepa() {
         for (int i = 0; i < modelo.getDepartamentos().size(); i++) {
             cbDepartamentos.addItem(modelo.getDepartamentos().get(i).getNombre());
@@ -218,4 +307,5 @@ public class Ingreso extends javax.swing.JFrame {
     private javax.swing.JTextField txtMes;
     private javax.swing.JTextField txtPeso;
     // End of variables declaration//GEN-END:variables
+
 }

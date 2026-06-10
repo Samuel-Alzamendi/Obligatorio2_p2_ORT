@@ -21,7 +21,10 @@ public class Envio {
     
     
     //constructor    
-
+    public Envio(){
+        
+    }
+    
     public Envio(int id, Zona zona, Funcionario funcionario, String fechaEnvio, int pesoTotalPaquetes, int precio) {
         this.id = id;
         this.zona = zona;

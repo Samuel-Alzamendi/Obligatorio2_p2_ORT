@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dominio;
 
 import java.io.FileInputStream;
@@ -11,12 +7,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
  * @author michellekatzzador
  */
-public class Sistema implements Serializable {
+public class Sistema extends Observable implements Serializable {
 
     private ArrayList<Cliente> clientes = new ArrayList<>();
     private ArrayList<Paquete> paquetes = new ArrayList<>();
@@ -89,7 +87,7 @@ public class Sistema implements Serializable {
 
     //Metodos
     //Metodo para agregar cliente al sistema
-    private void cargarDatos() {
+    public void cargarDatos() {
         Zona norte = new Zona("Norte");
         Zona oeste = new Zona("Oeste");
         Zona este = new Zona("Este");
@@ -120,6 +118,32 @@ public class Sistema implements Serializable {
         departamentos.add(new Departamento(19, "Montevideo", sur));
     }
 
+    // obetner departamento en la lista
+    public Departamento obtenerDepartamento(String nombre) {
+        Departamento d = new Departamento();
+
+        for (int i = 0; i < departamentos.size(); i++) {
+            if (departamentos.get(i).getNombre().equalsIgnoreCase(nombre)) {
+                d = departamentos.get(i);
+            }
+        }
+
+        return d;
+    }
+
+    public Zona obtenerZona(String nombre) {
+        Zona z = new Zona();
+
+        for (int i = 0; i < clientes.size(); i++) {
+            if (zonas.get(i).getNombre().equalsIgnoreCase(nombre)) {
+                z = zonas.get(i);
+            }
+        }
+
+        return z;
+    }
+
+    // agregar un clinete
     public boolean agregarCliente(String unNombre, String unMail, String unTelefono) {
         boolean correcto = true;
         if (unNombre.equals("")) {
@@ -134,22 +158,25 @@ public class Sistema implements Serializable {
             c.setMail(unMail);
             clientes.add(c);
 
+            setChanged();
+            notifyObservers();
         }
         return correcto;
     }
-    
-    public Cliente obtenerCliente(String nombre){
+
+    // evento para obtener los clientes de la lista
+    public Cliente obtenerCliente(String nombre) {
         Cliente c = new Cliente();
-        
-        for(int i = 0; i < clientes.size(); i++){
-            if(clientes.get(i).getNombre().equalsIgnoreCase(nombre)){
+
+        for (int i = 0; i < clientes.size(); i++) {
+            if (clientes.get(i).getNombre().equalsIgnoreCase(nombre)) {
                 c = clientes.get(i);
             }
         }
-        
+
         return c;
     }
-    
+
     public boolean eliminarCliente(String nombre) {
         boolean correcto = true;
         if (existeNombre(nombre)) {
@@ -158,6 +185,8 @@ public class Sistema implements Serializable {
                 if (clientes.get(i).getNombre().equalsIgnoreCase(nombre)) {
                     c = clientes.get(i);
                     clientes.remove(c);
+                    setChanged();
+                    notifyObservers();
                 }
             }
         } else {
@@ -182,8 +211,24 @@ public class Sistema implements Serializable {
 
             funcionarios.add(f);
 
+            setChanged();
+            notifyObservers();
+
         }
         return correcto;
+    }
+
+    // evento para obtener los clientes de la lista
+    public Funcionario obtenerFuncionario(String nombre) {
+        Funcionario f = new Funcionario();
+
+        for (int i = 0; i < clientes.size(); i++) {
+            if (clientes.get(i).getNombre().equalsIgnoreCase(nombre)) {
+                f = funcionarios.get(i);
+            }
+        }
+
+        return f;
     }
 
     public boolean eliminarFuncionario(String nombre) {
@@ -194,6 +239,8 @@ public class Sistema implements Serializable {
                 if (funcionarios.get(i).getNombre().equalsIgnoreCase(nombre)) {
                     f = funcionarios.get(i);
                     funcionarios.remove(f);
+                    setChanged();
+                    notifyObservers();
                 }
             }
         } else {
@@ -226,25 +273,38 @@ public class Sistema implements Serializable {
         return 0;
     }
 
-    public boolean AgregarPaquete(Paquete paquete) {
-        boolean agregar = true;
-        if (existePaquete(paquete.getId()) || paquete.getId().equalsIgnoreCase(null)) {
-            agregar = false;
-        } else if (paquete.getCliente().getNombre().trim().equalsIgnoreCase(null)) {
-            agregar = false;
-        } else if (paquete.getDireccion().equalsIgnoreCase(null) || paquete.getFecha().equalsIgnoreCase(null)
-                || paquete.getEstado().equalsIgnoreCase(null) || paquete.getNombreDestinatario().equalsIgnoreCase(null)
-                || paquete.getPeso() <= 0 || paquete.getPrecio() <= 0 || paquete.getTarifa().size() <= 0) {
+    public void AgregarPaquete(Paquete paquete) {
+        paquetes.add(paquete);
+        setChanged();
+        notifyObservers();
+    }
 
-            agregar = false;
-        } else {
-            paquetes.add(paquete);
+    public Paquete obtenerPaquete(String nombre) {
+        Paquete p = new Paquete();
+
+        for (int i = 0; i < paquetes.size(); i++) {
+            if (paquetes.get(i).getId().equalsIgnoreCase(nombre)) {
+                p = paquetes.get(i);
+            }
         }
-        return agregar;
+
+        return p;
+    }
+
+    public ArrayList<Paquete> ObtenerPaquetePen(String zona) {
+        ArrayList<Paquete> paquetesPendientes = new ArrayList<>();
+
+        for (int i = 0; i < paquetes.size(); i++) {
+            if (paquetes.get(i).getDepartamento().getZona().getNombre().equalsIgnoreCase(zona)) {
+                paquetesPendientes.add(paquetes.get(i));
+            }
+        }
+
+        return paquetesPendientes;
     }
 
     //metodo para ver que nombre no se repita
-    private boolean existePaquete(String id) {
+    public boolean existePaquete(String id) {
         boolean existe = false;
         for (int i = 0; i < paquetes.size(); i++) {
             if (paquetes.get(i).getId().equalsIgnoreCase(id)) {
@@ -252,6 +312,19 @@ public class Sistema implements Serializable {
             }
         }
         return existe;
+    }
+
+    //------------------------------------------------------------
+    // envios
+    public Envio obtenerEnvio(int id) {
+        Envio e = new Envio();
+
+        for (int i = 0; i < envios.size(); i++) {
+            if (envios.get(i).getId() == id) {
+                e = envios.get(i);
+            }
+        }
+        return e;
     }
 
 }

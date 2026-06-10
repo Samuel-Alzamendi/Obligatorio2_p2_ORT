@@ -4,23 +4,39 @@
  */
 package interfaz.paquetes;
 
+import dominio.Cliente;
+import dominio.Envio;
+import dominio.Funcionario;
+import dominio.Paquete;
 import dominio.Sistema;
+import dominio.Zona;
+import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.ListModel;
 
 /**
  *
  * @author samue
  */
-public class Envio extends javax.swing.JFrame {
+public class IngresarEnvio extends javax.swing.JFrame implements Observer {
 
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Envio.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(IngresarEnvio.class.getName());
 
     private Sistema modelo;
 
-    public Envio(Sistema modelo) {
+    //Paquete pLista = new Paquete();
+    ArrayList<Paquete> pLista = new ArrayList<>();
+
+    public IngresarEnvio(Sistema modelo) {
         this.modelo = modelo;
+        modelo.addObserver(this);
         initComponents();
         comboFun();
         numEnvio();
+        actualizarListas();
     }
 
     @SuppressWarnings("unchecked")
@@ -43,13 +59,13 @@ public class Envio extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         lblListaEnvio = new javax.swing.JLabel();
         spListaPaquetes = new javax.swing.JScrollPane();
-        liPaquetesEnvio = new javax.swing.JList<>();
+        liPaqueteEnvio = new javax.swing.JList<>();
         btnEliminar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         cbFuncionarios = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        TxtMes = new javax.swing.JTextField();
-        TxtAno = new javax.swing.JTextField();
+        txtMes = new javax.swing.JTextField();
+        txtAno = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Hacer envio");
@@ -77,18 +93,21 @@ public class Envio extends javax.swing.JFrame {
 
         btnCancelar.setText("Cancelar envio");
         btnCancelar.setToolTipText("");
+        btnCancelar.addActionListener(this::btnCancelarActionPerformed);
 
         lblListaEnvio.setText("Lista de paquetes para el envio");
 
-        spListaPaquetes.setViewportView(liPaquetesEnvio);
+        spListaPaquetes.setViewportView(liPaqueteEnvio);
 
         btnEliminar.setText("Eliminar paquete");
+        btnEliminar.addActionListener(this::btnEliminarActionPerformed);
 
         btnAgregar.setText("Agregar paquete");
+        btnAgregar.addActionListener(this::btnAgregarActionPerformed);
 
         jLabel5.setText("Funcionario");
 
-        TxtMes.addActionListener(this::TxtMesActionPerformed);
+        txtMes.addActionListener(this::txtMesActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -112,14 +131,14 @@ public class Envio extends javax.swing.JFrame {
                                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(TxtMes, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(TxtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(cbFuncionarios, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                        .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cbFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(6, 6, 6))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -127,15 +146,18 @@ public class Envio extends javax.swing.JFrame {
                         .addComponent(lblNumEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblListaEnvio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(spListaPaquetes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAgregar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnAgregar))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnEliminar)))
+                            .addComponent(spListaPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 9, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(spEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -158,17 +180,15 @@ public class Envio extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(spListaPaquetes)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnEliminar)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(btnAgregar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnConfirmar))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnCancelar)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnAgregar)
+                                    .addComponent(btnEliminar))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnConfirmar)
+                                    .addComponent(btnCancelar)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(cbFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel5))
@@ -176,8 +196,8 @@ public class Envio extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel2)
-                                    .addComponent(TxtMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TxtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -188,7 +208,7 @@ public class Envio extends javax.swing.JFrame {
                                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(spPaPendientes, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 9, Short.MAX_VALUE)))))
+                                .addGap(0, 11, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
 
@@ -199,19 +219,21 @@ public class Envio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void liZonasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_liZonasValueChanged
-
-        String [] ids = new String[modelo.getPaquetes().size()];
-        int cont = 0;
         String zona = (String) liZonas.getSelectedValue();
+        DefaultListModel<String> modeloPendientes = new DefaultListModel<>();
+
         if (zona != null) {
-            for (int i = 0; i < modelo.getPaquetes().size(); i++) {
-                if(modelo.getPaquetes().get(i).getDepartamento().getZona().equals(zona)) {
-                    ids[0] = modelo.getPaquetes().get(i).getId();
-                    cont++;
+            if (modelo.ObtenerPaquetePen(zona).size() >= 1) {
+                ArrayList<Paquete> paquetesPendientes = modelo.ObtenerPaquetePen(zona);
+                for (Paquete p : paquetesPendientes) {
+                    modeloPendientes.addElement(p.getId());
                 }
+            } else {
+                liPendientes.clearSelection();
             }
-            liPendientes.setListData(ids);
         }
+
+        liPendientes.setModel(modeloPendientes); // siempre se setea el modelo
 
     }//GEN-LAST:event_liZonasValueChanged
 
@@ -219,26 +241,154 @@ public class Envio extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDiaActionPerformed
 
-    private void TxtMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtMesActionPerformed
+    private void txtMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtMesActionPerformed
+    }//GEN-LAST:event_txtMesActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        
+        Zona z = new Zona();
+        ArrayList<Paquete> paquetesParaEnvio = new ArrayList<>();
+        Paquete p = new Paquete();
+        boolean zonaCumple = true;
+        boolean cumpleFecha = true;
         boolean cumple = true;
-        if(Integer.parseInt(txtDia.getText())<1 || Integer.parseInt(txtDia.getText())>31 || Integer.parseInt(TxtMes.getText())<1 || Integer.parseInt(TxtMes.getText())>12 || Integer.parseInt(TxtAno.getText())<2026|| Integer.parseInt(TxtAno.getText())>2080){
-            cumple= false;
-        }else{     
-            
 
+        int dia = 0;
+        int mes = 0;
+        int ano = 0;
+
+        if (cbFuncionarios.getSelectedItem() != null) {
+            Funcionario f = new Funcionario();
+
+            if (txtDia.getText().trim().isEmpty()
+                    || txtMes.getText().trim().isEmpty()
+                    || txtAno.getText().trim().isEmpty()) {
+                cumple = false;
+            } else {
+                try {
+                    dia = Integer.parseInt(txtDia.getText());
+                    mes = Integer.parseInt(txtMes.getText());
+                    ano = Integer.parseInt(txtAno.getText());
+//                if (dia <= 0 || dia >= 32 || mes <= 0 || mes >= 13
+//                        || txtAno.getText().length() >= 5 || txtAno.getText().length() <= 3) {
+//                    cumpleFecha = false;
+//                }
+                    if (dia < 1 || dia > 31
+                            || mes < 1 || mes > 12
+                            || ano < 2026 || ano > 2080) {
+                        JOptionPane.showMessageDialog(this, "Error... Fecha mal ingresada");
+                        cumpleFecha = false;
+                        cumple = false;
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "La fecha debe contener solo números");
+                    cumple = false;
+                }
+            }
+
+            if (cumple) {
+                Envio e = new Envio();
+                e.setFechaEnvio(dia + "/" + mes + "/" + ano);
+                e.setFuncionario(f);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione un funcionario");
         }
+
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        if (liZonas.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(this, "Seleccione una zona");
+        } else {
+            if (liPendientes.getSelectedValue() == null) {
+                JOptionPane.showMessageDialog(this, "Seleccione un paquete pendiente");
+            } else {
+                String paqueteElegido = (String) liPendientes.getSelectedValue();
+                int indexSeleccionado = liPendientes.getSelectedIndex();
+
+                for (int i = 0; i < modelo.getPaquetes().size(); i++) {
+                    Paquete a = modelo.getPaquetes().get(i);
+                    if (a.getId().equalsIgnoreCase(paqueteElegido)) {
+                        pLista.add(a);
+                    }
+                }
+
+                String[] listaPaquete = new String[pLista.size()];
+                for (int i = 0; i < listaPaquete.length; i++) {
+                    listaPaquete[i] = pLista.get(i).getId();
+                }
+
+                liPaqueteEnvio.setListData(listaPaquete);
+
+                DefaultListModel<String> modeloPendientes = (DefaultListModel<String>) liPendientes.getModel();
+                modeloPendientes.remove(indexSeleccionado);
+            }
+        }
+
+
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+
+        if (liPaqueteEnvio.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(this, "Seleccione un paquete para quitar");
+        } else {
+            String paqueteElegido = (String) liPaqueteEnvio.getSelectedValue();
+            int indexSeleccionado = liPaqueteEnvio.getSelectedIndex();
+
+            for (int i = 0; i < pLista.size(); i++) {
+                if ((pLista.get(i).getId()).equalsIgnoreCase(paqueteElegido)) {
+                    pLista.remove(i);
+                }
+            }
+
+            String[] listaPaquete = new String[pLista.size()];
+            for (int i = 0; i < listaPaquete.length; i++) {
+                listaPaquete[i] = pLista.get(i).getId();
+            }
+            liPaqueteEnvio.setListData(listaPaquete);
+
+            DefaultListModel<String> modeloPendientes = (DefaultListModel<String>) liPendientes.getModel();
+            modeloPendientes.addElement(paqueteElegido.replace("Paquete con ID: ", ""));
+        }
+
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
     // cargar los funcionarios en el combo box
-    private void comboFun() {
+    public void comboFun() {
         for (int i = 0; i < modelo.getFuncionarios().size(); i++) {
             cbFuncionarios.addItem(modelo.getFuncionarios().get(i).getNombre());
         }
+    }
+
+    private void actualizarListas() {
+//        String[] idsPaquetes = new String[modelo.ObtenerPaquetePen().size()];
+//        ArrayList<Paquete> paquetesPendientes = new ArrayList<>();
+//        paquetesPendientes = modelo.ObtenerPaquetePen();
+//
+//        for (int i = 0; i < idsPaquetes.length; i++) {
+//            idsPaquetes[i] = paquetesPendientes.get(i).getId();
+//        }
+//        liPendientes.setListData(idsPaquetes);
+
+        String[] zonas = new String[modelo.getZonas().size()];
+        for (int i = 0; i < modelo.getZonas().size(); i++) {
+            zonas[i] = modelo.getZonas().get(i).getNombre();
+        }
+        liZonas.setListData(zonas);
+
+        String[] envios = new String[modelo.getEnvios().size()];
+        for (int i = 0; i < modelo.getEnvios().size(); i++) {
+            envios[i] = modelo.getEnvios().get(i).getId() + "";
+        }
+        liZonas.setListData(zonas);
+
     }
 
     // carga el numero de envio
@@ -248,8 +398,6 @@ public class Envio extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField TxtAno;
-    private javax.swing.JTextField TxtMes;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConfirmar;
@@ -264,12 +412,20 @@ public class Envio extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblListaEnvio;
     private javax.swing.JLabel lblNumEnvio;
-    private javax.swing.JList<String> liPaquetesEnvio;
+    private javax.swing.JList<String> liPaqueteEnvio;
     private javax.swing.JList<String> liPendientes;
     private javax.swing.JList<String> liZonas;
     private javax.swing.JScrollPane spEnvio;
     private javax.swing.JScrollPane spListaPaquetes;
     private javax.swing.JScrollPane spPaPendientes;
+    private javax.swing.JTextField txtAno;
     private javax.swing.JTextField txtDia;
+    private javax.swing.JTextField txtMes;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object arg) {
+        actualizarListas();
+        comboFun();
+    }
 }

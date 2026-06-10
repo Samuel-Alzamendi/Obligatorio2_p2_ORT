@@ -2,12 +2,14 @@ package interfaz.datos;
 
 import dominio.Sistema;
 import java.util.InputMismatchException;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JOptionPane;
 
 /**
  * Michelle Katz 220144 Samuel Alzamendi 355626
  */
-public class FuncionarioInterfaz extends javax.swing.JFrame {
+public class FuncionarioInterfaz extends javax.swing.JFrame implements Observer {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FuncionarioInterfaz.class.getName());
 
@@ -15,6 +17,8 @@ public class FuncionarioInterfaz extends javax.swing.JFrame {
 
     public FuncionarioInterfaz(Sistema modelo) {
         this.modelo = modelo;
+        modelo.addObserver(this);
+
         initComponents();
     }
 
@@ -109,23 +113,34 @@ public class FuncionarioInterfaz extends javax.swing.JFrame {
         String nombre = txtNombre.getText();
         String telefono = txtTel.getText();
         int ano = 0;
+        boolean cumple = false;
         try {
             ano = Integer.parseInt(txtAñoIngreso.getText());
-        } catch (InputMismatchException e) {
+
+            if (ano < 1900 || ano > 2026) {
+                JOptionPane.showMessageDialog(this, "Error... Año mal ingresada");
+                cumple = false;
+            }else{
+                cumple = true;
+            }
+        } catch (NumberFormatException e) {
             System.out.println(e);
             JOptionPane.showMessageDialog(this, "Ingrese solamente numeros en año");
         }
 
-        boolean correcto = modelo.agregarFuncionario(nombre, ano, telefono);
+        boolean correcto = true;
+        if (cumple) {
+            correcto = modelo.agregarFuncionario(nombre, ano, telefono);
+        }
         // se borran datos y se actualiza lista
-        if (correcto) {
+        if (correcto && cumple) {
             actualizarLista();
             txtNombre.setText("");
             txtTel.setText("");
             txtAñoIngreso.setText("");
 
         } else {
-            JOptionPane.showMessageDialog(this, "El nombre ya existe o está vacío");
+            JOptionPane.showMessageDialog(this, "Error, verifique los campos");
         }
     }//GEN-LAST:event_btnCrearFuncionarioActionPerformed
     //BOTON MODIFICAR
@@ -186,4 +201,9 @@ public class FuncionarioInterfaz extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTel;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object arg) {
+        actualizarLista();
+    }
 }
