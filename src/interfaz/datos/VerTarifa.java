@@ -7,6 +7,7 @@ package interfaz.datos;
 import dominio.Sistema;
 import dominio.Tarifa;
 import javax.swing.JOptionPane;
+import persistencia.ArchivoGrabacion;
 
 /**
  *
@@ -52,6 +53,7 @@ public class VerTarifa extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tarifas");
 
+        jPanel1.setMinimumSize(new java.awt.Dimension(426, 300));
         jPanel1.setLayout(null);
 
         tbTarifas.setModel(new javax.swing.table.DefaultTableModel(
@@ -94,36 +96,36 @@ public class VerTarifa extends javax.swing.JFrame {
         }
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(85, 73, 320, 120);
+        jScrollPane1.setBounds(90, 70, 320, 120);
 
         jLabel1.setText("Norte");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(42, 92, 31, 17);
+        jLabel1.setBounds(30, 100, 50, 17);
 
         lblSur.setText("Sur");
         jPanel1.add(lblSur);
-        lblSur.setBounds(54, 163, 19, 17);
+        lblSur.setBounds(30, 160, 50, 17);
 
         lblEste.setText("Este");
         jPanel1.add(lblEste);
-        lblEste.setBounds(47, 140, 26, 17);
+        lblEste.setBounds(30, 140, 50, 17);
 
         lblOeste.setText("Oeste");
         jPanel1.add(lblOeste);
-        lblOeste.setBounds(38, 115, 35, 17);
+        lblOeste.setBounds(30, 120, 50, 17);
 
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(this::btnModificarActionPerformed);
         jPanel1.add(btnModificar);
-        btnModificar.setBounds(321, 219, 84, 23);
+        btnModificar.setBounds(290, 210, 120, 23);
 
         jLabel5.setText("% modificacion");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(94, 222, 91, 17);
+        jLabel5.setBounds(80, 210, 130, 17);
 
         tfporcentaje.addActionListener(this::tfporcentajeActionPerformed);
         jPanel1.add(tfporcentaje);
-        tfporcentaje.setBounds(191, 219, 85, 23);
+        tfporcentaje.setBounds(190, 210, 90, 23);
 
         btnAceptar.setText("Aceptar");
         btnAceptar.addActionListener(this::btnAceptarActionPerformed);
@@ -133,13 +135,13 @@ public class VerTarifa extends javax.swing.JFrame {
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(this::btnCancelarActionPerformed);
         jPanel1.add(btnCancelar);
-        btnCancelar.setBounds(150, 260, 108, 23);
+        btnCancelar.setBounds(138, 260, 120, 23);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,7 +185,23 @@ public class VerTarifa extends javax.swing.JFrame {
     }//GEN-LAST:event_tfporcentajeActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
+        ArchivoGrabacion grab = new  ArchivoGrabacion("TARIFAS.TXT"); 
+       
+        for(int i =0 ; i<modelo.getTarifas().size(); i++){
+            Tarifa t = modelo.getTarifas().get(i);
+            String linea = t.getZona().getNombre() + "#";
+            for(int j = 0; j < 4; j++){
+                linea += t.getPrecios()[j];
+                        if(j < 3){
+                            linea += ",";
+                        }
+            }
+            grab.grabarLinea(linea);
+            
+        }
+              
+       grab.cerrar();
+        this.dispose();        
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

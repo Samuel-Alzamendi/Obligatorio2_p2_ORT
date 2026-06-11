@@ -136,7 +136,7 @@ public class Sistema extends Observable implements Serializable {
     public Zona obtenerZona(String nombre) {
         Zona z = new Zona();
 
-        for (int i = 0; i < clientes.size(); i++) {
+        for (int i = 0; i < zonas.size(); i++) {
             if (zonas.get(i).getNombre().equalsIgnoreCase(nombre)) {
                 z = zonas.get(i);
             }
