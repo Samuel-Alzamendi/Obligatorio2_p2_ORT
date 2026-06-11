@@ -90,34 +90,37 @@ public class Sistema extends Observable implements Serializable {
     //Metodos
     //Metodo para agregar cliente al sistema
     public void cargarDatos() {
-        Zona norte = new Zona("Norte");
-        Zona oeste = new Zona("Oeste");
-        Zona este = new Zona("Este");
-        Zona sur = new Zona("Sur");
-        zonas.add(norte);
-        zonas.add(oeste);
-        zonas.add(este);
-        zonas.add(sur);
+        if (zonas.isEmpty() || departamentos.isEmpty()) {
+            Zona norte = new Zona("Norte");
+            Zona oeste = new Zona("Oeste");
+            Zona este = new Zona("Este");
+            Zona sur = new Zona("Sur");
+            zonas.add(norte);
+            zonas.add(oeste);
+            zonas.add(este);
+            zonas.add(sur);
 
-        departamentos.add(new Departamento(1, "Artigas", norte));
-        departamentos.add(new Departamento(2, "Salto", norte));
-        departamentos.add(new Departamento(3, "Paysandú", norte));
-        departamentos.add(new Departamento(4, "Rivera", norte));
-        departamentos.add(new Departamento(5, "Tacuarembó", norte));
-        departamentos.add(new Departamento(6, "Río Negro", oeste));
-        departamentos.add(new Departamento(7, "Soriano", oeste));
-        departamentos.add(new Departamento(8, "Colonia", oeste));
-        departamentos.add(new Departamento(9, "San José", oeste));
-        departamentos.add(new Departamento(10, "Cerro Largo", este));
-        departamentos.add(new Departamento(11, "Treinta y Tres", este));
-        departamentos.add(new Departamento(12, "Lavalleja", este));
-        departamentos.add(new Departamento(13, "Rocha", este));
-        departamentos.add(new Departamento(14, "Maldonado", este));
-        departamentos.add(new Departamento(15, "Durazno", sur));
-        departamentos.add(new Departamento(16, "Flores", sur));
-        departamentos.add(new Departamento(17, "Florida", sur));
-        departamentos.add(new Departamento(18, "Canelones", sur));
-        departamentos.add(new Departamento(19, "Montevideo", sur));
+            departamentos.add(new Departamento(1, "Artigas", norte));
+            departamentos.add(new Departamento(2, "Salto", norte));
+            departamentos.add(new Departamento(3, "Paysandú", norte));
+            departamentos.add(new Departamento(4, "Rivera", norte));
+            departamentos.add(new Departamento(5, "Tacuarembó", norte));
+            departamentos.add(new Departamento(6, "Río Negro", oeste));
+            departamentos.add(new Departamento(7, "Soriano", oeste));
+            departamentos.add(new Departamento(8, "Colonia", oeste));
+            departamentos.add(new Departamento(9, "San José", oeste));
+            departamentos.add(new Departamento(10, "Cerro Largo", este));
+            departamentos.add(new Departamento(11, "Treinta y Tres", este));
+            departamentos.add(new Departamento(12, "Lavalleja", este));
+            departamentos.add(new Departamento(13, "Rocha", este));
+            departamentos.add(new Departamento(14, "Maldonado", este));
+            departamentos.add(new Departamento(15, "Durazno", sur));
+            departamentos.add(new Departamento(16, "Flores", sur));
+            departamentos.add(new Departamento(17, "Florida", sur));
+            departamentos.add(new Departamento(18, "Canelones", sur));
+            departamentos.add(new Departamento(19, "Montevideo", sur));
+        }
+
     }
 
     // obetner departamento en la lista
@@ -328,30 +331,29 @@ public class Sistema extends Observable implements Serializable {
         }
         return e;
     }
-    
+
     //-----------------------------------------------------------------------
     //TARIFAS
-    public void cargarTarifas(){
-        ArchivoLectura archivo = new ArchivoLectura ("TARIFAS.TXT");
-       
-        while (archivo.hayMasLineas()){
+    public void cargarTarifas() {
+        ArchivoLectura archivo = new ArchivoLectura("TARIFAS.TXT");
+
+        while (archivo.hayMasLineas()) {
             String[] datos = archivo.linea().split("#");
             String nombreZona = datos[0];
             String[] precios = datos[1].split(",");
-            
+
             Zona z = obtenerZona(nombreZona);
             Tarifa t = new Tarifa(z);
-            int[] precioPeso =  new int [4];
-            for (int i =0 ; i <precios.length ; i++){
-                precioPeso[i]= Integer.parseInt(precios [i]);
+            int[] precioPeso = new int[4];
+            for (int i = 0; i < precios.length; i++) {
+                precioPeso[i] = Integer.parseInt(precios[i]);
             }
             t.setPrecios(precioPeso);
             tarifas.add(t);
-           
-            
+
         }
         archivo.cerrar();
-     
+
     }
 
 }

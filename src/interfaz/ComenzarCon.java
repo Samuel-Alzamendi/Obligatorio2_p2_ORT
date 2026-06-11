@@ -1,6 +1,7 @@
 package interfaz;
 
 import dominio.Sistema;
+import persistencia.Persistencia;
 
 /**
  * Michelle Katz 220144
@@ -58,8 +59,15 @@ public class ComenzarCon extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrbUltimosDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbUltimosDatosActionPerformed
+        Persistencia p =new Persistencia();
+        modelo = p.deserializar();
+        if(modelo == null){
+            modelo = new Sistema();
+        }
+        
         Menu menu = new Menu(modelo);
         menu.setVisible(true);
+        
         this.dispose();
     }//GEN-LAST:event_jrbUltimosDatosActionPerformed
 

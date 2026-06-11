@@ -4,21 +4,24 @@
  */
 package dominio;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author michellekatzzador
  */
-public class Zona {
+public class Zona implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private String nombre;
 
     //contstructor
-    public Zona(){
-        
+    public Zona() {
+
     }
-    
+
     public Zona(String nombre) {
         this.nombre = nombre;
 

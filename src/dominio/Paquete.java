@@ -4,13 +4,15 @@
  */
 package dominio;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author michellekatzzador
  */
-public class Paquete {
+public class Paquete implements Serializable{
+    private static final long serialVersionUID = 1L;
 
     private String id;
     private Cliente cliente;

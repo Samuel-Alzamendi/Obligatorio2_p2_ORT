@@ -26,7 +26,11 @@ import java.util.ArrayList;
  */
 public class Persistencia implements Serializable {
     
-    public static void serializar(Sistema s){
+    public Persistencia(){
+        
+    }
+    
+    public void serializar(Sistema s){
         
         try {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("sistema.ser"));
@@ -37,7 +41,7 @@ public class Persistencia implements Serializable {
         }
     }
 
-    public static Sistema deserializar() {
+    public Sistema deserializar() {
         try {
             ObjectInputStream in = new ObjectInputStream(
                 new FileInputStream("sistema.ser"));

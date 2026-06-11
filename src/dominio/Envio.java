@@ -4,13 +4,17 @@
  */
 package dominio;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author michellekatzzador
  */
-public class Envio {
+public class Envio implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private int id;
     private Zona zona;
     private Funcionario funcionario;
@@ -18,27 +22,23 @@ public class Envio {
     private String fechaEnvio;
     private int pesoTotalPaquetes;
     private int precio;
-    
-    
+
     //constructor    
-    public Envio(){
-        
+    public Envio() {
+
     }
-    
+
     public Envio(int id, Zona zona, Funcionario funcionario, String fechaEnvio, int pesoTotalPaquetes, int precio) {
         this.id = id;
         this.zona = zona;
         this.funcionario = funcionario;
-        paquetes = new ArrayList <>();
+        paquetes = new ArrayList<>();
         this.fechaEnvio = fechaEnvio;
         this.pesoTotalPaquetes = pesoTotalPaquetes;
         this.precio = precio;
     }
-    
-    
-    
-    //getter y setter
 
+    //getter y setter
     public int getId() {
         return id;
     }
@@ -94,8 +94,5 @@ public class Envio {
     public void setPrecio(int precio) {
         this.precio = precio;
     }
-  
-        
-        
-        
+
 }

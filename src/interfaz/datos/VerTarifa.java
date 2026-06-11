@@ -14,11 +14,11 @@ import persistencia.ArchivoGrabacion;
  * @author samue
  */
 public class VerTarifa extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VerTarifa.class.getName());
 
     private Sistema modelo;
-    
+
     public VerTarifa(Sistema modelo) {
         this.modelo = modelo;
         initComponents();
@@ -152,32 +152,29 @@ public class VerTarifa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-         int porcentaje = 0;
+        int porcentaje = 0;
         boolean cumple = false;
         try {
-            porcentaje = Integer.parseInt(tfporcentaje.getText()) ;
-    
+            porcentaje = Integer.parseInt(tfporcentaje.getText());
             cumple = true;
-            
         } catch (NumberFormatException e) {
             System.out.println(e);
             JOptionPane.showMessageDialog(this, "Ingrese solamente numeros en porcentaje");
         }
-        if (cumple){
-            for(int i =0;i < modelo.getTarifas().size();i++ ){
+        if (cumple) {
+            for (int i = 0; i < modelo.getTarifas().size(); i++) {
                 Tarifa t = modelo.getTarifas().get(i);
-                
-                for(int j = 0; j<4; j++){
+
+                for (int j = 0; j < 4; j++) {
                     int calculo = (int) Math.round(t.getPrecios()[j] * (1 + porcentaje / 100.0));
                     tbTarifas.setValueAt(calculo, i, j);
                     t.getPrecios()[j] = calculo;
                 }
-        
-            }             
+
+            }
         }
-      
-        
-       
+
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void tfporcentajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfporcentajeActionPerformed
@@ -185,45 +182,43 @@ public class VerTarifa extends javax.swing.JFrame {
     }//GEN-LAST:event_tfporcentajeActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        ArchivoGrabacion grab = new  ArchivoGrabacion("TARIFAS.TXT"); 
-       
-        for(int i =0 ; i<modelo.getTarifas().size(); i++){
+        ArchivoGrabacion grab = new ArchivoGrabacion("TARIFAS.TXT");
+
+        for (int i = 0; i < modelo.getTarifas().size(); i++) {
             Tarifa t = modelo.getTarifas().get(i);
             String linea = t.getZona().getNombre() + "#";
-            for(int j = 0; j < 4; j++){
+            for (int j = 0; j < 4; j++) {
                 linea += t.getPrecios()[j];
-                        if(j < 3){
-                            linea += ",";
-                        }
+                if (j < 3) {
+                    linea += ",";
+                }
             }
             grab.grabarLinea(linea);
-            
+
         }
-              
-       grab.cerrar();
-        this.dispose();        
+
+        grab.cerrar();
+        this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
-         this.dispose();
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     //Metodos 
-   private void cargarTabla(){
-       
-       for(int i =0;i < modelo.getTarifas().size();i++ ){
-        Tarifa t = modelo.getTarifas().get(i);
-           for(int j = 0; j<4; j++){
-               tbTarifas.setValueAt(t.getPrecios()[j], i, j);
-           }
-        
-        }       
-   }
-    
-    
-    
-    
+    private void cargarTabla() {
+
+        for (int i = 0; i < modelo.getTarifas().size(); i++) {
+            Tarifa t = modelo.getTarifas().get(i);
+            for (int j = 0; j < 4; j++) {
+                tbTarifas.setValueAt(t.getPrecios()[j], i, j);
+            }
+
+        }
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JToggleButton btnCancelar;
@@ -239,6 +234,5 @@ public class VerTarifa extends javax.swing.JFrame {
     private javax.swing.JTable tbTarifas;
     private javax.swing.JTextField tfporcentaje;
     // End of variables declaration//GEN-END:variables
-
 
 }

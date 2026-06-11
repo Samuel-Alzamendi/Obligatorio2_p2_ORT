@@ -4,16 +4,21 @@
  */
 package dominio;
 
+import java.io.Serializable;
+
 /**
  *
  * @author michellekatzzador
  */
-public class Funcionario {
-    private String nombre; 
-    private String celular; 
-    private int numeroFuncionario; 
+public class Funcionario implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private String nombre;
+    private String celular;
+    private int numeroFuncionario;
     private int anoIngreso;
-    
+
     //constructor
     public Funcionario(String nombre, String celular, int numeroFuncionario, int anoIngreso) {
         this.nombre = nombre;
@@ -21,14 +26,12 @@ public class Funcionario {
         this.numeroFuncionario = numeroFuncionario;
         this.anoIngreso = anoIngreso;
     }
-    
-    public Funcionario() {
-       
-    }
-    
-    
-    //getter y setter
 
+    public Funcionario() {
+
+    }
+
+    //getter y setter
     public String getNombre() {
         return nombre;
     }
@@ -60,7 +63,5 @@ public class Funcionario {
     public void setAnoIngreso(int anoIngreso) {
         this.anoIngreso = anoIngreso;
     }
-    
-    
-    
+
 }

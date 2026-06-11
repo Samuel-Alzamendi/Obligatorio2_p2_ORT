@@ -4,25 +4,27 @@
  */
 package dominio;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author michellekatzzador
  */
-public class Tarifa {
-    
+public class Tarifa implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private Zona zona;
     private int[] precios = new int[4];
     private static int porcentaje;
-   
+
     //constructor
     public Tarifa(Zona zona) {
         this.zona = zona;
     }
 
     //getter y setter
- 
     public Zona getZona() {
         return zona;
     }
@@ -46,13 +48,6 @@ public class Tarifa {
     public static void setPorcentaje(int porcentaje) {
         Tarifa.porcentaje = porcentaje;
     }
-    
+
     //metodos
-
- 
-
-   
-    
-    
-    
 }

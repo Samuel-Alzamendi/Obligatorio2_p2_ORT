@@ -3,6 +3,7 @@ import dominio.Sistema;
 import interfaz.Reportes.*;
 import interfaz.datos.*;
 import interfaz.paquetes.*;
+import persistencia.Persistencia;
 /**
  * Michelle Katz 220144
  * Samuel Alzamendi 355626
@@ -40,6 +41,11 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -166,6 +172,11 @@ public class Menu extends javax.swing.JFrame {
         LogDeTransacciones v = new LogDeTransacciones(modelo);
         v.setVisible(true);
     }//GEN-LAST:event_miLogTransaccionesActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        Persistencia p = new Persistencia();
+        p.serializar(modelo);
+    }//GEN-LAST:event_formWindowClosing
 
 
     

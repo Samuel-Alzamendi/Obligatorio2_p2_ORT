@@ -25,6 +25,7 @@ public class ClienteInterfaz extends javax.swing.JFrame implements Observer {
         this.modelo = modelo;
         modelo.addObserver(this);
         initComponents();
+        actualizarLista();
     }
 
     @SuppressWarnings("unchecked")

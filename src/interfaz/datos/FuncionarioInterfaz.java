@@ -18,8 +18,8 @@ public class FuncionarioInterfaz extends javax.swing.JFrame implements Observer 
     public FuncionarioInterfaz(Sistema modelo) {
         this.modelo = modelo;
         modelo.addObserver(this);
-
         initComponents();
+        actualizarLista();
     }
 
     @SuppressWarnings("unchecked")
