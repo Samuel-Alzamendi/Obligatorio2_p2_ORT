@@ -6,6 +6,7 @@ package interfaz.datos;
 
 import dominio.Sistema;
 import dominio.Tarifa;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -149,7 +150,31 @@ public class VerTarifa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        // TODO add your handling code here:
+         int porcentaje = 0;
+        boolean cumple = false;
+        try {
+            porcentaje = Integer.parseInt(tfporcentaje.getText()) ;
+    
+            cumple = true;
+            
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(this, "Ingrese solamente numeros en porcentaje");
+        }
+        if (cumple){
+            for(int i =0;i < modelo.getTarifas().size();i++ ){
+                Tarifa t = modelo.getTarifas().get(i);
+                
+                for(int j = 0; j<4; j++){
+                    int calculo = (int) Math.round(t.getPrecios()[j] * (1 + porcentaje / 100.0));
+                    tbTarifas.setValueAt(calculo, i, j);
+                    t.getPrecios()[j] = calculo;
+                }
+        
+            }             
+        }
+      
+        
        
     }//GEN-LAST:event_btnModificarActionPerformed
 
@@ -171,7 +196,6 @@ public class VerTarifa extends javax.swing.JFrame {
        
        for(int i =0;i < modelo.getTarifas().size();i++ ){
         Tarifa t = modelo.getTarifas().get(i);
-  
            for(int j = 0; j<4; j++){
                tbTarifas.setValueAt(t.getPrecios()[j], i, j);
            }
