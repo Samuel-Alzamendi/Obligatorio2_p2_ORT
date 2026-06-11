@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JOptionPane;
 import persistencia.ArchivoLectura;
 
 /**
@@ -318,6 +319,39 @@ public class Sistema extends Observable implements Serializable {
         }
         return existe;
     }
+    
+      public int calcularPrecio(int pesoEnGramos, Departamento d){
+         int numero = 0;
+         int categoria = -1;
+          String zona = "";
+          if(pesoEnGramos< 1000){
+              zona=d.getZona().getNombre();
+              categoria = 0;
+          
+             
+          }else if(pesoEnGramos>= 1000 && pesoEnGramos< 5000){
+              zona = d.getZona().getNombre();
+               categoria = 1;
+              
+          }else if(pesoEnGramos>= 5000 && pesoEnGramos<1000){
+              zona = d.getZona().getNombre();
+               categoria = 2;
+              
+          } else if(pesoEnGramos>= 10000) {
+              zona = d.getZona().getNombre();
+               categoria = 3;
+              
+          }else{
+               System.out.println("Error");
+          }
+          
+          for (int i=0 ; i<tarifas.size();i++){
+                  if (tarifas.get(i).getZona().getNombre().equalsIgnoreCase(zona)){
+                      numero = tarifas.get(i).getPrecios()[categoria];
+                  }
+           }
+          return numero;
+      }
 
     //------------------------------------------------------------
     // envios
@@ -331,6 +365,10 @@ public class Sistema extends Observable implements Serializable {
         }
         return e;
     }
+    
+    
+ 
+           
 
     //-----------------------------------------------------------------------
     //TARIFAS
