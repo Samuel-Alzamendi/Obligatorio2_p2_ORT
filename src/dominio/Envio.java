@@ -22,13 +22,15 @@ public class Envio implements Serializable {
     private String fechaEnvio;
     private int pesoTotalPaquetes;
     private int precio;
+    private boolean recepcionado;
 
     //constructor    
     public Envio() {
-
+        recepcionado = false;
+        this.paquetes = new ArrayList<>();
     }
 
-    public Envio(int id, Zona zona, Funcionario funcionario, String fechaEnvio, int pesoTotalPaquetes, int precio) {
+    public Envio(int id, Zona zona, Funcionario funcionario, String fechaEnvio, int pesoTotalPaquetes, int precio, boolean recepcionado) {
         this.id = id;
         this.zona = zona;
         this.funcionario = funcionario;
@@ -36,6 +38,8 @@ public class Envio implements Serializable {
         this.fechaEnvio = fechaEnvio;
         this.pesoTotalPaquetes = pesoTotalPaquetes;
         this.precio = precio;
+        this.recepcionado = recepcionado;
+        
     }
 
     //getter y setter
@@ -45,6 +49,14 @@ public class Envio implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+    
+        public boolean getRecepcionado() {
+        return recepcionado;
+    }
+
+    public void setrecepcionado(boolean recepcionado) {
+        this.recepcionado = recepcionado;
     }
 
     public Zona getZona() {
@@ -94,5 +106,10 @@ public class Envio implements Serializable {
     public void setPrecio(int precio) {
         this.precio = precio;
     }
+    
+    
+    public void agregarPaquete(Paquete paquete) {
+    paquetes.add(paquete);
+}
 
 }

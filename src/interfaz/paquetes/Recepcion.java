@@ -44,6 +44,7 @@ public class Recepcion extends javax.swing.JFrame implements Observer {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Recepcion");
 
+        liEnvios.addListSelectionListener(this::liEnviosValueChanged);
         spEnvios.setViewportView(liEnvios);
 
         btnConfirmar.setText("Confirmar");
@@ -83,7 +84,7 @@ public class Recepcion extends javax.swing.JFrame implements Observer {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEnvios)
                     .addComponent(lblPaquetesEnvio))
@@ -107,7 +108,7 @@ public class Recepcion extends javax.swing.JFrame implements Observer {
             JOptionPane.showMessageDialog(this, "Seleccione un envio");
         } else {
 
-            Envio e = modelo.obtenerEnvio(Integer.parseInt(liEnvios.getSelectedValue()));
+            Envio e = modelo.obtenerEnvio(Integer.parseInt(liEnvios.getSelectedValue().replace("Envio ", "").trim()));
 
             String[] paquetesLista = new String[e.getPaquetes().size()];
             for (int i = 0; i < e.getPaquetes().size(); i++) {
@@ -121,11 +122,34 @@ public class Recepcion extends javax.swing.JFrame implements Observer {
 
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
+    private void liEnviosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_liEnviosValueChanged
+        if (liEnvios.getSelectedValue() != null) {
+
+            int id = Integer.parseInt(liEnvios.getSelectedValue().replace("Envio ", "").trim());
+            System.out.println("Buscando envio con id: " + id);
+            Envio e = modelo.obtenerEnvio(id);
+            System.out.println("Envio encontrado: " + e);
+            //OBTIENE TEXTO ENVIO X + REMPLAZA ENVIO DEJANDO SOLO EL NUMERO Y PARSEINT
+
+            String[] paquetesLista = new String[e.getPaquetes().size()];
+            for (int i = 0; i < e.getPaquetes().size(); i++) {
+                paquetesLista[i] = e.getPaquetes().get(i).toString();
+            }
+            liPaquetesEnvio.setListData(paquetesLista);
+
+        }
+
+
+    }//GEN-LAST:event_liEnviosValueChanged
+
     private void actualizarListas() {
 
         String[] envios = new String[modelo.getEnvios().size()];
-        for (int i = 0; i < modelo.getEnvios().size(); i++) {
-            envios[i] = modelo.getEnvios().get(i).getId() + "";
+        int indice = 0;
+        for (int i = modelo.getEnvios().size() - 1; i >= 0; i--) {
+            envios[indice] = "Envio " + modelo.getEnvios().get(i).getId();
+            indice++;
+
         }
         liEnvios.setListData(envios);
 

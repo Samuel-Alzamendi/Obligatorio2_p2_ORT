@@ -302,13 +302,17 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
                     e.setFechaEnvio(dia + "/" + mes + "/" + ano);
                     e.setFuncionario(f);
                     e.setId(Integer.parseInt(lblNumEnvio.getText()));
-                    
+
                     //PASA LISTA DE PAQUETES DE ENVIOS(ID) A UN ARRAY PARA LLAMAR METODO cambiarEstadoPaquete()
                     String[] ids = new String[liPaqueteEnvio.getModel().getSize()];
                     for (int i = 0; i < ids.length; i++) {
                         ids[i] = liPaqueteEnvio.getModel().getElementAt(i);
                     }
                     modelo.cambiarEstadoPaquete(ids);
+                    for (int i = 0; i < ids.length; i++) {
+                        Paquete pa = modelo.obtenerPaquete(ids[i]);
+                        e.agregarPaquete(pa);
+                    }
                     modelo.agregarEnvio(e);
                     JOptionPane.showMessageDialog(this, "Envio confirmado exitosamente");
                     this.dispose();
