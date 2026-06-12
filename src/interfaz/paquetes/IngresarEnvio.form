@@ -51,8 +51,8 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="spPaPendientes" min="-2" pref="180" max="-2" attributes="0"/>
                                       <Component id="jScrollPane2" min="-2" pref="180" max="-2" attributes="0"/>
-                                      <Component id="spPaPendientes" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
@@ -67,7 +67,7 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="txtMes" min="-2" pref="47" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtAno" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtAno" min="-2" pref="76" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="cbFuncionarios" min="-2" pref="183" max="-2" attributes="0"/>
                                   </Group>
@@ -84,16 +84,16 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lblListaEnvio" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="btnConfirmar" max="32767" attributes="0"/>
-                                      <Component id="btnAgregar" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnConfirmar" pref="132" max="32767" attributes="0"/>
+                                      <Component id="btnAgregar" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="btnCancelar" min="-2" pref="119" max="-2" attributes="0"/>
-                                      <Component id="btnEliminar" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnEliminar" max="32767" attributes="0"/>
+                                      <Component id="btnCancelar" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Component id="spListaPaquetes" alignment="0" min="-2" pref="284" max="-2" attributes="0"/>
@@ -138,7 +138,7 @@
                                   </Group>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="18" max="32767" attributes="0"/>
+                                  <EmptySpace pref="16" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="cbFuncionarios" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -163,7 +163,7 @@
                                           <Component id="spPaPendientes" min="-2" pref="87" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>

@@ -165,6 +165,9 @@ public class FuncionarioInterfaz extends javax.swing.JFrame implements Observer 
             JOptionPane.showMessageDialog(this, "No se pudo modificar correctamente");
         }
         actualizarLista();
+        txtNombre.setText("");
+        txtTel.setText("");
+        txtAñoIngreso.setText("");
     }//GEN-LAST:event_btnModificarFuncionarioActionPerformed
 
     private void liFunValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_liFunValueChanged

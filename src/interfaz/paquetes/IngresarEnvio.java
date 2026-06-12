@@ -23,6 +23,8 @@ import javax.swing.ListModel;
  */
 public class IngresarEnvio extends javax.swing.JFrame implements Observer {
 
+    DefaultListModel<String> modeloPendientes = new DefaultListModel<>();
+    DefaultListModel<String> limpieza = new DefaultListModel<>();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(IngresarEnvio.class.getName());
 
     private Sistema modelo;
@@ -124,8 +126,8 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
                                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(spPaPendientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(spPaPendientes, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
@@ -137,7 +139,7 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(cbFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(6, 6, 6))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -147,15 +149,15 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblListaEnvio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnAgregar))
-                                .addGap(18, 18, 18)
+                                    .addComponent(btnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                                    .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnEliminar)))
+                                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(spListaPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 9, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -188,7 +190,7 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
                                     .addComponent(btnConfirmar)
                                     .addComponent(btnCancelar)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(cbFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel5))
@@ -208,7 +210,7 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
                                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(spPaPendientes, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 11, Short.MAX_VALUE)))))
+                                .addGap(0, 10, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
 
@@ -220,16 +222,23 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
 
     private void liZonasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_liZonasValueChanged
         String zona = (String) liZonas.getSelectedValue();
-        DefaultListModel<String> modeloPendientes = new DefaultListModel<>();
+
+        limpieza.clear();
+        pLista.clear();
+        liPaqueteEnvio.setModel(limpieza);
+        modeloPendientes.clear();
+        liPendientes.clearSelection();
 
         if (zona != null) {
             if (modelo.ObtenerPaquetePen(zona).size() >= 1) {
                 ArrayList<Paquete> paquetesPendientes = modelo.ObtenerPaquetePen(zona);
                 for (Paquete p : paquetesPendientes) {
                     modeloPendientes.addElement(p.getId());
+
                 }
             } else {
                 liPendientes.clearSelection();
+
             }
         }
 
@@ -256,45 +265,64 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
         int dia = 0;
         int mes = 0;
         int ano = 0;
+        //CHECKEO DE QUE CAMPOS ESTEN LLENOS Y BIEN
+        if (liPaqueteEnvio.getModel().getSize() != 0) {
 
-        if (cbFuncionarios.getSelectedItem() != null) {
-            Funcionario f = new Funcionario();
+            if (cbFuncionarios.getSelectedItem() != null) {
+                Funcionario f = new Funcionario();
 
-            if (txtDia.getText().trim().isEmpty()
-                    || txtMes.getText().trim().isEmpty()
-                    || txtAno.getText().trim().isEmpty()) {
-                cumple = false;
-            } else {
-                try {
-                    dia = Integer.parseInt(txtDia.getText());
-                    mes = Integer.parseInt(txtMes.getText());
-                    ano = Integer.parseInt(txtAno.getText());
-//                if (dia <= 0 || dia >= 32 || mes <= 0 || mes >= 13
-//                        || txtAno.getText().length() >= 5 || txtAno.getText().length() <= 3) {
-//                    cumpleFecha = false;
-//                }
-                    if (dia < 1 || dia > 31
-                            || mes < 1 || mes > 12
-                            || ano < 2026 || ano > 2080) {
-                        JOptionPane.showMessageDialog(this, "Error... Fecha mal ingresada");
-                        cumpleFecha = false;
+                if (txtDia.getText().trim().isEmpty()
+                        || txtMes.getText().trim().isEmpty()
+                        || txtAno.getText().trim().isEmpty()) {
+                    cumple = false;
+                    JOptionPane.showMessageDialog(this, "Error... Falta fecha");
+                } else {
+                    try {
+
+                        dia = Integer.parseInt(txtDia.getText());
+                        mes = Integer.parseInt(txtMes.getText());
+                        ano = Integer.parseInt(txtAno.getText());
+
+                        if (dia < 1 || dia > 31
+                                || mes < 1 || mes > 12
+                                || ano < 2026 || ano > 2080) {
+                            JOptionPane.showMessageDialog(this, "Error... Fecha mal ingresada");
+                            cumpleFecha = false;
+                            cumple = false;
+                        }
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "La fecha debe contener solo números");
                         cumple = false;
                     }
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(this, "La fecha debe contener solo números");
-                    cumple = false;
                 }
-            }
 
-            if (cumple) {
-                Envio e = new Envio();
-                e.setFechaEnvio(dia + "/" + mes + "/" + ano);
-                e.setFuncionario(f);
+                if (cumple) {
+                    //LLAMAR A SISTEMA
+                    Envio e = new Envio();
+                    e.setFechaEnvio(dia + "/" + mes + "/" + ano);
+                    e.setFuncionario(f);
+                    e.setId(Integer.parseInt(lblNumEnvio.getText()));
+                    
+                    //PASA LISTA DE PAQUETES DE ENVIOS(ID) A UN ARRAY PARA LLAMAR METODO cambiarEstadoPaquete()
+                    String[] ids = new String[liPaqueteEnvio.getModel().getSize()];
+                    for (int i = 0; i < ids.length; i++) {
+                        ids[i] = liPaqueteEnvio.getModel().getElementAt(i);
+                    }
+                    modelo.cambiarEstadoPaquete(ids);
+                    modelo.agregarEnvio(e);
+                    JOptionPane.showMessageDialog(this, "Envio confirmado exitosamente");
+                    this.dispose();
+
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Seleccione un funcionario");
             }
 
         } else {
-            JOptionPane.showMessageDialog(this, "Seleccione un funcionario");
+            JOptionPane.showMessageDialog(this, "No hay ningun paquete seleccionado");
         }
+
 
     }//GEN-LAST:event_btnConfirmarActionPerformed
 

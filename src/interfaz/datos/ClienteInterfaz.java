@@ -46,6 +46,8 @@ public class ClienteInterfaz extends javax.swing.JFrame implements Observer {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clientes");
 
+        txtNombre.addActionListener(this::txtNombreActionPerformed);
+
         lblNombre.setText("Nombre");
 
         lblTel.setText("Telefono");
@@ -167,7 +169,14 @@ public class ClienteInterfaz extends javax.swing.JFrame implements Observer {
             JOptionPane.showMessageDialog(this, "No se pudo modificar correctamente");
         }
         actualizarLista();
+        txtNombre.setText("");
+        txtTel.setText("");
+        txtEmail.setText("");
     }//GEN-LAST:event_btnModficarClienteActionPerformed
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
 
 //metodo actualizarLista (creamos string de largo cleintes y en for ponemos dentro. Luego la mostramos en lista
     private void actualizarLista() {

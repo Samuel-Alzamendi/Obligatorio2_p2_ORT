@@ -6,13 +6,15 @@ package interfaz.paquetes;
 
 import dominio.Envio;
 import dominio.Sistema;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author samue
  */
-public class Recepcion extends javax.swing.JFrame {
+public class Recepcion extends javax.swing.JFrame implements Observer {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Recepcion.class.getName());
 
@@ -22,6 +24,8 @@ public class Recepcion extends javax.swing.JFrame {
         this.modelo = modelo;
         initComponents();
         actualizarListas();
+        modelo.addObserver(this);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -138,4 +142,8 @@ public class Recepcion extends javax.swing.JFrame {
     private javax.swing.JScrollPane spEnvios;
     private javax.swing.JScrollPane spPaquetesEnvios;
     // End of variables declaration//GEN-END:variables
+@Override
+    public void update(Observable o, Object arg) {
+        actualizarListas();
+    }
 }

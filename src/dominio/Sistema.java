@@ -298,10 +298,10 @@ public class Sistema extends Observable implements Serializable {
     }
 
     public ArrayList<Paquete> ObtenerPaquetePen(String zona) {
-        ArrayList<Paquete> paquetesPendientes = new ArrayList<>();
+        ArrayList<Paquete> paquetesPendientes = new ArrayList<>(); 
 
         for (int i = 0; i < paquetes.size(); i++) {
-            if (paquetes.get(i).getDepartamento().getZona().getNombre().equalsIgnoreCase(zona)) {
+            if (paquetes.get(i).getDepartamento().getZona().getNombre().equalsIgnoreCase(zona) && paquetes.get(i).getEstado().equalsIgnoreCase("pendiente") ) {
                 paquetesPendientes.add(paquetes.get(i));
             }
         }
@@ -320,6 +320,17 @@ public class Sistema extends Observable implements Serializable {
         return existe;
     }
     
+    public void cambiarEstadoPaquete(String[]lista){
+        for(int i=0; i <lista.length;i++){
+            for(int j = 0;j<paquetes.size();j++ ){
+                if (paquetes.get(j).getId().equals(lista[i])){
+                    paquetes.get(j).setEstado("Enviado");
+                }
+            }
+        }
+    }
+            
+            
       public int calcularPrecio(int pesoEnGramos, Departamento d){
          int numero = 0;
          int categoria = -1;
@@ -364,6 +375,12 @@ public class Sistema extends Observable implements Serializable {
             }
         }
         return e;
+    }
+    
+    public void agregarEnvio(Envio envio){
+     envios.add(envio);
+     
+        
     }
     
     

@@ -163,6 +163,7 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
         boolean clienteCumple = true;
         boolean cumpleFecha = true;
         boolean cumple = true;
+        boolean cumplePeso = true;
 
         String id = txtId.getText();
         if (!modelo.existePaquete(id)) {
@@ -205,20 +206,34 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
                         JOptionPane.showMessageDialog(this, "La fecha debe contener solo números");
                         cumple = false;
                     }
-
-                    if (cumpleFecha && cumple) {
+                    
+                    int peso = 0;
+        
+                     try {
+                        peso = Integer.parseInt(txtPeso.getText());    
+                       cumplePeso = true;
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "el peso debe contener solo números");
+                    
+                    }  if (cumpleFecha && cumple && cumplePeso) {
+                        
                         Paquete p = new Paquete();
                         p.setDepartamento(d);
                         p.setDireccion(txtDireccion.getText());
                         p.setFecha(dia + "/" + mes + "/" + ano);
                         p.setId(txtId.getText());
                         p.setNombreDestinatario(txtDestinatario.getText());
-                        if (txtPeso.getText().trim().isEmpty()) {
+                        
+                        
+                        if(lblPrecioMuestra.getText().equals("_________")){
+                            JOptionPane.showMessageDialog(this, "Error... No se Calculo");
+                            cumple = false;
+                        }else if (txtPeso.getText().trim().isEmpty()) {
                             JOptionPane.showMessageDialog(this, "Error... No se ingreso peso");
                             cumple = false;
                         } else {
                             try {
-                                int peso = Integer.parseInt(txtPeso.getText());
+                                 peso = Integer.parseInt(txtPeso.getText());
 
                                 if (peso < 0) {
                                     JOptionPane.showMessageDialog(this, "Error... Se ingreso un peso negativo");
@@ -246,15 +261,17 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
                 }
             }
 
-            if (cumple && cumpleFecha && clienteCumple) {
+            if (cumple && cumpleFecha && clienteCumple && cumplePeso) {
                 JOptionPane.showMessageDialog(this, "Ingreso exitoso");
-            } else {
-                JOptionPane.showMessageDialog(this, "Ingreso inválido");
-            }
+                this.dispose();
+            } 
+            //else {
+                //JOptionPane.showMessageDialog(this, "Ingreso inválido");
+          //  }
         } else if (modelo.existePaquete(id)) {
             JOptionPane.showMessageDialog(this, "Identificador de paquete ya existente\nIngreso inválido");
         }
-
+        
 
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
@@ -338,8 +355,6 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
     private javax.swing.JTextField txtPeso;
     // End of variables declaration//GEN-END:variables
 
-    private void calcularPrecio(int peso, Departamento d) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 
 }
