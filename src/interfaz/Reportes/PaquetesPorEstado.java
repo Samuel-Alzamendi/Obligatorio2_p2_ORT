@@ -4,9 +4,14 @@
  */
 package interfaz.Reportes;
 
+import dominio.Cliente;
+import dominio.Envio;
+import dominio.Paquete;
 import dominio.Sistema;
 import java.awt.Image;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,14 +22,15 @@ public class PaquetesPorEstado extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PaquetesPorEstado.class.getName());
 
     private Sistema modelo;
-    
+
     public PaquetesPorEstado(Sistema modelo) {
         this.modelo = modelo;
         initComponents();
         ImageIcon original = new ImageIcon(getClass().getResource("/interfaz/Imagenes/MapaUruguay.jpeg"));
         Image escalada = original.getImage().getScaledInstance(
-        lblMapaUruguay.getWidth(), lblMapaUruguay.getHeight(), Image.SCALE_SMOOTH);
+                lblMapaUruguay.getWidth(), lblMapaUruguay.getHeight(), Image.SCALE_SMOOTH);
         lblMapaUruguay.setIcon(new ImageIcon(escalada));
+        cargarTabla();
     }
 
     /**
@@ -114,6 +120,11 @@ public class PaquetesPorEstado extends javax.swing.JFrame {
         ));
         tEnvios.setGridColor(new java.awt.Color(255, 255, 255));
         tEnvios.setShowGrid(true);
+        tEnvios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tEnviosMouseClicked(evt);
+            }
+        });
         pMain.add(tEnvios);
         tEnvios.setBounds(78, 30, 514, 80);
 
@@ -167,6 +178,203 @@ public class PaquetesPorEstado extends javax.swing.JFrame {
 
         setBounds(0, 0, 614, 357);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tEnviosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tEnviosMouseClicked
+        ArrayList<Paquete> paquetes = modelo.getPaquetes();
+
+        int fila = tEnvios.getSelectedRow();
+        int columna = tEnvios.getSelectedColumn();
+        String zonaRecibida = "";
+
+        if (fila == 0) {
+            zonaRecibida = "Norte";
+        } else if (fila == 1) {
+            zonaRecibida = "Oeste";
+        } else if (fila == 2) {
+            zonaRecibida = "Sur";
+        } else if (fila == 3) {
+            zonaRecibida = "Este";
+        }
+
+        String estadoRecibido = "";
+        if (columna == 0) {
+            estadoRecibido = "Pendiente";
+        } else if (columna == 1) {
+            estadoRecibido = "Enviado";
+        } else if (columna == 2) {
+            estadoRecibido = "Recibido";
+        }
+
+        String zona = "";
+        String estado = "";
+        String nombreCliente = "";
+        String nombreDepa = "";
+
+        ArrayList<String> nombresClientes = new ArrayList();
+        ArrayList<String> nombresDepa = new ArrayList();
+
+        int cont = -1;
+        int contDepa = -1;
+
+        if (columna < 3) {
+            for (int i = 0; i < paquetes.size(); i++) {
+
+                zona = paquetes.get(i).getDepartamento().getZona().getNombre();
+                estado = paquetes.get(i).getEstado();
+
+                if (zona.equalsIgnoreCase(zonaRecibida)) {
+                    nombreCliente = paquetes.get(i).getCliente().getNombre();
+                    if (estado.equalsIgnoreCase(estadoRecibido)) {
+
+                        // clientes
+                        if (cont == -1) {
+                            nombresClientes.add(nombreCliente);
+                            cont += 1;
+                        } else {
+                            for (int j = 0; j < nombresClientes.size(); j++) {
+                                if (!nombresClientes.get(j).equalsIgnoreCase(nombreCliente)) {
+                                    cont += 1;
+                                    if (cont == 1) {
+                                        cont = 2;
+                                    }
+                                }
+                            }
+                        }// if nombres clientes
+
+                        // departamento
+                        nombreDepa = paquetes.get(i).getDepartamento().getNombre();
+                        if (contDepa == -1) {
+                            nombresDepa.add(nombreCliente);
+                            contDepa += 1;
+                        } else {
+                            for (int j = 0; j < nombresDepa.size(); j++) {
+                                if (!nombresDepa.get(j).equalsIgnoreCase(nombreCliente)) {
+                                    nombresDepa.add(nombreDepa);
+                                }
+                            }
+                        }// if departamentos
+
+                    }// if estados
+                }// if zonas
+            }// for paqutes
+            String depas = "";
+            for(int k = 0; k<nombresDepa.size(); k++){
+                depas = depas + nombresDepa.get(k) + "\n";
+            }
+            if(cont == -1){
+                cont = 0;
+            }
+            
+            String mostrar = "Clientes distintos: " + cont + "\n Departmentos: " + depas;
+            JOptionPane.showMessageDialog(this, mostrar);
+
+        }
+
+    }//GEN-LAST:event_tEnviosMouseClicked
+
+    public void cargarTabla() {
+        ArrayList<Paquete> paquetes = modelo.getPaquetes();
+
+        int totalN = 0;
+        int totalS = 0;
+        int totalE = 0;
+        int totalO = 0;
+
+        int nP = 0;
+        int nE = 0;
+        int nR = 0;
+
+        int sP = 0;
+        int sE = 0;
+        int sR = 0;
+
+        int eP = 0;
+        int eE = 0;
+        int eR = 0;
+
+        int oP = 0;
+        int oE = 0;
+        int oR = 0;
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                tEnvios.setValueAt(0, i, j);
+            }
+        }
+
+        for (int h = 0; h < paquetes.size(); h++) {
+            String zona = paquetes.get(h).getDepartamento().getZona().getNombre();
+            String estado = paquetes.get(h).getEstado();
+//            for (int i = 0; i < 4; i++) {
+//                for (int j = 0; j < 4; j++) {
+            if (zona.equalsIgnoreCase("Norte")) {
+                totalN += 1;
+                if (estado.equalsIgnoreCase("Pendiente")) {
+                    //tbTarifas.setValueAt(t.getPrecios()[j], i, j);
+                    nP += 1;
+                    tEnvios.setValueAt(nP, 0, 0);
+                } else if (estado.equalsIgnoreCase("Enviado")) {
+                    nE += 1;
+                    tEnvios.setValueAt(nE, 0, 1);
+
+                } else if (estado.equalsIgnoreCase("Recibido")) {
+                    nR += 1;
+                    tEnvios.setValueAt(nR, 0, 2);
+                }
+
+            } else if (zona.equalsIgnoreCase("Oeste")) {
+                totalO += 1;
+
+                if (estado.equalsIgnoreCase("Pendiente")) {
+                    oP += 1;
+                    tEnvios.setValueAt(oP, 3, 0);
+                } else if (estado.equalsIgnoreCase("Enviado")) {
+                    oE += 1;
+                    tEnvios.setValueAt(oE, 3, 1);
+                } else if (estado.equalsIgnoreCase("Recibido")) {
+                    oR += 1;
+                    tEnvios.setValueAt(oR, 3, 2);
+                }
+            } else if (zona.equalsIgnoreCase("Sur")) {
+                totalS += 1;
+
+                if (estado.equalsIgnoreCase("Pendiente")) {
+                    sP += 1;
+                    tEnvios.setValueAt(sP, 1, 0);
+                } else if (estado.equalsIgnoreCase("Enviado")) {
+                    sE += 1;
+                    tEnvios.setValueAt(sE, 1, 1);
+                } else if (estado.equalsIgnoreCase("Recibido")) {
+                    sR += 1;
+                    tEnvios.setValueAt(sR, 1, 2);
+                }
+
+            } else if (zona.equalsIgnoreCase("Este")) {
+                totalE += 1;
+
+                if (estado.equalsIgnoreCase("Pendiente")) {
+                    eP += 1;
+                    tEnvios.setValueAt(eP, 2, 0);
+                } else if (estado.equalsIgnoreCase("Enviado")) {
+                    eE += 1;
+                    tEnvios.setValueAt(eE, 2, 1);
+                } else if (estado.equalsIgnoreCase("Recibido")) {
+                    eR += 1;
+                    tEnvios.setValueAt(eR, 2, 2);
+                }
+
+            }// if de zonas
+
+            tEnvios.setValueAt(totalN, 0, 3);
+            tEnvios.setValueAt(totalS, 1, 3);
+            tEnvios.setValueAt(totalE, 2, 3);
+            tEnvios.setValueAt(totalO, 3, 3);
+
+            //}// for 3
+            //}// for 2
+        }// for 1
+
+    }// metodo
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

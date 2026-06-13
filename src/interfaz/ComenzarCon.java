@@ -4,14 +4,13 @@ import dominio.Sistema;
 import persistencia.Persistencia;
 
 /**
- * Michelle Katz 220144
- * Samuel Alzamendi 355626
+ * Michelle Katz 220144 Samuel Alzamendi 355626
  */
 public class ComenzarCon extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ComenzarCon.class.getName());
-    private Sistema modelo= new Sistema();
-    
+    private Sistema modelo = new Sistema();
+
     public ComenzarCon(Sistema modelo) {
         this.modelo = modelo;
         initComponents();
@@ -35,6 +34,7 @@ public class ComenzarCon extends javax.swing.JFrame {
 
         bgGrupoOps.add(jrbSistemaNuevo);
         jrbSistemaNuevo.setText("Un sistema nuevo");
+        jrbSistemaNuevo.addActionListener(this::jrbSistemaNuevoActionPerformed);
         jPanel1.add(jrbSistemaNuevo);
         jrbSistemaNuevo.setBounds(80, 80, 240, 21);
 
@@ -59,19 +59,31 @@ public class ComenzarCon extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrbUltimosDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbUltimosDatosActionPerformed
-        Persistencia p =new Persistencia();
+        Persistencia p = new Persistencia();
         modelo = p.deserializar();
-        if(modelo == null){
+        if (modelo == null) {
             modelo = new Sistema();
         }
-        
+
         Menu menu = new Menu(modelo);
         menu.setVisible(true);
-        
+
         this.dispose();
     }//GEN-LAST:event_jrbUltimosDatosActionPerformed
 
-    
+    private void jrbSistemaNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbSistemaNuevoActionPerformed
+
+        Persistencia p = new Persistencia();
+        p.borrarDatos();
+
+        modelo = new Sistema();
+
+        Menu menu = new Menu(modelo);
+        menu.setVisible(true);
+
+        this.dispose();
+    }//GEN-LAST:event_jrbSistemaNuevoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgGrupoOps;

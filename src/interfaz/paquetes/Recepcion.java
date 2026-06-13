@@ -25,7 +25,6 @@ public class Recepcion extends javax.swing.JFrame implements Observer {
         initComponents();
         actualizarListas();
         modelo.addObserver(this);
-
     }
 
     @SuppressWarnings("unchecked")
@@ -52,6 +51,7 @@ public class Recepcion extends javax.swing.JFrame implements Observer {
 
         btnCancelar.setText("Cancelar");
         btnCancelar.setToolTipText("");
+        btnCancelar.addActionListener(this::btnCancelarActionPerformed);
 
         spPaquetesEnvios.setViewportView(liPaquetesEnvio);
 
@@ -103,21 +103,23 @@ public class Recepcion extends javax.swing.JFrame implements Observer {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-
-        if (liEnvios.getSelectedValue() == null) {
-            JOptionPane.showMessageDialog(this, "Seleccione un envio");
-        } else {
-
-            Envio e = modelo.obtenerEnvio(Integer.parseInt(liEnvios.getSelectedValue().replace("Envio ", "").trim()));
-
-            String[] paquetesLista = new String[e.getPaquetes().size()];
-            for (int i = 0; i < e.getPaquetes().size(); i++) {
-                paquetesLista[i] = e.getPaquetes().get(i).toString();
-            }
-
-            liPaquetesEnvio.setListData(paquetesLista);
-
-        }
+        
+        this.dispose();
+        // revisar
+//        if (liEnvios.getSelectedValue() == null) {
+//            JOptionPane.showMessageDialog(this, "Seleccione un envio");
+//        } else {
+//
+//            Envio e = modelo.obtenerEnvio(Integer.parseInt(liEnvios.getSelectedValue().replace("Envio ", "").trim()));
+//
+//            String[] paquetesLista = new String[e.getPaquetes().size()];
+//            for (int i = 0; i < e.getPaquetes().size(); i++) {
+//                paquetesLista[i] = e.getPaquetes().get(i).toString();
+//            }
+//
+//            liPaquetesEnvio.setListData(paquetesLista);
+//
+//        }
 
 
     }//GEN-LAST:event_btnConfirmarActionPerformed
@@ -125,31 +127,34 @@ public class Recepcion extends javax.swing.JFrame implements Observer {
     private void liEnviosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_liEnviosValueChanged
         if (liEnvios.getSelectedValue() != null) {
 
-            int id = Integer.parseInt(liEnvios.getSelectedValue().replace("Envio ", "").trim());
+            //OBTIENE TEXTO ENVIO X + REMPLAZA ENVIO DEJANDO SOLO EL NUMERO Y PARSEINT
+            int id = Integer.parseInt(liEnvios.getSelectedValue().split(" - ")[0].replace("Envio ", "").trim());
+            
             System.out.println("Buscando envio con id: " + id);
             Envio e = modelo.obtenerEnvio(id);
             System.out.println("Envio encontrado: " + e);
-            //OBTIENE TEXTO ENVIO X + REMPLAZA ENVIO DEJANDO SOLO EL NUMERO Y PARSEINT
 
             String[] paquetesLista = new String[e.getPaquetes().size()];
             for (int i = 0; i < e.getPaquetes().size(); i++) {
-                paquetesLista[i] = e.getPaquetes().get(i).toString();
+                paquetesLista[i] = e.getPaquetes().get(i).getId();
             }
             liPaquetesEnvio.setListData(paquetesLista);
 
         }
-
-
     }//GEN-LAST:event_liEnviosValueChanged
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void actualizarListas() {
 
         String[] envios = new String[modelo.getEnvios().size()];
         int indice = 0;
         for (int i = modelo.getEnvios().size() - 1; i >= 0; i--) {
-            envios[indice] = "Envio " + modelo.getEnvios().get(i).getId();
+            envios[indice] = "Envio " + modelo.getEnvios().get(i).getId()
+                    + " - Fecha: " + modelo.getEnvios().get(i).getFechaEnvio();
             indice++;
-
         }
         liEnvios.setListData(envios);
 

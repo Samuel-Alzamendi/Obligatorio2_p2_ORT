@@ -25,13 +25,13 @@ import java.util.ArrayList;
  * @author michellekatzzador
  */
 public class Persistencia implements Serializable {
-    
-    public Persistencia(){
-        
+
+    public Persistencia() {
+
     }
-    
-    public void serializar(Sistema s){
-        
+
+    public void serializar(Sistema s) {
+
         try {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("sistema.ser"));
             out.writeObject(s);
@@ -44,14 +44,41 @@ public class Persistencia implements Serializable {
     public Sistema deserializar() {
         try {
             ObjectInputStream in = new ObjectInputStream(
-                new FileInputStream("sistema.ser"));
-                Sistema s = (Sistema) in.readObject();
-                 in.close();
-                return s; 
+                    new FileInputStream("sistema.ser"));
+            Sistema s = (Sistema) in.readObject();
+            in.close();
+            return s;
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-        } 
+        }
         return null;
     }
-    
+
+    public void borrarDatos() {
+        java.io.File archivo = new java.io.File("sistema.ser");
+        if (archivo.exists()) {
+            archivo.delete();
+            System.out.println("Datos borrados correctamente.");
+        } else {
+            System.out.println("No había datos guardados.");
+        }
+    }
+
+    public boolean veriArch() throws IOException {
+        boolean veri = true;
+        java.io.File archivo = new java.io.File("sistema.ser");
+        try {
+            if (archivo.exists()) {
+                System.out.println("Existe sistema.ser");
+            } else {
+                ObjectInputStream in = new ObjectInputStream(
+                        new FileInputStream("sistema.ser"));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return veri;
+    }
+
 }
