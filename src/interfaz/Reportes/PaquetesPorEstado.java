@@ -65,27 +65,27 @@ public class PaquetesPorEstado extends javax.swing.JFrame {
 
         lblEste.setText("Este");
         pMain.add(lblEste);
-        lblEste.setBounds(6, 94, 54, 16);
+        lblEste.setBounds(6, 94, 54, 17);
 
         lblEnviado.setText("Enviado");
         pMain.add(lblEnviado);
-        lblEnviado.setBounds(208, 6, 103, 16);
+        lblEnviado.setBounds(208, 6, 103, 17);
 
         lblOeste.setText("Oeste");
         pMain.add(lblOeste);
-        lblOeste.setBounds(6, 50, 54, 16);
+        lblOeste.setBounds(6, 50, 54, 17);
 
         lblNorte.setText("Norte");
         pMain.add(lblNorte);
-        lblNorte.setBounds(6, 28, 54, 16);
+        lblNorte.setBounds(6, 28, 54, 17);
 
         lblTotal.setText("Total");
         pMain.add(lblTotal);
-        lblTotal.setBounds(466, 6, 103, 16);
+        lblTotal.setBounds(466, 6, 103, 17);
 
         lblPendiente.setText("Pendiente");
         pMain.add(lblPendiente);
-        lblPendiente.setBounds(78, 6, 103, 16);
+        lblPendiente.setBounds(78, 6, 103, 17);
 
         lblOesteMapa.setBackground(new java.awt.Color(255, 255, 51));
         lblOesteMapa.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
@@ -93,16 +93,21 @@ public class PaquetesPorEstado extends javax.swing.JFrame {
         lblOesteMapa.setText("Oeste");
         lblOesteMapa.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblOesteMapa.setOpaque(true);
+        lblOesteMapa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblOesteMapaMouseEntered(evt);
+            }
+        });
         pMain.add(lblOesteMapa);
         lblOesteMapa.setBounds(90, 190, 52, 33);
 
         lblRecibido.setText("Recibido");
         pMain.add(lblRecibido);
-        lblRecibido.setBounds(337, 6, 103, 16);
+        lblRecibido.setBounds(337, 6, 103, 17);
 
         lblSur.setText("Sur");
         pMain.add(lblSur);
-        lblSur.setBounds(6, 72, 54, 16);
+        lblSur.setBounds(6, 72, 54, 17);
 
         tEnvios.setBackground(new java.awt.Color(0, 0, 0));
         tEnvios.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -134,6 +139,11 @@ public class PaquetesPorEstado extends javax.swing.JFrame {
         lblSurMapa.setText("Sur");
         lblSurMapa.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblSurMapa.setOpaque(true);
+        lblSurMapa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblSurMapaMouseEntered(evt);
+            }
+        });
         pMain.add(lblSurMapa);
         lblSurMapa.setBounds(150, 290, 52, 33);
 
@@ -143,6 +153,11 @@ public class PaquetesPorEstado extends javax.swing.JFrame {
         lblEsteMapa.setText("Este");
         lblEsteMapa.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblEsteMapa.setOpaque(true);
+        lblEsteMapa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblEsteMapaMouseEntered(evt);
+            }
+        });
         pMain.add(lblEsteMapa);
         lblEsteMapa.setBounds(240, 210, 52, 33);
 
@@ -152,6 +167,11 @@ public class PaquetesPorEstado extends javax.swing.JFrame {
         lblNorteMapa.setText("Norte");
         lblNorteMapa.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblNorteMapa.setOpaque(true);
+        lblNorteMapa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblNorteMapaMouseEntered(evt);
+            }
+        });
         pMain.add(lblNorteMapa);
         lblNorteMapa.setBounds(170, 130, 52, 33);
 
@@ -258,19 +278,134 @@ public class PaquetesPorEstado extends javax.swing.JFrame {
                 }// if zonas
             }// for paqutes
             String depas = "";
-            for(int k = 0; k<nombresDepa.size(); k++){
+            for (int k = 0; k < nombresDepa.size(); k++) {
                 depas = depas + nombresDepa.get(k) + "\n";
             }
-            if(cont == -1){
+            if (cont == -1) {
                 cont = 0;
             }
-            
+
             String mostrar = "Clientes distintos: " + cont + "\n Departmentos: " + depas;
             JOptionPane.showMessageDialog(this, mostrar);
 
         }
 
     }//GEN-LAST:event_tEnviosMouseClicked
+
+    private void lblNorteMapaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNorteMapaMouseEntered
+        int nP = 0;
+        int nE = 0;
+        int nR = 0;
+
+        ArrayList<Paquete> paquetes = modelo.getPaquetes();
+
+        for (int h = 0; h < paquetes.size(); h++) {
+            String zona = paquetes.get(h).getDepartamento().getZona().getNombre();
+            String estado = paquetes.get(h).getEstado();
+
+            if (zona.equalsIgnoreCase("Norte")) {
+
+                if (estado.equalsIgnoreCase("Pendiente")) {
+                    //tbTarifas.setValueAt(t.getPrecios()[j], i, j);
+                    nP += 1;
+
+                } else if (estado.equalsIgnoreCase("Enviado")) {
+                    nE += 1;
+
+                } else if (estado.equalsIgnoreCase("Recibido")) {
+                    nR += 1;
+
+                }
+
+            }
+        }
+
+        JOptionPane.showMessageDialog(this, "Pendiente: " + nP + "\nEnviado: " + nE + "\nRecibido: " + nR);
+    }//GEN-LAST:event_lblNorteMapaMouseEntered
+
+    private void lblEsteMapaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEsteMapaMouseEntered
+        // TODO add your handling code here:
+        ArrayList<Paquete> paquetes = modelo.getPaquetes();
+        int eP = 0;
+        int eE = 0;
+        int eR = 0;
+        for (int h = 0; h < paquetes.size(); h++) {
+            String zona = paquetes.get(h).getDepartamento().getZona().getNombre();
+            String estado = paquetes.get(h).getEstado();
+            if (zona.equalsIgnoreCase("Este")) {
+
+                if (estado.equalsIgnoreCase("Pendiente")) {
+                    eP += 1;
+
+                } else if (estado.equalsIgnoreCase("Enviado")) {
+                    eE += 1;
+
+                } else if (estado.equalsIgnoreCase("Recibido")) {
+                    eR += 1;
+
+                }
+            }
+        }
+        JOptionPane.showMessageDialog(this, "Pendiente: " + eP + "\nEnviado: " + eE + "\nRecibido: " + eR);
+    }//GEN-LAST:event_lblEsteMapaMouseEntered
+
+    private void lblSurMapaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSurMapaMouseEntered
+        int sP = 0;
+        int sE = 0;
+        int sR = 0;
+
+        ArrayList<Paquete> paquetes = modelo.getPaquetes();
+
+        for (int h = 0; h < paquetes.size(); h++) {
+            String zona = paquetes.get(h).getDepartamento().getZona().getNombre();
+            String estado = paquetes.get(h).getEstado();
+
+            if (zona.equalsIgnoreCase("Sur")) {
+
+                if (estado.equalsIgnoreCase("Pendiente")) {
+                    sP += 1;
+
+                } else if (estado.equalsIgnoreCase("Enviado")) {
+                    sE += 1;
+
+                } else if (estado.equalsIgnoreCase("Recibido")) {
+                    sR += 1;
+
+                }
+            }
+        }
+        JOptionPane.showMessageDialog(this, "Pendiente: " + sP + "\nEnviado: " + sE + "\nRecibido: " + sR);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblSurMapaMouseEntered
+
+    private void lblOesteMapaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOesteMapaMouseEntered
+        int oP = 0;
+        int oE = 0;
+        int oR = 0;
+
+        ArrayList<Paquete> paquetes = modelo.getPaquetes();
+
+        for (int h = 0; h < paquetes.size(); h++) {
+            String zona = paquetes.get(h).getDepartamento().getZona().getNombre();
+            String estado = paquetes.get(h).getEstado();
+            if (zona.equalsIgnoreCase("Oeste")) {
+             
+
+                if (estado.equalsIgnoreCase("Pendiente")) {
+                    oP += 1;
+                    
+                } else if (estado.equalsIgnoreCase("Enviado")) {
+                    oE += 1;
+                   
+                } else if (estado.equalsIgnoreCase("Recibido")) {
+                    oR += 1;
+                    
+                }
+            }
+        }
+        JOptionPane.showMessageDialog(this, "Pendiente: " + oP + "\nEnviado: " + oE + "\nRecibido: " + oR);
+
+    }//GEN-LAST:event_lblOesteMapaMouseEntered
 
     public void cargarTabla() {
         ArrayList<Paquete> paquetes = modelo.getPaquetes();
