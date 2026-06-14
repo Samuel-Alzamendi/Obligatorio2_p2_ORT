@@ -4,6 +4,8 @@
  */
 package interfaz.Reportes;
 
+import dominio.Cliente;
+import dominio.Paquete;
 import dominio.Sistema;
 
 /**
@@ -11,7 +13,7 @@ import dominio.Sistema;
  * @author samue
  */
 public class ConsultaPorCliente extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ConsultaPorCliente.class.getName());
 
     private Sistema modelo;
@@ -19,6 +21,14 @@ public class ConsultaPorCliente extends javax.swing.JFrame {
     public ConsultaPorCliente(Sistema modelo) {
         initComponents();
         this.modelo = modelo;
+
+        String[] datos = new String[modelo.getClientes().size()];
+        for (int i = 0; i < modelo.getClientes().size(); i++) {
+            Cliente c = modelo.getClientes().get(i);
+            datos[i] = c.getNombre();
+        }
+        liClientes.setListData(datos);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -42,44 +52,49 @@ public class ConsultaPorCliente extends javax.swing.JFrame {
 
         pMain.setLayout(null);
 
+        liClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                liClientesMouseClicked(evt);
+            }
+        });
         spClientes.setViewportView(liClientes);
 
         pMain.add(spClientes);
-        spClientes.setBounds(10, 10, 400, 330);
+        spClientes.setBounds(10, 10, 400, 290);
 
         lblPendientes.setText("Total de paquetes pendientes");
         pMain.add(lblPendientes);
-        lblPendientes.setBounds(420, 10, 170, 16);
+        lblPendientes.setBounds(420, 10, 170, 17);
 
         lblTotalPendientes.setText("_____");
         pMain.add(lblTotalPendientes);
-        lblTotalPendientes.setBounds(420, 30, 25, 16);
+        lblTotalPendientes.setBounds(420, 30, 35, 17);
 
         btnConfirmar.setText("Confirmar");
         pMain.add(btnConfirmar);
-        btnConfirmar.setBounds(420, 320, 84, 23);
+        btnConfirmar.setBounds(420, 280, 86, 23);
 
         btnCancelar.setText("Cancelar");
         btnCancelar.setToolTipText("");
         btnCancelar.addActionListener(this::btnCancelarActionPerformed);
         pMain.add(btnCancelar);
-        btnCancelar.setBounds(510, 320, 76, 23);
+        btnCancelar.setBounds(510, 280, 81, 23);
 
         lblEnviados.setText("Total de paquetes enviados");
         pMain.add(lblEnviados);
-        lblEnviados.setBounds(420, 60, 170, 16);
+        lblEnviados.setBounds(420, 60, 170, 17);
 
         lblTotalEnviados.setText("_____");
         pMain.add(lblTotalEnviados);
-        lblTotalEnviados.setBounds(420, 80, 25, 16);
+        lblTotalEnviados.setBounds(420, 80, 35, 17);
 
         lblRecibidos.setText("Total de paquetes recibidos");
         pMain.add(lblRecibidos);
-        lblRecibidos.setBounds(420, 110, 170, 16);
+        lblRecibidos.setBounds(420, 110, 170, 17);
 
         lblTotalRecibidos.setText("_____");
         pMain.add(lblTotalRecibidos);
-        lblTotalRecibidos.setBounds(420, 130, 25, 16);
+        lblTotalRecibidos.setBounds(420, 130, 35, 17);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,6 +113,48 @@ public class ConsultaPorCliente extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void liClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liClientesMouseClicked
+        String clienteElegido = liClientes.getSelectedValue();
+        Cliente clienteEncontrado = null;
+        for (int i = 0; i < modelo.getClientes().size(); i++) {
+            if (modelo.getClientes().get(i).getNombre().equalsIgnoreCase(clienteElegido)) {
+                clienteEncontrado = modelo.getClientes().get(i);
+            }
+        }
+
+        //Seteamos texto de cant pendiente
+        int cantPendiente = 0;
+
+        for (int i = 0; i < modelo.getPaquetes().size(); i++) {
+            Paquete p = modelo.getPaquetes().get(i);;
+            if (p.getCliente().equals(clienteEncontrado) && p.getEstado().equals("Pendiente")) {
+                cantPendiente++;
+            }
+
+        }
+
+        lblTotalPendientes.setText(cantPendiente + "");
+
+        //Seteamos texto de cant enviado
+        int cantEnviado = 0;
+
+        for (int i = 0; i < modelo.getPaquetes().size(); i++) {
+            Paquete p = modelo.getPaquetes().get(i);;
+            if (p.getCliente().equals(clienteEncontrado) && p.getEstado().equals("Enviado")) {
+                cantEnviado++;
+            }
+
+        }
+
+        lblTotalEnviados.setText(cantEnviado + "");
+
+        //Seteamos texto de cant total
+        int cantTotal = cantEnviado + cantPendiente;
+
+        lblTotalRecibidos.setText(cantTotal + "");
+
+    }//GEN-LAST:event_liClientesMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
