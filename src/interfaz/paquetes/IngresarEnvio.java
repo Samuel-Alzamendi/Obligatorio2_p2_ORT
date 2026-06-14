@@ -10,7 +10,11 @@ import dominio.Funcionario;
 import dominio.Paquete;
 import dominio.Sistema;
 import dominio.Zona;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.DefaultListModel;
@@ -48,7 +52,7 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtDia = new javax.swing.JTextField();
+        txtFecha = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         spEnvio = new javax.swing.JScrollPane();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -66,8 +70,6 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
         btnAgregar = new javax.swing.JButton();
         cbFuncionarios = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        txtMes = new javax.swing.JTextField();
-        txtAno = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Hacer envio");
@@ -77,7 +79,7 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
 
         jLabel2.setText("Fecha");
 
-        txtDia.addActionListener(this::txtDiaActionPerformed);
+        txtFecha.addActionListener(this::txtFechaActionPerformed);
 
         jLabel3.setText("Zona");
 
@@ -109,8 +111,6 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
 
         jLabel5.setText("Funcionario");
 
-        txtMes.addActionListener(this::txtMesActionPerformed);
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -132,15 +132,13 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(cbFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(cbFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(7, 7, 7)
+                                        .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(6, 6, 6))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -190,16 +188,14 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
                                     .addComponent(btnConfirmar)
                                     .addComponent(btnCancelar)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(cbFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2)
-                                    .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -210,7 +206,7 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
                                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(spPaPendientes, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 10, Short.MAX_VALUE)))))
+                                .addGap(0, 12, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
 
@@ -246,13 +242,9 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
 
     }//GEN-LAST:event_liZonasValueChanged
 
-    private void txtDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiaActionPerformed
+    private void txtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtDiaActionPerformed
-
-    private void txtMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMesActionPerformed
+    }//GEN-LAST:event_txtFechaActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         Zona z = new Zona();
@@ -262,36 +254,39 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
         boolean cumpleFecha = true;
         boolean cumple = true;
 
-        int dia = 0;
-        int mes = 0;
-        int ano = 0;
         //CHECKEO DE QUE CAMPOS ESTEN LLENOS Y BIEN
         if (liPaqueteEnvio.getModel().getSize() != 0) {
 
             if (cbFuncionarios.getSelectedItem() != null) {
                 Funcionario f = new Funcionario();
 
-                if (txtDia.getText().trim().isEmpty()
-                        || txtMes.getText().trim().isEmpty()
-                        || txtAno.getText().trim().isEmpty()) {
+                String fechaTexto = "";
+                if (txtFecha.getText().trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Error... Debe ingresar la fecha");
+                    cumpleFecha = false;
                     cumple = false;
-                    JOptionPane.showMessageDialog(this, "Error... Falta fecha");
                 } else {
+                    SimpleDateFormat formato = new SimpleDateFormat("d/M/yyyy");
+                    formato.setLenient(false);
+
                     try {
+                        Date fecha = formato.parse(txtFecha.getText().trim());
 
-                        dia = Integer.parseInt(txtDia.getText());
-                        mes = Integer.parseInt(txtMes.getText());
-                        ano = Integer.parseInt(txtAno.getText());
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(fecha);
+                        int ano = cal.get(Calendar.YEAR);
 
-                        if (dia < 1 || dia > 31
-                                || mes < 1 || mes > 12
-                                || ano < 2026 || ano > 2080) {
+                        if (ano < 2026 || ano > 2080) {
                             JOptionPane.showMessageDialog(this, "Error... Fecha mal ingresada");
                             cumpleFecha = false;
                             cumple = false;
+                        } else {
+                            SimpleDateFormat formatoSalida = new SimpleDateFormat("dd/MM/yyyy");
+                            fechaTexto = formatoSalida.format(fecha);
                         }
-                    } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(this, "La fecha debe contener solo números");
+                    } catch (ParseException e) {
+                        JOptionPane.showMessageDialog(this, "Error... Fecha mal ingresada. Use el formato dd/MM/aaaa");
+                        cumpleFecha = false;
                         cumple = false;
                     }
                 }
@@ -299,7 +294,7 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
                 if (cumple) {
                     //LLAMAR A SISTEMA
                     Envio e = new Envio();
-                    e.setFechaEnvio(dia + "/" + mes + "/" + ano);
+                    p.setFecha(fechaTexto);
                     e.setFuncionario(f);
                     e.setId(Integer.parseInt(lblNumEnvio.getText()));
 
@@ -321,13 +316,11 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
 
             } else {
                 JOptionPane.showMessageDialog(this, "Seleccione un funcionario");
-            }
 
+            }
         } else {
             JOptionPane.showMessageDialog(this, "No hay ningun paquete seleccionado");
         }
-
-
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
@@ -450,9 +443,7 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
     private javax.swing.JScrollPane spEnvio;
     private javax.swing.JScrollPane spListaPaquetes;
     private javax.swing.JScrollPane spPaPendientes;
-    private javax.swing.JTextField txtAno;
-    private javax.swing.JTextField txtDia;
-    private javax.swing.JTextField txtMes;
+    private javax.swing.JTextField txtFecha;
     // End of variables declaration//GEN-END:variables
 
     @Override

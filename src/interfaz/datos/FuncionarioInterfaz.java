@@ -139,9 +139,7 @@ public class FuncionarioInterfaz extends javax.swing.JFrame implements Observer 
             txtTel.setText("");
             txtAñoIngreso.setText("");
 
-        } else {
-            JOptionPane.showMessageDialog(this, "Error, verifique los campos");
-        }
+        } 
     }//GEN-LAST:event_btnCrearFuncionarioActionPerformed
     //BOTON MODIFICAR
     private void btnModificarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarFuncionarioActionPerformed

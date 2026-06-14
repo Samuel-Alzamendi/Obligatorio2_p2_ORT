@@ -122,16 +122,19 @@ public class ClienteInterfaz extends javax.swing.JFrame implements Observer {
         String telefono = txtTel.getText();
         String email = txtEmail.getText();
 
-        boolean correcto = modelo.agregarCliente(nombre, email, telefono);
-        // se borran datos y se actualiza lista
-        if (correcto) {
-            actualizarLista();
-            txtNombre.setText("");
-            txtTel.setText("");
-            txtEmail.setText("");
+        boolean letrasNombre = nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ]*");
+        if (letrasNombre) {
+            boolean correcto = modelo.agregarCliente(nombre, email, telefono);
+            // se borran datos y se actualiza lista
+            if (correcto) {
+                actualizarLista();
+                txtNombre.setText("");
+                txtTel.setText("");
+                txtEmail.setText("");
 
-        } else {
-            JOptionPane.showMessageDialog(this, "El nombre ya existe o está vacío");
+            } else {
+                JOptionPane.showMessageDialog(this, "El nombre ya existe o está vacío");
+            }
         }
 
 
@@ -186,7 +189,6 @@ public class ClienteInterfaz extends javax.swing.JFrame implements Observer {
         }
         liClientes.setListData(nombres);
     }
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

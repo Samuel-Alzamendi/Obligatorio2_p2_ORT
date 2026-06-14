@@ -65,27 +65,27 @@ public class PaquetesPorEstado extends javax.swing.JFrame {
 
         lblEste.setText("Este");
         pMain.add(lblEste);
-        lblEste.setBounds(6, 94, 54, 17);
+        lblEste.setBounds(6, 94, 54, 16);
 
         lblEnviado.setText("Enviado");
         pMain.add(lblEnviado);
-        lblEnviado.setBounds(208, 6, 103, 17);
+        lblEnviado.setBounds(208, 6, 103, 16);
 
         lblOeste.setText("Oeste");
         pMain.add(lblOeste);
-        lblOeste.setBounds(6, 50, 54, 17);
+        lblOeste.setBounds(6, 50, 54, 16);
 
         lblNorte.setText("Norte");
         pMain.add(lblNorte);
-        lblNorte.setBounds(6, 28, 54, 17);
+        lblNorte.setBounds(6, 28, 54, 16);
 
         lblTotal.setText("Total");
         pMain.add(lblTotal);
-        lblTotal.setBounds(466, 6, 103, 17);
+        lblTotal.setBounds(466, 6, 103, 16);
 
         lblPendiente.setText("Pendiente");
         pMain.add(lblPendiente);
-        lblPendiente.setBounds(78, 6, 103, 17);
+        lblPendiente.setBounds(78, 6, 103, 16);
 
         lblOesteMapa.setBackground(new java.awt.Color(255, 255, 51));
         lblOesteMapa.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
@@ -103,11 +103,11 @@ public class PaquetesPorEstado extends javax.swing.JFrame {
 
         lblRecibido.setText("Recibido");
         pMain.add(lblRecibido);
-        lblRecibido.setBounds(337, 6, 103, 17);
+        lblRecibido.setBounds(337, 6, 103, 16);
 
         lblSur.setText("Sur");
         pMain.add(lblSur);
-        lblSur.setBounds(6, 72, 54, 17);
+        lblSur.setBounds(6, 72, 54, 16);
 
         tEnvios.setBackground(new java.awt.Color(0, 0, 0));
         tEnvios.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -264,11 +264,11 @@ public class PaquetesPorEstado extends javax.swing.JFrame {
                         // departamento
                         nombreDepa = paquetes.get(i).getDepartamento().getNombre();
                         if (contDepa == -1) {
-                            nombresDepa.add(nombreCliente);
+                            nombresDepa.add(nombreDepa);
                             contDepa += 1;
                         } else {
                             for (int j = 0; j < nombresDepa.size(); j++) {
-                                if (!nombresDepa.get(j).equalsIgnoreCase(nombreCliente)) {
+                                if (!nombresDepa.get(j).equalsIgnoreCase(nombreDepa)) {
                                     nombresDepa.add(nombreDepa);
                                 }
                             }
@@ -462,26 +462,26 @@ public class PaquetesPorEstado extends javax.swing.JFrame {
 
                 if (estado.equalsIgnoreCase("Pendiente")) {
                     oP += 1;
-                    tEnvios.setValueAt(oP, 3, 0);
+                    tEnvios.setValueAt(oP, 1, 0);
                 } else if (estado.equalsIgnoreCase("Enviado")) {
                     oE += 1;
-                    tEnvios.setValueAt(oE, 3, 1);
+                    tEnvios.setValueAt(oE, 1, 1);
                 } else if (estado.equalsIgnoreCase("Recibido")) {
                     oR += 1;
-                    tEnvios.setValueAt(oR, 3, 2);
+                    tEnvios.setValueAt(oR, 1, 2);
                 }
             } else if (zona.equalsIgnoreCase("Sur")) {
                 totalS += 1;
 
                 if (estado.equalsIgnoreCase("Pendiente")) {
                     sP += 1;
-                    tEnvios.setValueAt(sP, 1, 0);
+                    tEnvios.setValueAt(sP, 2, 0);
                 } else if (estado.equalsIgnoreCase("Enviado")) {
                     sE += 1;
-                    tEnvios.setValueAt(sE, 1, 1);
+                    tEnvios.setValueAt(sE, 2, 1);
                 } else if (estado.equalsIgnoreCase("Recibido")) {
                     sR += 1;
-                    tEnvios.setValueAt(sR, 1, 2);
+                    tEnvios.setValueAt(sR, 2, 2);
                 }
 
             } else if (zona.equalsIgnoreCase("Este")) {
@@ -489,21 +489,22 @@ public class PaquetesPorEstado extends javax.swing.JFrame {
 
                 if (estado.equalsIgnoreCase("Pendiente")) {
                     eP += 1;
-                    tEnvios.setValueAt(eP, 2, 0);
+                    tEnvios.setValueAt(eP, 3, 0);
                 } else if (estado.equalsIgnoreCase("Enviado")) {
                     eE += 1;
-                    tEnvios.setValueAt(eE, 2, 1);
+                    tEnvios.setValueAt(eE, 3, 1);
                 } else if (estado.equalsIgnoreCase("Recibido")) {
                     eR += 1;
-                    tEnvios.setValueAt(eR, 2, 2);
+                    tEnvios.setValueAt(eR, 3, 2);
                 }
 
             }// if de zonas
 
             tEnvios.setValueAt(totalN, 0, 3);
-            tEnvios.setValueAt(totalS, 1, 3);
-            tEnvios.setValueAt(totalE, 2, 3);
-            tEnvios.setValueAt(totalO, 3, 3);
+            tEnvios.setValueAt(totalO, 1, 3);
+            tEnvios.setValueAt(totalS, 2, 3);
+            tEnvios.setValueAt(totalE, 3, 3);
+            
 
             //}// for 3
             //}// for 2
