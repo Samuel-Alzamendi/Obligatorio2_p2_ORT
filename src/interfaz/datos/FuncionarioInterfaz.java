@@ -143,6 +143,7 @@ public class FuncionarioInterfaz extends javax.swing.JFrame implements Observer 
                 txtTel.setText("");
                 txtAñoIngreso.setText("");
                 JOptionPane.showMessageDialog(this, "Se creo correctamente");
+                modelo.registrarTransaccion("Ingreso de funcionario " + nombre);
             } else if (cumple) {
                 JOptionPane.showMessageDialog(this, "El nombre ya existe o está vacío");
             }
@@ -185,6 +186,7 @@ public class FuncionarioInterfaz extends javax.swing.JFrame implements Observer 
                         correcto = modelo.agregarFuncionario(nombre, ano, telefono);
                         if (correcto) {
                             JOptionPane.showMessageDialog(this, "Se modifico correctamente");
+                            modelo.registrarTransaccion("Modificación de funcionario " + nombre);
                             actualizarLista();
                             txtNombre.setText("");
                             txtTel.setText("");
@@ -193,7 +195,7 @@ public class FuncionarioInterfaz extends javax.swing.JFrame implements Observer 
                             JOptionPane.showMessageDialog(this, "No se pudo modificar correctamente");
                         }
                     }
-                                } else {
+                } else {
                     JOptionPane.showMessageDialog(this, "El nombre no es valido");
                 }
             }
@@ -215,6 +217,7 @@ public class FuncionarioInterfaz extends javax.swing.JFrame implements Observer 
                     correcto = modelo.agregarFuncionario(nombre, ano, telefono);
                     if (correcto) {
                         JOptionPane.showMessageDialog(this, "Se modifico correctamente");
+                        modelo.registrarTransaccion("Modificación de funcionario " + nombre);
                         actualizarLista();
                         txtNombre.setText("");
                         txtTel.setText("");

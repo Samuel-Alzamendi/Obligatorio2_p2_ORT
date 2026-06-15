@@ -263,6 +263,7 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
 
                                 if (cumple) {
                                     modelo.AgregarPaquete(p);
+                                    modelo.registrarTransaccion("Ingreso de paquete de cliente " + c.getNombre());
                                 }
                                 //actualizarListaPaquetes();
                             }

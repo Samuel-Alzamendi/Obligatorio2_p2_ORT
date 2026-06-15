@@ -312,6 +312,7 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
                         e.agregarPaquete(pa);
                     }
                     modelo.agregarEnvio(e);
+                    modelo.registrarTransaccion("Ingreso de envío número " + e.getId());
                     JOptionPane.showMessageDialog(this, "Envio confirmado exitosamente");
                     this.dispose();
 

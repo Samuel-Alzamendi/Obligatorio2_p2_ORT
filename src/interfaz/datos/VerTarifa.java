@@ -209,6 +209,7 @@ public class VerTarifa extends javax.swing.JFrame {
         }
 
         grab.cerrar();
+        modelo.registrarTransaccion("Modificación de tarifas");
         this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 

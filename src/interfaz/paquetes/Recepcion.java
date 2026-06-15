@@ -103,7 +103,10 @@ public class Recepcion extends javax.swing.JFrame implements Observer {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        
+        if (liEnvios.getSelectedValue() != null) {
+            int id = Integer.parseInt(liEnvios.getSelectedValue().split(" - ")[0].replace("Envio ", "").trim());
+            modelo.registrarTransaccion("Recepción de envío número " + id);
+        }
         this.dispose();
         // revisar
 //        if (liEnvios.getSelectedValue() == null) {

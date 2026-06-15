@@ -2,11 +2,6 @@ package interfaz.datos;
 
 import dominio.Cliente;
 import dominio.Sistema;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Observable;
@@ -120,7 +115,6 @@ public class ClienteInterfaz extends javax.swing.JFrame implements Observer {
     //BOTON CREAR CLIENTE
     private void btnCrearClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearClienteActionPerformed
         String nombre = txtNombre.getText();
-
         String telefono = txtTel.getText();
         String email = txtEmail.getText();
 
@@ -133,7 +127,8 @@ public class ClienteInterfaz extends javax.swing.JFrame implements Observer {
                 txtNombre.setText("");
                 txtTel.setText("");
                 txtEmail.setText("");
-
+                JOptionPane.showMessageDialog(this, "Se agrego exitosamente");
+                modelo.registrarTransaccion("Ingreso de cliente " + nombre);
             } else {
                 JOptionPane.showMessageDialog(this, "El nombre ya existe o está vacío");
             }
@@ -179,13 +174,14 @@ public class ClienteInterfaz extends javax.swing.JFrame implements Observer {
                     correcto = modelo.agregarCliente(nombre, mail, telefono);
                     if (correcto) {
                         JOptionPane.showMessageDialog(this, "Se modifico correctamente");
+                        modelo.registrarTransaccion("Modificación de cliente " + nombre);
+                        actualizarLista();
+                        txtNombre.setText("");
+                        txtTel.setText("");
+                        txtEmail.setText("");
                     } else {
                         JOptionPane.showMessageDialog(this, "No se pudo modificar correctamente");
                     }
-                    actualizarLista();
-                    txtNombre.setText("");
-                    txtTel.setText("");
-                    txtEmail.setText("");
                 } else {
                     JOptionPane.showMessageDialog(this, "El nombre no es valido");
                 }
@@ -197,13 +193,14 @@ public class ClienteInterfaz extends javax.swing.JFrame implements Observer {
                 correcto = modelo.agregarCliente(nombre, mail, telefono);
                 if (correcto) {
                     JOptionPane.showMessageDialog(this, "Se modifico correctamente");
+                    modelo.registrarTransaccion("Modificación de cliente " + nombre);
+                    actualizarLista();
+                    txtNombre.setText("");
+                    txtTel.setText("");
+                    txtEmail.setText("");
                 } else {
                     JOptionPane.showMessageDialog(this, "No se pudo modificar correctamente");
                 }
-                actualizarLista();
-                txtNombre.setText("");
-                txtTel.setText("");
-                txtEmail.setText("");
             } else {
                 JOptionPane.showMessageDialog(this, "El nombre no es valido");
             }

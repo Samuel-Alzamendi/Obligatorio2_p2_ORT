@@ -5,19 +5,29 @@
 package interfaz.Reportes;
 
 import dominio.Sistema;
+import java.io.File;
+import java.util.Observable;
+import java.util.Observer;
+import javax.swing.JOptionPane;
+import persistencia.ArchivoGrabacion;
+import persistencia.ArchivoLectura;
 
 /**
  *
  * @author samue
  */
-public class LogDeTransacciones extends javax.swing.JFrame {
-    
+public class LogDeTransacciones extends javax.swing.JFrame implements Observer {
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LogDeTransacciones.class.getName());
 
     private Sistema modelo;
+
     public LogDeTransacciones(Sistema modelo) {
         this.modelo = modelo;
         initComponents();
+        txtLogs.setEditable(false);
+        actualizarLista();
+        modelo.addObserver(this);
     }
 
     /**
@@ -38,6 +48,7 @@ public class LogDeTransacciones extends javax.swing.JFrame {
         setTitle("Logs de transacciones");
 
         jButton1.setText("Borrar todo contenido");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
 
         txtLogs.setColumns(20);
         txtLogs.setRows(5);
@@ -78,6 +89,34 @@ public class LogDeTransacciones extends javax.swing.JFrame {
         setBounds(0, 0, 614, 357);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int resp = JOptionPane.showConfirmDialog(this,
+                "¿Borrar todo el contenido del log?",
+                "Confirmar",
+                JOptionPane.YES_NO_OPTION);
+
+        if (resp == JOptionPane.YES_OPTION) {
+            ArchivoGrabacion grab = new ArchivoGrabacion("Transacciones.log");
+            grab.cerrar();
+            txtLogs.setText("");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void actualizarLista() {
+        txtLogs.setText("");
+        String todo = "";
+        ArchivoLectura lect = new ArchivoLectura("Transacciones.log");
+        while (lect.hayMasLineas()) {
+                todo = todo + lect.linea() + "\n";
+            }
+        lect.cerrar();
+        txtLogs.setText(todo);
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        actualizarLista();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

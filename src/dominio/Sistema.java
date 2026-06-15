@@ -6,10 +6,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JOptionPane;
+import persistencia.ArchivoGrabacion;
 import persistencia.ArchivoLectura;
 
 /**
@@ -415,6 +418,23 @@ public class Sistema extends Observable implements Serializable {
         }
         archivo.cerrar();
 
+    }
+
+     //-----------------------------------------------------------------------
+    //LOG DE TRANSACCIONES
+
+    public void registrarTransaccion(String descripcion) {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yy HH:mm");
+        String fechaHora = formato.format(new Date());
+        String linea = fechaHora + " – " + descripcion;
+
+        //guardar en el archivo Transacciones.log
+        ArchivoGrabacion grab = new ArchivoGrabacion("Transacciones.log", true);
+        grab.grabarLinea(linea);
+        grab.cerrar();
+
+        setChanged();
+        notifyObservers();
     }
 
 }
