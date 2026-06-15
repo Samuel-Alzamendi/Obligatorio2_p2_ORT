@@ -69,41 +69,41 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
 
         jLabel1.setText("Identificador de paquete");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(6, 9, 140, 16);
+        jLabel1.setBounds(10, 20, 190, 17);
 
         jLabel2.setText("Cliente");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(6, 34, 140, 16);
+        jLabel2.setBounds(10, 80, 140, 17);
 
         jLabel3.setText("Fecha");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(10, 190, 140, 16);
+        jLabel3.setBounds(10, 220, 140, 20);
 
         jLabel4.setText("Destinatario");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(10, 220, 140, 16);
+        jLabel4.setBounds(200, 220, 140, 20);
 
         jLabel5.setText("Direccion");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(10, 250, 140, 16);
+        jLabel5.setBounds(10, 280, 140, 17);
 
         jLabel6.setText("Departameno de destino");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(10, 280, 180, 16);
+        jLabel6.setBounds(380, 220, 180, 20);
 
         jLabel7.setText("Peso en gramos");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(10, 310, 140, 16);
+        jLabel7.setBounds(330, 20, 140, 17);
 
         btnConfirmar.setText("Confirmar");
         btnConfirmar.addActionListener(this::btnConfirmarActionPerformed);
         jPanel1.add(btnConfirmar);
-        btnConfirmar.setBounds(340, 350, 130, 23);
+        btnConfirmar.setBounds(320, 350, 130, 30);
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(this::btnCancelarActionPerformed);
         jPanel1.add(btnCancelar);
-        btnCancelar.setBounds(478, 350, 110, 23);
+        btnCancelar.setBounds(460, 350, 110, 30);
 
         txtFecha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -111,40 +111,40 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
             }
         });
         jPanel1.add(txtFecha);
-        txtFecha.setBounds(180, 190, 180, 22);
+        txtFecha.setBounds(10, 243, 150, 30);
         jPanel1.add(txtDestinatario);
-        txtDestinatario.setBounds(180, 220, 180, 22);
+        txtDestinatario.setBounds(200, 243, 150, 30);
         jPanel1.add(txtDireccion);
-        txtDireccion.setBounds(180, 250, 180, 22);
+        txtDireccion.setBounds(10, 300, 560, 30);
         jPanel1.add(txtPeso);
-        txtPeso.setBounds(180, 310, 70, 22);
+        txtPeso.setBounds(330, 40, 130, 30);
 
         spCliente.setViewportView(liClientes);
 
         jPanel1.add(spCliente);
-        spCliente.setBounds(180, 40, 180, 141);
+        spCliente.setBounds(10, 100, 270, 110);
 
         lblPrecioTotal.setText("Precio total");
         jPanel1.add(lblPrecioTotal);
-        lblPrecioTotal.setBounds(380, 310, 80, 20);
+        lblPrecioTotal.setBounds(330, 80, 80, 20);
 
         lblPrecioMuestra.setText("_________");
         jPanel1.add(lblPrecioMuestra);
-        lblPrecioMuestra.setBounds(460, 310, 130, 20);
+        lblPrecioMuestra.setBounds(410, 80, 130, 20);
         jPanel1.add(txtId);
-        txtId.setBounds(180, 10, 180, 22);
+        txtId.setBounds(10, 40, 270, 30);
 
         cbDepartamentos.addActionListener(this::cbDepartamentosActionPerformed);
         jPanel1.add(cbDepartamentos);
-        cbDepartamentos.setBounds(180, 280, 180, 22);
+        cbDepartamentos.setBounds(380, 243, 190, 30);
 
         jToggleButton1.setText("Calcular");
         jToggleButton1.addActionListener(this::jToggleButton1ActionPerformed);
         jPanel1.add(jToggleButton1);
-        jToggleButton1.setBounds(260, 310, 100, 23);
+        jToggleButton1.setBounds(470, 40, 100, 30);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 610, 400);
+        jPanel1.setBounds(0, 0, 590, 400);
 
         pack();
         setLocationRelativeTo(null);

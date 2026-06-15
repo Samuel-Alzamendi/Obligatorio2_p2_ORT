@@ -31,25 +31,27 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="btnConfirmar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="lblEnvios" alignment="0" max="32767" attributes="0"/>
-                          <Component id="spEnvios" pref="290" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="spPaquetesEnvios" min="-2" pref="290" max="-2" attributes="0"/>
-                          <Component id="lblPaquetesEnvio" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <Component id="spEnvios" alignment="0" min="-2" pref="272" max="-2" attributes="0"/>
+                  <Component id="lblEnvios" pref="291" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="lblPaquetesEnvio" pref="291" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="btnConfirmar" min="-2" pref="124" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btnCancelar" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="spPaquetesEnvios" min="-2" pref="270" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -63,15 +65,15 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="spEnvios" max="32767" attributes="0"/>
-                  <Component id="spPaquetesEnvios" min="-2" pref="270" max="-2" attributes="0"/>
+                  <Component id="spEnvios" pref="250" max="32767" attributes="0"/>
+                  <Component id="spPaquetesEnvios" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnConfirmar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="btnCancelar" pref="35" max="32767" attributes="0"/>
+                  <Component id="btnConfirmar" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="270" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
