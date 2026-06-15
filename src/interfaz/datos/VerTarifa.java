@@ -35,7 +35,6 @@ public class VerTarifa extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jRadioButton1 = new javax.swing.JRadioButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbTarifas = new javax.swing.JTable();
@@ -48,8 +47,6 @@ public class VerTarifa extends javax.swing.JFrame {
         tfporcentaje = new javax.swing.JTextField();
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JToggleButton();
-
-        jRadioButton1.setText("jRadioButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tarifas");
@@ -118,25 +115,26 @@ public class VerTarifa extends javax.swing.JFrame {
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(this::btnModificarActionPerformed);
         jPanel1.add(btnModificar);
-        btnModificar.setBounds(290, 210, 120, 23);
+        btnModificar.setBounds(230, 200, 130, 30);
 
         jLabel5.setText("% modificacion");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(80, 210, 130, 17);
+        jLabel5.setBounds(30, 210, 130, 17);
 
+        tfporcentaje.setPreferredSize(new java.awt.Dimension(64, 36));
         tfporcentaje.addActionListener(this::tfporcentajeActionPerformed);
         jPanel1.add(tfporcentaje);
-        tfporcentaje.setBounds(190, 210, 90, 23);
+        tfporcentaje.setBounds(130, 200, 90, 30);
 
         btnAceptar.setText("Aceptar");
         btnAceptar.addActionListener(this::btnAceptarActionPerformed);
         jPanel1.add(btnAceptar);
-        btnAceptar.setBounds(270, 260, 135, 23);
+        btnAceptar.setBounds(280, 250, 135, 30);
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(this::btnCancelarActionPerformed);
         jPanel1.add(btnCancelar);
-        btnCancelar.setBounds(138, 260, 120, 23);
+        btnCancelar.setBounds(138, 253, 120, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -253,7 +251,6 @@ public class VerTarifa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblEste;
     private javax.swing.JLabel lblOeste;
