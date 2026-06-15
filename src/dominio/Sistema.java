@@ -224,12 +224,12 @@ public class Sistema extends Observable implements Serializable {
         return correcto;
     }
 
-    // evento para obtener los clientes de la lista
+    // evento para obtener los funcionarios de la lista
     public Funcionario obtenerFuncionario(String nombre) {
         Funcionario f = new Funcionario();
 
-        for (int i = 0; i < clientes.size(); i++) {
-            if (clientes.get(i).getNombre().equalsIgnoreCase(nombre)) {
+        for (int i = 0; i < funcionarios.size(); i++) {
+            if (funcionarios.get(i).getNombre().equalsIgnoreCase(nombre)) {
                 f = funcionarios.get(i);
             }
         }
@@ -274,10 +274,10 @@ public class Sistema extends Observable implements Serializable {
 
     // ----------------------------------------------
     // paquetes
-    public float calcularPrecio() {
-
-        return 0;
-    }
+//    public float calcularPrecio() {
+//
+//        return 0;
+//    }
 
     public void AgregarPaquete(Paquete paquete) {
         paquetes.add(paquete);
@@ -344,7 +344,7 @@ public class Sistema extends Observable implements Serializable {
               zona = d.getZona().getNombre();
                categoria = 1;
               
-          }else if(pesoEnGramos>= 5000 && pesoEnGramos<1000){
+          }else if(pesoEnGramos>= 5000 && pesoEnGramos<10000){
               zona = d.getZona().getNombre();
                categoria = 2;
               

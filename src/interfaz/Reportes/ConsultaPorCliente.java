@@ -148,9 +148,19 @@ public class ConsultaPorCliente extends javax.swing.JFrame {
         }
 
         lblTotalEnviados.setText(cantEnviado + "");
+        
+           int cantRecibido = 0;
+
+        for (int i = 0; i < modelo.getPaquetes().size(); i++) {
+            Paquete p = modelo.getPaquetes().get(i);;
+            if (p.getCliente().equals(clienteEncontrado) && p.getEstado().equals("Enviado")) {
+                cantRecibido++;
+            }
+
+        }
 
         //Seteamos texto de cant total
-        int cantTotal = cantEnviado + cantPendiente;
+        int cantTotal = cantEnviado + cantPendiente + cantRecibido;
 
         lblTotalRecibidos.setText(cantTotal + "");
 

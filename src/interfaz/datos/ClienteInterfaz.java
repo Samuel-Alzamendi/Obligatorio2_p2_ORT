@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JOptionPane;
@@ -119,6 +120,7 @@ public class ClienteInterfaz extends javax.swing.JFrame implements Observer {
     //BOTON CREAR CLIENTE
     private void btnCrearClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearClienteActionPerformed
         String nombre = txtNombre.getText();
+
         String telefono = txtTel.getText();
         String email = txtEmail.getText();
 
@@ -135,8 +137,9 @@ public class ClienteInterfaz extends javax.swing.JFrame implements Observer {
             } else {
                 JOptionPane.showMessageDialog(this, "El nombre ya existe o está vacío");
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "El nombre no es valido");
         }
-
 
     }//GEN-LAST:event_btnCrearClienteActionPerformed
 
@@ -154,7 +157,7 @@ public class ClienteInterfaz extends javax.swing.JFrame implements Observer {
             }
         }
 
-    }//GEN-LAST:event_liClientesValueChanged
+    }
 
     // boton para modificar al cliente
     private void btnModficarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModficarClienteActionPerformed
@@ -163,31 +166,70 @@ public class ClienteInterfaz extends javax.swing.JFrame implements Observer {
         String mail = txtEmail.getText();
         String nombreSeleccionado = (String) liClientes.getSelectedValue();
 
-        boolean correcto = modelo.eliminarCliente(nombreSeleccionado);
-        correcto = modelo.agregarCliente(nombre, mail, telefono);
-
-        if (correcto) {
-            JOptionPane.showMessageDialog(this, "Se modifico correctamente");
+        if (nombreSeleccionado == null) {
+            JOptionPane.showMessageDialog(this, "Seleccione un cliente");
+        } else if (!nombre.equalsIgnoreCase(nombreSeleccionado)) {
+            Cliente otro = modelo.obtenerCliente(nombre);
+            if (otro.getNombre() != null && otro.getNombre().equalsIgnoreCase(nombre)) {
+                JOptionPane.showMessageDialog(this, "El nombre ya existe");
+            } else {
+                boolean letrasNombre = nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ]*");
+                if (letrasNombre) {
+                    boolean correcto = modelo.eliminarCliente(nombreSeleccionado);
+                    correcto = modelo.agregarCliente(nombre, mail, telefono);
+                    if (correcto) {
+                        JOptionPane.showMessageDialog(this, "Se modifico correctamente");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No se pudo modificar correctamente");
+                    }
+                    actualizarLista();
+                    txtNombre.setText("");
+                    txtTel.setText("");
+                    txtEmail.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(this, "El nombre no es valido");
+                }
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "No se pudo modificar correctamente");
+            boolean letrasNombre = nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ]*");
+            if (letrasNombre) {
+                boolean correcto = modelo.eliminarCliente(nombreSeleccionado);
+                correcto = modelo.agregarCliente(nombre, mail, telefono);
+                if (correcto) {
+                    JOptionPane.showMessageDialog(this, "Se modifico correctamente");
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se pudo modificar correctamente");
+                }
+                actualizarLista();
+                txtNombre.setText("");
+                txtTel.setText("");
+                txtEmail.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "El nombre no es valido");
+            }
         }
-        actualizarLista();
-        txtNombre.setText("");
-        txtTel.setText("");
-        txtEmail.setText("");
     }//GEN-LAST:event_btnModficarClienteActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
+    }
 
-//metodo actualizarLista (creamos string de largo cleintes y en for ponemos dentro. Luego la mostramos en lista
+    // metodo actualizarLista
     private void actualizarLista() {
-        String[] nombres = new String[modelo.getClientes().size()];
+        ArrayList<String> nombres = new ArrayList<>();
+
         for (int i = 0; i < modelo.getClientes().size(); i++) {
-            nombres[i] = modelo.getClientes().get(i).getNombre();
+            nombres.add(modelo.getClientes().get(i).getNombre());
         }
-        liClientes.setListData(nombres);
+
+        Collections.sort(nombres);
+
+        String[] datos = new String[nombres.size()];
+        for (int i = 0; i < nombres.size(); i++) {
+            datos[i] = nombres.get(i);
+        }
+
+        liClientes.setListData(datos);
     }
 
 

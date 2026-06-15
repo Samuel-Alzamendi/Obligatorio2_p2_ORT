@@ -258,7 +258,8 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
         if (liPaqueteEnvio.getModel().getSize() != 0) {
 
             if (cbFuncionarios.getSelectedItem() != null) {
-                Funcionario f = new Funcionario();
+                Funcionario f  = modelo.obtenerFuncionario(cbFuncionarios.getSelectedItem().toString());
+                
 
                 String fechaTexto = "";
                 if (txtFecha.getText().trim().isEmpty()) {
@@ -294,9 +295,11 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
                 if (cumple) {
                     //LLAMAR A SISTEMA
                     Envio e = new Envio();
-                    p.setFecha(fechaTexto);
+                    e.setFechaEnvio(fechaTexto);
                     e.setFuncionario(f);
                     e.setId(Integer.parseInt(lblNumEnvio.getText()));
+                    z = modelo.obtenerZona(liZonas.getSelectedValue().toString());
+                    e.setZona(z);
 
                     //PASA LISTA DE PAQUETES DE ENVIOS(ID) A UN ARRAY PARA LLAMAR METODO cambiarEstadoPaquete()
                     String[] ids = new String[liPaqueteEnvio.getModel().getSize()];

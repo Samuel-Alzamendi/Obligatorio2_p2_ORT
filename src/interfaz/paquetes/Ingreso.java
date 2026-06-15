@@ -258,7 +258,7 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
 
                                 p.setEstado("Pendiente");
                                 // calcular
-                                p.setPrecio(modelo.calcularPrecio());
+                                p.setPrecio(modelo.calcularPrecio(peso, d));
                                 p.setCliente(c);
 
                                 if (cumple) {

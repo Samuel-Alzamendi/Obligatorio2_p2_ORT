@@ -23,6 +23,7 @@ public class VerTarifa extends javax.swing.JFrame {
         this.modelo = modelo;
         initComponents();
         cargarTabla();
+        guardarBackup();
     }
 
     /**
@@ -162,18 +163,28 @@ public class VerTarifa extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Ingrese solamente numeros en porcentaje");
         }
         if (cumple) {
+            boolean cumplePrecio = true;
             for (int i = 0; i < modelo.getTarifas().size(); i++) {
                 Tarifa t = modelo.getTarifas().get(i);
-
-                for (int j = 0; j < 4; j++) {
+                for (int j = 0; j < 4 && cumplePrecio; j++) {
                     int calculo = (int) Math.round(t.getPrecios()[j] * (1 + porcentaje / 100.0));
-                    tbTarifas.setValueAt(calculo, i, j);
-                    t.getPrecios()[j] = calculo;
+                    if(calculo < 0) {
+                         JOptionPane.showMessageDialog(this, "Error... El precio no puede ser negativo");
+                         cumplePrecio = false;
+                    }
                 }
 
+            }if (cumplePrecio) {
+                for (int i = 0; i < modelo.getTarifas().size(); i++) {
+                    Tarifa t = modelo.getTarifas().get(i);
+                    for (int j = 0; j < 4; j++) {
+                        int calculo = (int) Math.round(t.getPrecios()[j] * (1 + porcentaje / 100.0));
+                        tbTarifas.setValueAt(calculo, i, j);
+                        t.getPrecios()[j] = calculo;
+                    }
+                }
             }
         }
-
 
     }//GEN-LAST:event_btnModificarActionPerformed
 
@@ -202,7 +213,13 @@ public class VerTarifa extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+      
+      //gardamos precios originales al apretar cancelar - Precios originales creada abajo con el metodo guardarBackup()
+       for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            modelo.getTarifas().get(i).getPrecios()[j] = preciosOriginales[i][j];
+        } 
+         }
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -218,6 +235,15 @@ public class VerTarifa extends javax.swing.JFrame {
         }
     }
 
+    private int[][] preciosOriginales;
+    private void guardarBackup() {
+        preciosOriginales = new int[4][4];
+        for (int i = 0; i < 4 ; i++) {
+            for (int j = 0; j < 4; j++) {
+                preciosOriginales[i][j] = modelo.getTarifas().get(i).getPrecios()[j];
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
