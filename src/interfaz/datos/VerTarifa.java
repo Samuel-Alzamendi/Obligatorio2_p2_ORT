@@ -129,12 +129,12 @@ public class VerTarifa extends javax.swing.JFrame {
         btnAceptar.setText("Aceptar");
         btnAceptar.addActionListener(this::btnAceptarActionPerformed);
         jPanel1.add(btnAceptar);
-        btnAceptar.setBounds(280, 250, 135, 30);
+        btnAceptar.setBounds(140, 250, 135, 30);
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(this::btnCancelarActionPerformed);
         jPanel1.add(btnCancelar);
-        btnCancelar.setBounds(138, 253, 120, 30);
+        btnCancelar.setBounds(290, 250, 120, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

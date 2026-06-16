@@ -40,7 +40,6 @@ public class ConsultaPorCliente extends javax.swing.JFrame {
         liClientes = new javax.swing.JList<>();
         lblPendientes = new javax.swing.JLabel();
         lblTotalPendientes = new javax.swing.JLabel();
-        btnConfirmar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         lblEnviados = new javax.swing.JLabel();
         lblTotalEnviados = new javax.swing.JLabel();
@@ -70,15 +69,11 @@ public class ConsultaPorCliente extends javax.swing.JFrame {
         pMain.add(lblTotalPendientes);
         lblTotalPendientes.setBounds(420, 30, 35, 17);
 
-        btnConfirmar.setText("Confirmar");
-        pMain.add(btnConfirmar);
-        btnConfirmar.setBounds(420, 280, 86, 23);
-
-        btnCancelar.setText("Cancelar");
+        btnCancelar.setText("Cerrar");
         btnCancelar.setToolTipText("");
         btnCancelar.addActionListener(this::btnCancelarActionPerformed);
         pMain.add(btnCancelar);
-        btnCancelar.setBounds(510, 280, 81, 23);
+        btnCancelar.setBounds(421, 260, 170, 40);
 
         lblEnviados.setText("Total de paquetes enviados");
         pMain.add(lblEnviados);
@@ -169,7 +164,6 @@ public class ConsultaPorCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnConfirmar;
     private javax.swing.JLabel lblEnviados;
     private javax.swing.JLabel lblPendientes;
     private javax.swing.JLabel lblRecibidos;

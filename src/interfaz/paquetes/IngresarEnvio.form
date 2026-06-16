@@ -224,7 +224,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnCancelar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cancelar envio"/>
+            <Property name="text" type="java.lang.String" value="Cancelar"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
           <Events>

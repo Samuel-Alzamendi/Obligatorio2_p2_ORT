@@ -68,9 +68,11 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ingreso de Paquete");
         setBounds(new java.awt.Rectangle(0, 30, 790, 520));
-        setMinimumSize(new java.awt.Dimension(610, 400));
+        setMinimumSize(new java.awt.Dimension(785, 528));
         getContentPane().setLayout(null);
 
+        jPanel1.setPreferredSize(new java.awt.Dimension(900, 600));
+        jPanel1.setSize(new java.awt.Dimension(900, 600));
         jPanel1.setLayout(null);
 
         jLabel1.setText("Identificador de paquete");

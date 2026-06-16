@@ -59,10 +59,12 @@
               </Group>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
               <Component id="btnModficarCliente" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               <Component id="btnCrearCliente" min="-2" pref="133" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="Cerrar" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -91,9 +93,12 @@
                   <Component id="spLista" min="-2" pref="188" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="48" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnCrearCliente" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                  <Component id="btnModficarCliente" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="Cerrar" alignment="1" min="-2" pref="36" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnModficarCliente" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="btnCrearCliente" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
           </Group>
@@ -173,6 +178,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Clientes registrados"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="Cerrar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cerrar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CerrarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

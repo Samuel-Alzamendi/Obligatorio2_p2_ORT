@@ -95,7 +95,7 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
         btnConfirmar.setText("Confirmar envio");
         btnConfirmar.addActionListener(this::btnConfirmarActionPerformed);
 
-        btnCancelar.setText("Cancelar envio");
+        btnCancelar.setText("Cancelar");
         btnCancelar.setToolTipText("");
         btnCancelar.addActionListener(this::btnCancelarActionPerformed);
 

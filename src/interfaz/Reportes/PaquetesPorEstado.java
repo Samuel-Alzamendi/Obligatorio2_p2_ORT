@@ -57,6 +57,7 @@ public class PaquetesPorEstado extends javax.swing.JFrame {
         lblEsteMapa = new javax.swing.JLabel();
         lblNorteMapa = new javax.swing.JLabel();
         lblMapaUruguay = new javax.swing.JLabel();
+        btnCerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Paquetes por estado");
@@ -65,27 +66,27 @@ public class PaquetesPorEstado extends javax.swing.JFrame {
 
         lblEste.setText("Este");
         pMain.add(lblEste);
-        lblEste.setBounds(6, 94, 54, 16);
+        lblEste.setBounds(6, 94, 54, 17);
 
         lblEnviado.setText("Enviado");
         pMain.add(lblEnviado);
-        lblEnviado.setBounds(208, 6, 103, 16);
+        lblEnviado.setBounds(208, 6, 103, 17);
 
         lblOeste.setText("Oeste");
         pMain.add(lblOeste);
-        lblOeste.setBounds(6, 50, 54, 16);
+        lblOeste.setBounds(6, 50, 54, 17);
 
         lblNorte.setText("Norte");
         pMain.add(lblNorte);
-        lblNorte.setBounds(6, 28, 54, 16);
+        lblNorte.setBounds(6, 28, 54, 17);
 
         lblTotal.setText("Total");
         pMain.add(lblTotal);
-        lblTotal.setBounds(466, 6, 103, 16);
+        lblTotal.setBounds(466, 6, 103, 17);
 
         lblPendiente.setText("Pendiente");
         pMain.add(lblPendiente);
-        lblPendiente.setBounds(78, 6, 103, 16);
+        lblPendiente.setBounds(78, 6, 103, 17);
 
         lblOesteMapa.setBackground(new java.awt.Color(255, 255, 51));
         lblOesteMapa.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
@@ -103,11 +104,11 @@ public class PaquetesPorEstado extends javax.swing.JFrame {
 
         lblRecibido.setText("Recibido");
         pMain.add(lblRecibido);
-        lblRecibido.setBounds(337, 6, 103, 16);
+        lblRecibido.setBounds(337, 6, 103, 17);
 
         lblSur.setText("Sur");
         pMain.add(lblSur);
-        lblSur.setBounds(6, 72, 54, 16);
+        lblSur.setBounds(6, 72, 54, 17);
 
         tEnvios.setBackground(new java.awt.Color(0, 0, 0));
         tEnvios.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -185,18 +186,23 @@ public class PaquetesPorEstado extends javax.swing.JFrame {
         pMain.add(lblMapaUruguay);
         lblMapaUruguay.setBounds(78, 116, 224, 226);
 
+        btnCerrar.setText("Cerrar");
+        btnCerrar.addActionListener(this::btnCerrarActionPerformed);
+        pMain.add(btnCerrar);
+        btnCerrar.setBounds(470, 313, 120, 30);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pMain, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pMain, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
         );
 
-        setBounds(0, 0, 614, 357);
+        setBounds(0, 0, 610, 379);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tEnviosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tEnviosMouseClicked
@@ -407,6 +413,11 @@ public class PaquetesPorEstado extends javax.swing.JFrame {
 
     }//GEN-LAST:event_lblOesteMapaMouseEntered
 
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+        this.dispose();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCerrarActionPerformed
+
     public void cargarTabla() {
         ArrayList<Paquete> paquetes = modelo.getPaquetes();
 
@@ -514,6 +525,7 @@ public class PaquetesPorEstado extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCerrar;
     private javax.swing.JLabel lblEnviado;
     private javax.swing.JLabel lblEste;
     private javax.swing.JLabel lblEsteMapa;
