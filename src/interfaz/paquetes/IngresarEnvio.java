@@ -231,9 +231,7 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         Zona z = new Zona();
-        ArrayList<Paquete> paquetesParaEnvio = new ArrayList<>();
         Paquete p = new Paquete();
-        boolean zonaCumple = true;
         boolean cumpleFecha = true;
         boolean cumple = true;
 
@@ -363,7 +361,7 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
             liPaqueteEnvio.setListData(listaPaquete);
 
             DefaultListModel<String> modeloPendientes = (DefaultListModel<String>) liPendientes.getModel();
-            modeloPendientes.addElement(paqueteElegido.replace("Paquete con ID: ", ""));
+            modeloPendientes.addElement(paqueteElegido);
         }
 
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -380,33 +378,26 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
     }
 
     private void actualizarListas() {
-//        String[] idsPaquetes = new String[modelo.ObtenerPaquetePen().size()];
-//        ArrayList<Paquete> paquetesPendientes = new ArrayList<>();
-//        paquetesPendientes = modelo.ObtenerPaquetePen();
-//
-//        for (int i = 0; i < idsPaquetes.length; i++) {
-//            idsPaquetes[i] = paquetesPendientes.get(i).getId();
-//        }
-//        liPendientes.setListData(idsPaquetes);
 
         String[] zonas = new String[modelo.getZonas().size()];
         for (int i = 0; i < modelo.getZonas().size(); i++) {
             zonas[i] = modelo.getZonas().get(i).getNombre();
         }
-        liZonas.setListData(zonas);
-
-        String[] envios = new String[modelo.getEnvios().size()];
-        for (int i = 0; i < modelo.getEnvios().size(); i++) {
-            envios[i] = modelo.getEnvios().get(i).getId() + "";
-        }
-        liZonas.setListData(zonas);
+        liZonas.setListData(zonas);  
 
     }
 
     // carga el numero de envio
     private void numEnvio() {
-        lblNumEnvio.setText((modelo.getEnvios().size() + 1) + "");
+        int maxId = 0;
+        for (int i = 0; i < modelo.getEnvios().size(); i++) {
+        if (modelo.getEnvios().get(i).getId() > maxId) {
+            maxId = modelo.getEnvios().get(i).getId();
+        }
     }
+    lblNumEnvio.setText((maxId + 1) + "");
+}
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -436,6 +427,6 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         actualizarListas();
-        comboFun();
+        
     }
 }

@@ -72,7 +72,6 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
         getContentPane().setLayout(null);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(900, 600));
-        jPanel1.setSize(new java.awt.Dimension(900, 600));
         jPanel1.setLayout(null);
 
         jLabel1.setText("Identificador de paquete");
@@ -158,7 +157,15 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
             new String [] {
                 "ID", "N. Cliente", "N. Destinatario", "Direccion", "Fecha", "Peso", "Precio", "Departamento", "Estado"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tbPaquetes);
 
         jPanel1.add(jScrollPane1);
@@ -285,6 +292,7 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
                                 if (cumple) {
                                     modelo.AgregarPaquete(p);
                                     modelo.registrarTransaccion("Ingreso de paquete de cliente " + c.getNombre());
+
                                 }
                                 //actualizarListaPaquetes();
                             }
@@ -294,7 +302,13 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
 
                     if (cumple && cumpleFecha && clienteCumple && cumplePeso) {
                         JOptionPane.showMessageDialog(this, "Ingreso exitoso");
-                        this.dispose();
+                        cargarTabla();
+                        txtId.setText("");
+                        txtFecha.setText("");
+                        txtDestinatario.setText("");
+                        txtDireccion.setText("");
+                        txtPeso.setText("");
+                        lblPrecioMuestra.setText("_________");
                     }
                     //else {
                     //JOptionPane.showMessageDialog(this, "Ingreso inválido");
@@ -341,6 +355,8 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
 
     private void cargarTabla() {
 
+        DefaultTableModel modeloTabla = (DefaultTableModel) tbPaquetes.getModel();
+        modeloTabla.setRowCount(0);
         for (int i = 0; i < modelo.getPaquetes().size(); i++) {
 
             DefaultTableModel nuevaFila = (DefaultTableModel) tbPaquetes.getModel();
@@ -375,7 +391,8 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         // se ejecuta automáticamente cuando el modelo llama notifyObservers()
-        actualizarLista();  // refrescás las listas
+        actualizarLista();
+        cargarTabla();  // refrescás las listas
     }
 
     private void actualizarLista() {

@@ -338,11 +338,13 @@ public class Sistema extends Observable implements Serializable {
     public void cambiarEstadoPaquete(String[]lista){
         for(int i=0; i <lista.length;i++){
             for(int j = 0;j<paquetes.size();j++ ){
-                if (paquetes.get(j).getId().equals(lista[i])){
+                if (paquetes.get(j).getId().equalsIgnoreCase(lista[i])){
                     paquetes.get(j).setEstado("Enviado");
                 }
             }
         }
+        setChanged();
+        notifyObservers()
     }
             
             
@@ -393,7 +395,9 @@ public class Sistema extends Observable implements Serializable {
     }
     
     public void agregarEnvio(Envio envio){
-     envios.add(envio);
+        envios.add(envio);
+        setChanged();
+        notifyObservers();
      
         
     }
