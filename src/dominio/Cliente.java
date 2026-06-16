@@ -64,7 +64,4 @@ public class Cliente implements Serializable {
         this.idPaquetes = idPaquetes;
     }
 
-    public void agregarCliente(String unNombre, String unMail, String unTelefono) {
-
-    }
 }

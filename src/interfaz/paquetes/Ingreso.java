@@ -8,6 +8,7 @@ import dominio.Cliente;
 import dominio.Departamento;
 import dominio.Paquete;
 import dominio.Sistema;
+import dominio.Tarifa;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JOptionPane;
@@ -15,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -32,6 +34,7 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
         actualizarLista();
         comboDepa();
         modelo.addObserver(this);
+        cargarTabla();
     }
 
     @SuppressWarnings("unchecked")
@@ -59,6 +62,8 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
         txtId = new javax.swing.JTextField();
         cbDepartamentos = new javax.swing.JComboBox<>();
         jToggleButton1 = new javax.swing.JToggleButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbPaquetes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Hacer ingreso");
@@ -69,11 +74,11 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
 
         jLabel1.setText("Identificador de paquete");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(10, 20, 190, 17);
+        jLabel1.setBounds(10, 20, 190, 16);
 
         jLabel2.setText("Cliente");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(10, 80, 140, 17);
+        jLabel2.setBounds(10, 80, 140, 16);
 
         jLabel3.setText("Fecha");
         jPanel1.add(jLabel3);
@@ -85,7 +90,7 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
 
         jLabel5.setText("Direccion");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(10, 280, 140, 17);
+        jLabel5.setBounds(10, 280, 140, 16);
 
         jLabel6.setText("Departameno de destino");
         jPanel1.add(jLabel6);
@@ -93,7 +98,7 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
 
         jLabel7.setText("Peso en gramos");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(330, 20, 140, 17);
+        jLabel7.setBounds(330, 20, 140, 16);
 
         btnConfirmar.setText("Confirmar");
         btnConfirmar.addActionListener(this::btnConfirmarActionPerformed);
@@ -143,8 +148,21 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
         jPanel1.add(jToggleButton1);
         jToggleButton1.setBounds(470, 40, 100, 30);
 
+        tbPaquetes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "N. Cliente", "N. Destinatario", "Direccion", "Fecha", "Peso", "Precio", "Departamento", "Estado"
+            }
+        ));
+        jScrollPane1.setViewportView(tbPaquetes);
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(290, 100, 750, 110);
+
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 590, 400);
+        jPanel1.setBounds(0, 0, 1050, 400);
 
         pack();
         setLocationRelativeTo(null);
@@ -318,6 +336,39 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbDepartamentosActionPerformed
 
+    private void cargarTabla() {
+
+        for (int i = 0; i < modelo.getPaquetes().size(); i++) {
+
+            DefaultTableModel nuevaFila = (DefaultTableModel) tbPaquetes.getModel();
+
+            // Agregar una fila nueva (vacía o con datos)
+            nuevaFila.addRow(new Object[]{null, null, null, null, null, null, null, null, null});
+
+            Paquete p = modelo.getPaquetes().get(i);
+            tbPaquetes.setValueAt(p.getId(), i, 0);
+            tbPaquetes.setValueAt(p.getCliente().getNombre(), i, 1);
+            tbPaquetes.setValueAt(p.getNombreDestinatario(), i, 2);
+
+            tbPaquetes.setValueAt(p.getDireccion(), i, 3);
+            tbPaquetes.setValueAt(p.getFecha(), i, 4);
+            tbPaquetes.setValueAt(p.getPeso(), i, 5);
+
+            tbPaquetes.setValueAt(p.getPrecio(), i, 6);
+            tbPaquetes.setValueAt(p.getDepartamento().getNombre(), i, 7);
+            tbPaquetes.setValueAt(p.getEstado(), i, 8);
+
+        }
+
+//        for (int i = 0; i < modelo.getTarifas().size(); i++) {
+//            Tarifa t = modelo.getTarifas().get(i);
+//            for (int j = 0; j < 4; j++) {
+//                tbTarifas.setValueAt(t.getPrecios()[j], i, j);
+//            }
+//
+//        }
+    }
+
     @Override
     public void update(Observable o, Object arg) {
         // se ejecuta automáticamente cuando el modelo llama notifyObservers()
@@ -357,11 +408,13 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel lblPrecioMuestra;
     private javax.swing.JLabel lblPrecioTotal;
     private javax.swing.JList<String> liClientes;
     private javax.swing.JScrollPane spCliente;
+    private javax.swing.JTable tbPaquetes;
     private javax.swing.JTextField txtDestinatario;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtFecha;
