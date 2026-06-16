@@ -66,7 +66,8 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
         tbPaquetes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Hacer ingreso");
+        setTitle("Ingreso de Paquete");
+        setBounds(new java.awt.Rectangle(0, 30, 790, 520));
         setMinimumSize(new java.awt.Dimension(610, 400));
         getContentPane().setLayout(null);
 
@@ -74,11 +75,11 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
 
         jLabel1.setText("Identificador de paquete");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(10, 20, 190, 16);
+        jLabel1.setBounds(10, 20, 190, 17);
 
         jLabel2.setText("Cliente");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(10, 80, 140, 16);
+        jLabel2.setBounds(10, 80, 140, 17);
 
         jLabel3.setText("Fecha");
         jPanel1.add(jLabel3);
@@ -86,29 +87,29 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
 
         jLabel4.setText("Destinatario");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(200, 220, 140, 20);
+        jLabel4.setBounds(240, 220, 140, 20);
 
         jLabel5.setText("Direccion");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(10, 280, 140, 16);
+        jLabel5.setBounds(10, 280, 140, 17);
 
         jLabel6.setText("Departameno de destino");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(380, 220, 180, 20);
+        jLabel6.setBounds(490, 220, 180, 20);
 
         jLabel7.setText("Peso en gramos");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(330, 20, 140, 16);
+        jLabel7.setBounds(370, 20, 140, 17);
 
         btnConfirmar.setText("Confirmar");
         btnConfirmar.addActionListener(this::btnConfirmarActionPerformed);
         jPanel1.add(btnConfirmar);
-        btnConfirmar.setBounds(320, 350, 130, 30);
+        btnConfirmar.setBounds(500, 460, 130, 30);
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(this::btnCancelarActionPerformed);
         jPanel1.add(btnCancelar);
-        btnCancelar.setBounds(460, 350, 110, 30);
+        btnCancelar.setBounds(650, 460, 110, 30);
 
         txtFecha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -116,13 +117,13 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
             }
         });
         jPanel1.add(txtFecha);
-        txtFecha.setBounds(10, 243, 150, 30);
+        txtFecha.setBounds(10, 240, 210, 30);
         jPanel1.add(txtDestinatario);
-        txtDestinatario.setBounds(200, 243, 150, 30);
+        txtDestinatario.setBounds(240, 240, 240, 30);
         jPanel1.add(txtDireccion);
-        txtDireccion.setBounds(10, 300, 560, 30);
+        txtDireccion.setBounds(10, 300, 750, 30);
         jPanel1.add(txtPeso);
-        txtPeso.setBounds(330, 40, 130, 30);
+        txtPeso.setBounds(370, 40, 180, 30);
 
         spCliente.setViewportView(liClientes);
 
@@ -131,22 +132,22 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
 
         lblPrecioTotal.setText("Precio total");
         jPanel1.add(lblPrecioTotal);
-        lblPrecioTotal.setBounds(330, 80, 80, 20);
+        lblPrecioTotal.setBounds(370, 80, 80, 20);
 
         lblPrecioMuestra.setText("_________");
         jPanel1.add(lblPrecioMuestra);
-        lblPrecioMuestra.setBounds(410, 80, 130, 20);
+        lblPrecioMuestra.setBounds(450, 80, 130, 20);
         jPanel1.add(txtId);
         txtId.setBounds(10, 40, 270, 30);
 
         cbDepartamentos.addActionListener(this::cbDepartamentosActionPerformed);
         jPanel1.add(cbDepartamentos);
-        cbDepartamentos.setBounds(380, 243, 190, 30);
+        cbDepartamentos.setBounds(490, 240, 270, 30);
 
         jToggleButton1.setText("Calcular");
         jToggleButton1.addActionListener(this::jToggleButton1ActionPerformed);
         jPanel1.add(jToggleButton1);
-        jToggleButton1.setBounds(470, 40, 100, 30);
+        jToggleButton1.setBounds(560, 40, 200, 30);
 
         tbPaquetes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -159,10 +160,10 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
         jScrollPane1.setViewportView(tbPaquetes);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(290, 100, 750, 110);
+        jScrollPane1.setBounds(10, 340, 750, 110);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 1050, 400);
+        jPanel1.setBounds(0, 0, 790, 520);
 
         pack();
         setLocationRelativeTo(null);

@@ -155,9 +155,9 @@ public class Sistema extends Observable implements Serializable {
     // agregar un clinete
     public boolean agregarCliente(String unNombre, String unMail, String unTelefono) {
         boolean correcto = true;
-        if (unNombre.equals("")) {
+        if (unNombre.equals("")|| unMail.equals("") || unTelefono.equals("")) {
             correcto = false;
-            System.out.println("Error, faltó el ingreso del nombre");
+            System.out.println("Error, faltó el ingreso de un dato");
         } else if (existeNombre(unNombre)) {
             correcto = false;
         } else {
@@ -205,9 +205,9 @@ public class Sistema extends Observable implements Serializable {
     }
 
     //Metodo para agregar funcionario al sistema
-    public boolean agregarFuncionario(String unNombre, int unAnoIngreso, String unTelefono) {
+    public boolean agregarFuncionario(String unNombre, int unAnoIngreso, String unTelefono,int id) {
         boolean correcto = true;
-        if (unNombre.equals("")) {
+        if (unNombre.equals("")||  unAnoIngreso == 0 || unTelefono.equals("")) {
             correcto = false;
             System.out.println("Error, faltó el ingreso del nombre");
         } else if (existeNombre(unNombre)) {
@@ -217,6 +217,7 @@ public class Sistema extends Observable implements Serializable {
             f.setNombre(unNombre);
             f.setCelular(unTelefono);
             f.setAnoIngreso(unAnoIngreso);
+            f.setNumeroFuncionario(id);
 
             funcionarios.add(f);
 
@@ -269,6 +270,17 @@ public class Sistema extends Observable implements Serializable {
 
         for (int i = 0; i < funcionarios.size(); i++) {
             if (funcionarios.get(i).getNombre().equalsIgnoreCase(nombre)) {
+                existe = true;
+            }
+        }
+        return existe;
+    }
+    
+    
+    public boolean existeIdFuncionario(int id) {
+        boolean existe = false;
+        for (int i = 0; i < funcionarios.size(); i++) {
+            if (funcionarios.get(i).getNumeroFuncionario()== id ) {
                 existe = true;
             }
         }

@@ -137,9 +137,11 @@ public class ClienteInterfaz extends javax.swing.JFrame implements Observer {
 
         boolean letrasNombre = nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ]*");
         if (letrasNombre) {
+            
             boolean correcto = modelo.agregarCliente(nombre, email, telefono);
             // se borran datos y se actualiza lista
             if (correcto) {
+                
                 actualizarLista();
                 txtNombre.setText("");
                 txtTel.setText("");
@@ -180,7 +182,11 @@ public class ClienteInterfaz extends javax.swing.JFrame implements Observer {
 
         if (nombreSeleccionado == null) {
             JOptionPane.showMessageDialog(this, "Seleccione un cliente");
-        } else if (!nombre.equalsIgnoreCase(nombreSeleccionado)) {
+        } else if(telefono.equals("")|| nombre.equals("")|| mail.equals("")) {
+             JOptionPane.showMessageDialog(this, "Datos incompletos");
+             
+        }
+        else if (!nombre.equalsIgnoreCase(nombreSeleccionado)) {
             Cliente otro = modelo.obtenerCliente(nombre);
             if (otro.getNombre() != null && otro.getNombre().equalsIgnoreCase(nombre)) {
                 JOptionPane.showMessageDialog(this, "El nombre ya existe");

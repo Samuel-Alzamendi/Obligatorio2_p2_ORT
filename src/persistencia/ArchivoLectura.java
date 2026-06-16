@@ -36,11 +36,11 @@ public class ArchivoLectura {
         return hay;
     }
 
-    public String linea() { // devuelve la última linea leida return linea; } public void cerrar() { in.close(); }
-        return linea;
-    }
-    
-    public void cerrar() {
-        in.close();
-    }
+    public String linea() {
+    return linea;
+}
+
+public void cerrar() {
+    in.close();
+}
 }
