@@ -344,7 +344,7 @@ public class Sistema extends Observable implements Serializable {
             }
         }
         setChanged();
-        notifyObservers()
+        notifyObservers();
     }
             
             
