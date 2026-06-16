@@ -141,6 +141,7 @@ public class FuncionarioInterfaz extends javax.swing.JFrame implements Observer 
         int ano = 0;
         int id = 0;
         boolean cumple = false;
+        boolean cumpleId = true;
         boolean letrasNombre = nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ]*");
         if (letrasNombre) {
             try {
@@ -158,18 +159,22 @@ public class FuncionarioInterfaz extends javax.swing.JFrame implements Observer 
             }
             try {
                 id = Integer.parseInt(txtId.getText());
+                if(id==0){
+                    cumpleId = false;
+                }
             } catch (NumberFormatException e) {
                 System.out.println(e);
-                JOptionPane.showMessageDialog(this, "Ingrese solamente numeros en año");
+                cumpleId = false;
             }
 
             boolean idRepetido = modelo.existeIdFuncionario(id);
             boolean correcto = true;
-            if (cumple) {
-
+            if (cumple && !idRepetido && cumpleId) {
                 correcto = modelo.agregarFuncionario(nombre, ano, telefono, id);
+            } else {
+                JOptionPane.showMessageDialog(this, "El ID ya existe o está vacío");
             }
-            if (correcto && cumple && idRepetido) {
+            if (correcto && cumple && !idRepetido && cumpleId) {
                 actualizarLista();
                 txtId.setText("");
                 txtNombre.setText("");
@@ -178,7 +183,7 @@ public class FuncionarioInterfaz extends javax.swing.JFrame implements Observer 
                 JOptionPane.showMessageDialog(this, "Se creo correctamente");
                 modelo.registrarTransaccion("Ingreso de funcionario " + nombre);
             } else if (cumple) {
-                JOptionPane.showMessageDialog(this, "El nombre ya existe o está vacío");
+                JOptionPane.showMessageDialog(this, "No se pudo ingresar funcionario");
             }
         } else {
             JOptionPane.showMessageDialog(this, "El nombre no es valido");
@@ -195,7 +200,7 @@ public class FuncionarioInterfaz extends javax.swing.JFrame implements Observer 
 
         if (nombreSeleccionado == null) {
             JOptionPane.showMessageDialog(this, "Seleccione un funcionario");
-        } else if (telefono.equals("") || nombre.equals("") || ano == 0) {
+        } else if (telefono.equals("") || nombre.equals("")) {
             JOptionPane.showMessageDialog(this, "Datos incompletos");
         } else if (!nombre.equalsIgnoreCase(nombreSeleccionado)) {
             Funcionario otro = modelo.obtenerFuncionario(nombre);
@@ -216,7 +221,6 @@ public class FuncionarioInterfaz extends javax.swing.JFrame implements Observer 
                     } catch (NumberFormatException e) {
                         System.out.println(e);
                         JOptionPane.showMessageDialog(this, "Ingrese solamente numeros en año");
-
                     }
                     try {
                         id = Integer.parseInt(txtId.getText());
@@ -242,38 +246,8 @@ public class FuncionarioInterfaz extends javax.swing.JFrame implements Observer 
                 } else {
                     JOptionPane.showMessageDialog(this, "El nombre no es valido");
                 }
-            }
-        } else {
-            boolean letrasNombre = nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ]*");
-            if (letrasNombre) {
-                try {
-                    ano = Integer.parseInt(txtAñoIngreso.getText());
-                    if (ano < 1900 || ano > 2026) {
-                        JOptionPane.showMessageDialog(this, "Error... Año mal ingresada");
-                    } else {
-                        cumple = true;
-                    }
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(this, "Ingrese solamente numeros en año");
-                }
-                if (cumple) {
-                    boolean correcto = modelo.eliminarFuncionario(nombreSeleccionado);
-                    correcto = modelo.agregarFuncionario(nombre, ano, telefono,id);
-                    if (correcto) {
-                        JOptionPane.showMessageDialog(this, "Se modifico correctamente");
-                        modelo.registrarTransaccion("Modificación de funcionario " + nombre);
-                        actualizarLista();
-                        txtNombre.setText("");
-                        txtTel.setText("");
-                        txtAñoIngreso.setText("");
-                    } else {
-                        JOptionPane.showMessageDialog(this, "No se pudo modificar correctamente");
-                    }
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "El nombre no es valido");
-            }
-        }
+            }//if funcionarios
+        } // if principal
     }//GEN-LAST:event_btnModificarFuncionarioActionPerformed
 
     private void liFunValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_liFunValueChanged
@@ -282,6 +256,7 @@ public class FuncionarioInterfaz extends javax.swing.JFrame implements Observer 
         if (nombreSeleccionado != null) {
             for (int i = 0; i < modelo.getFuncionarios().size(); i++) {
                 if (modelo.getFuncionarios().get(i).getNombre().equalsIgnoreCase(nombreSeleccionado)) {
+                    txtId.setText(String.valueOf(modelo.getFuncionarios().get(i).getNumeroFuncionario()));
                     txtNombre.setText(modelo.getFuncionarios().get(i).getNombre());
                     txtTel.setText(modelo.getFuncionarios().get(i).getCelular());
                     txtAñoIngreso.setText(String.valueOf(modelo.getFuncionarios().get(i).getAnoIngreso()));
