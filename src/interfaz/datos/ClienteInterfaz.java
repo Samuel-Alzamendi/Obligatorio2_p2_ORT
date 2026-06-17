@@ -191,7 +191,6 @@ public class ClienteInterfaz extends javax.swing.JFrame implements Observer {
             JOptionPane.showMessageDialog(this, "Seleccione un cliente");
         } else if(telefono.equals("")|| nombre.equals("")|| mail.equals("")) {
              JOptionPane.showMessageDialog(this, "Datos incompletos");
-             
         }
         else if (!nombre.equalsIgnoreCase(nombreSeleccionado)) {
             Cliente otro = modelo.obtenerCliente(nombre);

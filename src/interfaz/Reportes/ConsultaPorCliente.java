@@ -7,6 +7,9 @@ package interfaz.Reportes;
 import dominio.Cliente;
 import dominio.Paquete;
 import dominio.Sistema;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  *
@@ -21,14 +24,7 @@ public class ConsultaPorCliente extends javax.swing.JFrame {
     public ConsultaPorCliente(Sistema modelo) {
         initComponents();
         this.modelo = modelo;
-
-        String[] datos = new String[modelo.getClientes().size()];
-        for (int i = 0; i < modelo.getClientes().size(); i++) {
-            Cliente c = modelo.getClientes().get(i);
-            datos[i] = c.getNombre();
-        }
-        liClientes.setListData(datos);
-
+        actualizarLista();
     }
 
     @SuppressWarnings("unchecked")
@@ -123,10 +119,9 @@ public class ConsultaPorCliente extends javax.swing.JFrame {
 
         for (int i = 0; i < modelo.getPaquetes().size(); i++) {
             Paquete p = modelo.getPaquetes().get(i);;
-            if (p.getCliente().equals(clienteEncontrado) && p.getEstado().equals("Pendiente")) {
+            if (p.getCliente().equals(clienteEncontrado) && p.getEstado().equalsIgnoreCase("Pendiente")) {
                 cantPendiente++;
             }
-
         }
 
         lblTotalPendientes.setText(cantPendiente + "");
@@ -136,31 +131,59 @@ public class ConsultaPorCliente extends javax.swing.JFrame {
 
         for (int i = 0; i < modelo.getPaquetes().size(); i++) {
             Paquete p = modelo.getPaquetes().get(i);;
-            if (p.getCliente().equals(clienteEncontrado) && p.getEstado().equals("Enviado")) {
+            if (p.getCliente().equals(clienteEncontrado) && p.getEstado().equalsIgnoreCase("Enviado")) {
                 cantEnviado++;
             }
 
         }
 
         lblTotalEnviados.setText(cantEnviado + "");
-        
-           int cantRecibido = 0;
+
+        int cantRecibido = 0;
 
         for (int i = 0; i < modelo.getPaquetes().size(); i++) {
             Paquete p = modelo.getPaquetes().get(i);;
-            if (p.getCliente().equals(clienteEncontrado) && p.getEstado().equals("Enviado")) {
+            if (p.getCliente().equals(clienteEncontrado) && p.getEstado().equalsIgnoreCase("Recibido")) {
                 cantRecibido++;
             }
 
         }
 
-        //Seteamos texto de cant total
-        int cantTotal = cantEnviado + cantPendiente + cantRecibido;
-
-        lblTotalRecibidos.setText(cantTotal + "");
+        //Seteamos texto de cant recibido
+        lblTotalRecibidos.setText(cantRecibido + "");
 
     }//GEN-LAST:event_liClientesMouseClicked
 
+    private void actualizarLista() {
+        String[] datos = new String[modelo.getClientes().size()];
+        ArrayList<String> datosOr = new ArrayList<>();
+
+        for (int i = 0; i < modelo.getClientes().size(); i++) {
+            datosOr.add(modelo.getClientes().get(i).toString());
+        }
+        Collections.sort(datosOr);
+        
+        for (int i = 0; i < modelo.getClientes().size(); i++) {
+            datos[i] = datosOr.get(i);
+        }
+
+        liClientes.setListData(datos);
+
+//                ArrayList<String> nombres = new ArrayList<>();
+//
+//        for (int i = 0; i < modelo.getClientes().size(); i++) {
+//            nombres.add(modelo.getClientes().get(i).toString());
+//        }
+//
+//        Collections.sort(nombres);
+//
+//        String[] datos = new String[nombres.size()];
+//        for (int i = 0; i < nombres.size(); i++) {
+//            datos[i] = nombres.get(i);
+//        }
+//
+//        liClientes.setListData(datos);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

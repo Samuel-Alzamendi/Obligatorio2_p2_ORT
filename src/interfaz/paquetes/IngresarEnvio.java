@@ -332,8 +332,9 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
                     e.setId(Integer.parseInt(lblNumEnvio.getText()));
                     z = modelo.obtenerZona(liZonas.getSelectedValue().toString());
                     e.setZona(z);
+                    e.setrecepcionado(false);
 
-                    int pesoTotal = Integer.parseInt(lblPesoTNum.getText());
+                    float pesoTotal = Float.parseFloat(lblPesoTNum.getText());
                     e.setPesoTotalPaquetes(pesoTotal);
 
                     float montoActual = Float.parseFloat(lblMontoTNum.getText());
@@ -394,7 +395,8 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
                         lblCantPNum.setText(cant + "");
 
                         // peso total de paquetes en envio
-                        int pesoTotal = Integer.parseInt(lblPesoTNum.getText()) + a.getPeso();
+                        float pesoActual = Float.parseFloat(lblPesoTNum.getText());
+                        float pesoTotal = ((pesoActual*1000) + a.getPeso()) / 1000;
                         lblPesoTNum.setText(pesoTotal + "");
 
                         // monto actual
@@ -436,7 +438,8 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
                     Paquete a = pLista.get(i);
 
                     // peso total de paquetes en envio
-                    int pesoTotal = Integer.parseInt(lblPesoTNum.getText()) - a.getPeso();
+                    float pesoActual = Float.parseFloat(lblPesoTNum.getText()) * 1000;
+                    float pesoTotal = (pesoActual - a.getPeso()) / 1000;
                     lblPesoTNum.setText(pesoTotal + "");
 
                     // monto total de paquetes en envio

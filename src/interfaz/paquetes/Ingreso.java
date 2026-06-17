@@ -316,6 +316,8 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
                 } else if (modelo.existePaquete(id)) {
                     JOptionPane.showMessageDialog(this, "Identificador de paquete ya existente\nIngreso inválido");
                 }
+            } else {
+                JOptionPane.showMessageDialog(this, "Destinatario invalido\nIngreso inválido");
             }
 
         } else {

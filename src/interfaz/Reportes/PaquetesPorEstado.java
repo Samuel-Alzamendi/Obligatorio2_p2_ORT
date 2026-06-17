@@ -10,6 +10,8 @@ import dominio.Paquete;
 import dominio.Sistema;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -17,7 +19,7 @@ import javax.swing.JOptionPane;
  *
  * @author samue
  */
-public class PaquetesPorEstado extends javax.swing.JFrame {
+public class PaquetesPorEstado extends javax.swing.JFrame implements Observer {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PaquetesPorEstado.class.getName());
 
@@ -31,6 +33,7 @@ public class PaquetesPorEstado extends javax.swing.JFrame {
                 lblMapaUruguay.getWidth(), lblMapaUruguay.getHeight(), Image.SCALE_SMOOTH);
         lblMapaUruguay.setIcon(new ImageIcon(escalada));
         cargarTabla();
+        modelo.addObserver(this);
     }
 
     /**
@@ -395,17 +398,16 @@ public class PaquetesPorEstado extends javax.swing.JFrame {
             String zona = paquetes.get(h).getDepartamento().getZona().getNombre();
             String estado = paquetes.get(h).getEstado();
             if (zona.equalsIgnoreCase("Oeste")) {
-             
 
                 if (estado.equalsIgnoreCase("Pendiente")) {
                     oP += 1;
-                    
+
                 } else if (estado.equalsIgnoreCase("Enviado")) {
                     oE += 1;
-                   
+
                 } else if (estado.equalsIgnoreCase("Recibido")) {
                     oR += 1;
-                    
+
                 }
             }
         }
@@ -515,7 +517,6 @@ public class PaquetesPorEstado extends javax.swing.JFrame {
             tEnvios.setValueAt(totalO, 1, 3);
             tEnvios.setValueAt(totalS, 2, 3);
             tEnvios.setValueAt(totalE, 3, 3);
-            
 
             //}// for 3
             //}// for 2
@@ -542,4 +543,9 @@ public class PaquetesPorEstado extends javax.swing.JFrame {
     private javax.swing.JPanel pMain;
     private javax.swing.JTable tEnvios;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object arg) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

@@ -64,4 +64,9 @@ public class Funcionario implements Serializable {
         this.anoIngreso = anoIngreso;
     }
 
+    @Override
+    public String toString() {
+        return this.nombre;
+    }
+
 }

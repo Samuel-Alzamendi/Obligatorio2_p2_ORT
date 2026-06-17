@@ -49,6 +49,7 @@ public class LogDeTransacciones extends javax.swing.JFrame implements Observer {
         setTitle("Logs de transacciones");
 
         jButton1.setText("Borrar todo contenido");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
 
         txtLogs.setColumns(20);
         txtLogs.setRows(5);
