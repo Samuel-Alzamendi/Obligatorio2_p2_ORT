@@ -21,7 +21,7 @@ public class Envio implements Serializable {
     private ArrayList<Paquete> paquetes;
     private String fechaEnvio;
     private int pesoTotalPaquetes;
-    private int precio;
+    private float precio;
     private boolean recepcionado;
 
     //constructor    
@@ -99,11 +99,11 @@ public class Envio implements Serializable {
         this.pesoTotalPaquetes = pesoTotalPaquetes;
     }
 
-    public int getPrecio() {
+    public float getPrecio() {
         return precio;
     }
 
-    public void setPrecio(int precio) {
+    public void setPrecio(float precio) {
         this.precio = precio;
     }
     

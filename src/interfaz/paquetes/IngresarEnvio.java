@@ -333,6 +333,12 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
                     z = modelo.obtenerZona(liZonas.getSelectedValue().toString());
                     e.setZona(z);
 
+                    int pesoTotal = Integer.parseInt(lblPesoTNum.getText());
+                    e.setPesoTotalPaquetes(pesoTotal);
+
+                    float montoActual = Float.parseFloat(lblMontoTNum.getText());
+                    e.setPrecio(montoActual);
+
                     //PASA LISTA DE PAQUETES DE ENVIOS(ID) A UN ARRAY PARA LLAMAR METODO cambiarEstadoPaquete()
                     String[] ids = new String[liPaqueteEnvio.getModel().getSize()];
                     for (int i = 0; i < ids.length; i++) {
@@ -374,6 +380,29 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
                     Paquete a = modelo.getPaquetes().get(i);
                     if (a.getId().equalsIgnoreCase(paqueteElegido)) {
                         pLista.add(a);
+
+                        // cantidad de paquetes en envio
+                        int cant = 0;
+
+                        try {
+                            cant = Integer.parseInt(lblCantPNum.getText());
+                        } catch (NumberFormatException e) {
+                            System.out.println(e);
+                        }
+
+                        cant += 1;
+                        lblCantPNum.setText(cant + "");
+
+                        // peso total de paquetes en envio
+                        int pesoTotal = Integer.parseInt(lblPesoTNum.getText()) + a.getPeso();
+                        lblPesoTNum.setText(pesoTotal + "");
+
+                        // monto actual
+                        // al ser float tengo q crear dos variables, sino me da error
+                        float montoActual = Float.parseFloat(lblMontoTNum.getText());
+                        float montoTotal = montoActual + a.getPrecio();
+                        lblMontoTNum.setText(montoTotal + "");
+
                     }
                 }
 
@@ -387,27 +416,8 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
                 DefaultListModel<String> modeloPendientes = (DefaultListModel<String>) liPendientes.getModel();
                 modeloPendientes.remove(indexSeleccionado);
 
-                // cantidad de paquetes en envio
-                int cant = 0;
-
-                try {
-                    cant = Integer.parseInt(lblCantPNum.getText());
-                } catch (NumberFormatException e) {
-                    System.out.println(e);
-                }
-
-                cant += 1;
-                lblCantPNum.setText(cant + "");
-
                 // peso total en envio
-                
                 //lblPesoTNum
-                for(int i = 0; i<modelo.getPaquetes().size(); i++){
-                    
-                }
-                
-                
-                
             }
         }
 
@@ -420,11 +430,22 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
             JOptionPane.showMessageDialog(this, "Seleccione un paquete para quitar");
         } else {
             String paqueteElegido = (String) liPaqueteEnvio.getSelectedValue();
-            int indexSeleccionado = liPaqueteEnvio.getSelectedIndex();
 
             for (int i = 0; i < pLista.size(); i++) {
                 if ((pLista.get(i).getId()).equalsIgnoreCase(paqueteElegido)) {
+                    Paquete a = pLista.get(i);
+
+                    // peso total de paquetes en envio
+                    int pesoTotal = Integer.parseInt(lblPesoTNum.getText()) - a.getPeso();
+                    lblPesoTNum.setText(pesoTotal + "");
+
+                    // monto total de paquetes en envio
+                    float montoActual = Float.parseFloat(lblMontoTNum.getText());
+                    float montoTotal = montoActual - a.getPrecio();
+                    lblMontoTNum.setText(montoTotal + "");
+
                     pLista.remove(i);
+                    break;
                 }
             }
 
@@ -438,18 +459,14 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
             modeloPendientes.addElement(paqueteElegido);
 
             int cant = 0;
-
             try {
                 cant = Integer.parseInt(lblCantPNum.getText());
             } catch (NumberFormatException e) {
                 System.out.println(e);
             }
-
             cant -= 1;
             lblCantPNum.setText(cant + "");
-
         }
-
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
