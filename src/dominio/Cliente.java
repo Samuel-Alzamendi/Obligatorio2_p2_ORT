@@ -63,4 +63,9 @@ public class Cliente implements Serializable {
         this.idPaquetes = idPaquetes;
     }
 
+    @Override
+    public String toString(){
+        return this.nombre;
+    }
+    
 }

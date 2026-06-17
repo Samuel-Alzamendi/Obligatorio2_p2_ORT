@@ -250,7 +250,7 @@ public class ClienteInterfaz extends javax.swing.JFrame implements Observer {
         ArrayList<String> nombres = new ArrayList<>();
 
         for (int i = 0; i < modelo.getClientes().size(); i++) {
-            nombres.add(modelo.getClientes().get(i).getNombre());
+            nombres.add(modelo.getClientes().get(i).toString());
         }
 
         Collections.sort(nombres);
