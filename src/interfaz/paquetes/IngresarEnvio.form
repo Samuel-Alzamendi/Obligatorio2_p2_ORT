@@ -40,56 +40,83 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel1" min="-2" pref="118" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lblNumEnvio" min="-2" pref="180" max="-2" attributes="0"/>
-                              </Group>
+                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel5" min="-2" pref="112" max="-2" attributes="0"/>
-                                      <Component id="cbFuncionarios" min="-2" pref="159" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel1" min="-2" pref="118" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="lblNumEnvio" min="-2" pref="180" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabel5" min="-2" pref="112" max="-2" attributes="0"/>
+                                              <Component id="cbFuncionarios" min="-2" pref="159" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="txtFecha" min="-2" pref="159" max="-2" attributes="0"/>
+                                              <Component id="jLabel2" min="-2" pref="112" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel3" min="-2" pref="112" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane2" min="-2" pref="152" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel4" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="btnAgregar" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
+                                          <Component id="spPaPendientes" alignment="0" min="-2" pref="233" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lblListaEnvio" min="-2" pref="224" max="-2" attributes="0"/>
+                                          <Component id="spListaPaquetes" min="-2" pref="255" max="-2" attributes="0"/>
+                                          <Component id="btnEliminar" min="-2" pref="140" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <Component id="jSeparator1" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="lblPesoT" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="lblPesoTNum" min="-2" pref="37" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="lblMontoT" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="lblMontoTNum" min="-2" pref="37" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace pref="124" max="32767" attributes="0"/>
+                                  <Component id="btnConfirmar" min="-2" pref="132" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="btnCancelar" min="-2" pref="140" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="lblCanPa" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtFecha" min="-2" pref="159" max="-2" attributes="0"/>
-                                      <Component id="jLabel2" min="-2" pref="112" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel3" min="-2" pref="112" max="-2" attributes="0"/>
-                              <Component id="jScrollPane2" min="-2" pref="152" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="btnConfirmar" min="-2" pref="132" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="btnCancelar" min="-2" pref="140" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                          <Component id="jLabel4" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnAgregar" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
-                                  <Component id="spPaPendientes" alignment="0" min="-2" pref="233" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblListaEnvio" min="-2" pref="224" max="-2" attributes="0"/>
-                                  <Component id="spListaPaquetes" min="-2" pref="255" max="-2" attributes="0"/>
-                                  <Component id="btnEliminar" min="-2" pref="140" max="-2" attributes="0"/>
+                                  <Component id="lblCantPNum" min="-2" pref="37" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <Component id="jSeparator1" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="25" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -124,7 +151,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="spListaPaquetes" pref="59" max="32767" attributes="0"/>
+                      <Component id="spListaPaquetes" pref="48" max="32767" attributes="0"/>
                       <Component id="spPaPendientes" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -132,12 +159,33 @@
                       <Component id="btnAgregar" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                       <Component id="btnEliminar" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btnCancelar" pref="40" max="32767" attributes="0"/>
-                      <Component id="btnConfirmar" max="32767" attributes="0"/>
-                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblCanPa" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblCantPNum" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="btnCancelar" pref="40" max="32767" attributes="0"/>
+                              <Component id="btnConfirmar" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblPesoT" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblPesoTNum" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblMontoT" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblMontoTNum" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -284,6 +332,36 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator1">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblCanPa">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cantidad de paquetes a enviar"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblCantPNum">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblPesoTNum">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblPesoT">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Peso total"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblMontoT">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Monto total $"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblMontoTNum">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="0"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

@@ -12,7 +12,6 @@ public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private int id;
     private String nombre;
     private String telefono;
     private String email;
@@ -23,7 +22,7 @@ public class Cliente implements Serializable {
     }
 
     //constructor
-    public Cliente(String nombre, String telefono, String email, ArrayList<Integer> idPaquetes, int id) {
+    public Cliente(String nombre, String telefono, String email, ArrayList<Integer> idPaquetes) {
         this.nombre = nombre;
         this.telefono = telefono;
         this.email = email;

@@ -41,10 +41,8 @@
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="lblNombre1" alignment="1" pref="188" max="32767" attributes="0"/>
                   <Component id="txtAñoIngreso" alignment="1" max="32767" attributes="0"/>
-                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="lblTel" alignment="1" max="32767" attributes="0"/>
-                      <Component id="txtTel" alignment="1" pref="187" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="lblTel" alignment="1" max="32767" attributes="0"/>
+                  <Component id="txtTel" alignment="1" pref="187" max="32767" attributes="0"/>
                   <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                       <Component id="lblNombre" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
                       <Component id="txtNombre" alignment="1" min="-2" pref="187" max="-2" attributes="0"/>

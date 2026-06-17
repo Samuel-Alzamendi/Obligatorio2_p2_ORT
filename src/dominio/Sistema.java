@@ -232,6 +232,7 @@ public class Sistema extends Observable implements Serializable {
     public Funcionario obtenerFuncionario(String nombre) {
         Funcionario f = new Funcionario();
 
+        
         for (int i = 0; i < funcionarios.size(); i++) {
             if (funcionarios.get(i).getNombre().equalsIgnoreCase(nombre)) {
                 f = funcionarios.get(i);
@@ -281,6 +282,16 @@ public class Sistema extends Observable implements Serializable {
         boolean existe = false;
         for (int i = 0; i < funcionarios.size(); i++) {
             if (funcionarios.get(i).getNumeroFuncionario()== id ) {
+                existe = true;
+            }
+        }
+        return existe;
+    }
+    
+    public boolean  existeFuncionarioNombre(String nombre){
+        boolean existe = false;
+        for (int i = 0; i < funcionarios.size(); i++) {
+            if (funcionarios.get(i).getNombre().equalsIgnoreCase(nombre)) {
                 existe = true;
             }
         }

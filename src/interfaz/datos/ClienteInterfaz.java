@@ -149,7 +149,6 @@ public class ClienteInterfaz extends javax.swing.JFrame implements Observer {
             boolean correcto = modelo.agregarCliente(nombre, email, telefono);
             // se borran datos y se actualiza lista
             if (correcto) {
-                
                 actualizarLista();
                 txtNombre.setText("");
                 txtTel.setText("");
@@ -157,7 +156,7 @@ public class ClienteInterfaz extends javax.swing.JFrame implements Observer {
                 JOptionPane.showMessageDialog(this, "Se agrego exitosamente");
                 modelo.registrarTransaccion("Ingreso de cliente " + nombre);
             } else {
-                JOptionPane.showMessageDialog(this, "El nombre ya existe o está vacío");
+                JOptionPane.showMessageDialog(this, "Faltan datos");
             }
         } else {
             JOptionPane.showMessageDialog(this, "El nombre no es valido");

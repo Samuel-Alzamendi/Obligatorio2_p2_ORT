@@ -70,6 +70,12 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
         cbFuncionarios = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        lblCanPa = new javax.swing.JLabel();
+        lblCantPNum = new javax.swing.JLabel();
+        lblPesoTNum = new javax.swing.JLabel();
+        lblPesoT = new javax.swing.JLabel();
+        lblMontoT = new javax.swing.JLabel();
+        lblMontoTNum = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Hacer envio");
@@ -111,48 +117,79 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
 
         jLabel5.setText("Funcionario");
 
+        lblCanPa.setText("Cantidad de paquetes a enviar");
+
+        lblCantPNum.setText("0");
+
+        lblPesoTNum.setText("0");
+
+        lblPesoT.setText("Peso total");
+
+        lblMontoT.setText("Monto total $");
+
+        lblMontoTNum.setText("0");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblNumEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblNumEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cbFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(18, 18, 18)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(spPaPendientes, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblListaEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(spListaPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jSeparator1)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(spPaPendientes, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblListaEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(spListaPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jSeparator1))
-                .addContainerGap(25, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(lblPesoT)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblPesoTNum, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(lblMontoT)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lblMontoTNum, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                                .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblCanPa)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblCantPNum, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,17 +217,32 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(spListaPaquetes, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                    .addComponent(spListaPaquetes, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                     .addComponent(spPaPendientes, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(btnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCanPa)
+                    .addComponent(lblCantPNum))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                            .addComponent(btnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPesoT)
+                            .addComponent(lblPesoTNum))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblMontoT)
+                            .addComponent(lblMontoTNum))))
+                .addGap(18, 18, 18))
         );
 
         getContentPane().add(jPanel1);
@@ -239,8 +291,7 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
         if (liPaqueteEnvio.getModel().getSize() != 0) {
 
             if (cbFuncionarios.getSelectedItem() != null) {
-                Funcionario f  = modelo.obtenerFuncionario(cbFuncionarios.getSelectedItem().toString());
-                
+                Funcionario f = modelo.obtenerFuncionario(cbFuncionarios.getSelectedItem().toString());
 
                 String fechaTexto = "";
                 if (txtFecha.getText().trim().isEmpty()) {
@@ -309,6 +360,7 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+
         if (liZonas.getSelectedValue() == null) {
             JOptionPane.showMessageDialog(this, "Seleccione una zona");
         } else {
@@ -334,6 +386,28 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
 
                 DefaultListModel<String> modeloPendientes = (DefaultListModel<String>) liPendientes.getModel();
                 modeloPendientes.remove(indexSeleccionado);
+
+                // cantidad de paquetes en envio
+                int cant = 0;
+
+                try {
+                    cant = Integer.parseInt(lblCantPNum.getText());
+                } catch (NumberFormatException e) {
+                    System.out.println(e);
+                }
+
+                cant += 1;
+                lblCantPNum.setText(cant + "");
+
+                // peso total en envio
+                
+                //lblPesoTNum
+                for(int i = 0; i<modelo.getPaquetes().size(); i++){
+                    
+                }
+                
+                
+                
             }
         }
 
@@ -362,6 +436,18 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
 
             DefaultListModel<String> modeloPendientes = (DefaultListModel<String>) liPendientes.getModel();
             modeloPendientes.addElement(paqueteElegido);
+
+            int cant = 0;
+
+            try {
+                cant = Integer.parseInt(lblCantPNum.getText());
+            } catch (NumberFormatException e) {
+                System.out.println(e);
+            }
+
+            cant -= 1;
+            lblCantPNum.setText(cant + "");
+
         }
 
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -383,7 +469,7 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
         for (int i = 0; i < modelo.getZonas().size(); i++) {
             zonas[i] = modelo.getZonas().get(i).getNombre();
         }
-        liZonas.setListData(zonas);  
+        liZonas.setListData(zonas);
 
     }
 
@@ -391,13 +477,12 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
     private void numEnvio() {
         int maxId = 0;
         for (int i = 0; i < modelo.getEnvios().size(); i++) {
-        if (modelo.getEnvios().get(i).getId() > maxId) {
-            maxId = modelo.getEnvios().get(i).getId();
+            if (modelo.getEnvios().get(i).getId() > maxId) {
+                maxId = modelo.getEnvios().get(i).getId();
+            }
         }
+        lblNumEnvio.setText((maxId + 1) + "");
     }
-    lblNumEnvio.setText((maxId + 1) + "");
-}
-    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -414,8 +499,14 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblCanPa;
+    private javax.swing.JLabel lblCantPNum;
     private javax.swing.JLabel lblListaEnvio;
+    private javax.swing.JLabel lblMontoT;
+    private javax.swing.JLabel lblMontoTNum;
     private javax.swing.JLabel lblNumEnvio;
+    private javax.swing.JLabel lblPesoT;
+    private javax.swing.JLabel lblPesoTNum;
     private javax.swing.JList<String> liPaqueteEnvio;
     private javax.swing.JList<String> liPendientes;
     private javax.swing.JList<String> liZonas;
@@ -427,6 +518,6 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         actualizarListas();
-        
+
     }
 }
