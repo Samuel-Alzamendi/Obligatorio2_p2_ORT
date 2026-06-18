@@ -155,7 +155,7 @@ public class Sistema extends Observable implements Serializable {
     // agregar un clinete
     public boolean agregarCliente(String unNombre, String unMail, String unTelefono) {
         boolean correcto = true;
-        if (unNombre.equals("")|| unMail.equals("") || unTelefono.equals("")) {
+        if (unNombre.equals("") || unMail.equals("") || unTelefono.equals("")) {
             correcto = false;
             System.out.println("Error, faltó el ingreso de un dato");
         } else if (existeNombre(unNombre)) {
@@ -205,9 +205,9 @@ public class Sistema extends Observable implements Serializable {
     }
 
     //Metodo para agregar funcionario al sistema
-    public boolean agregarFuncionario(String unNombre, int unAnoIngreso, String unTelefono,int id) {
+    public boolean agregarFuncionario(String unNombre, int unAnoIngreso, String unTelefono, int id) {
         boolean correcto = true;
-        if (unNombre.equals("")||  unAnoIngreso == 0 || unTelefono.equals("")) {
+        if (unNombre.equals("") || unAnoIngreso == 0 || unTelefono.equals("")) {
             correcto = false;
             System.out.println("Error, faltó el ingreso del nombre");
         } else if (existeNombre(unNombre)) {
@@ -232,7 +232,6 @@ public class Sistema extends Observable implements Serializable {
     public Funcionario obtenerFuncionario(String nombre) {
         Funcionario f = new Funcionario();
 
-        
         for (int i = 0; i < funcionarios.size(); i++) {
             if (funcionarios.get(i).getNombre().equalsIgnoreCase(nombre)) {
                 f = funcionarios.get(i);
@@ -276,19 +275,18 @@ public class Sistema extends Observable implements Serializable {
         }
         return existe;
     }
-    
-    
+
     public boolean existeIdFuncionario(int id) {
         boolean existe = false;
         for (int i = 0; i < funcionarios.size(); i++) {
-            if (funcionarios.get(i).getNumeroFuncionario()== id ) {
+            if (funcionarios.get(i).getNumeroFuncionario() == id) {
                 existe = true;
             }
         }
         return existe;
     }
-    
-    public boolean  existeFuncionarioNombre(String nombre){
+
+    public boolean existeFuncionarioNombre(String nombre) {
         boolean existe = false;
         for (int i = 0; i < funcionarios.size(); i++) {
             if (funcionarios.get(i).getNombre().equalsIgnoreCase(nombre)) {
@@ -304,18 +302,17 @@ public class Sistema extends Observable implements Serializable {
 //
 //        return 0;
 //    }
-
     public void AgregarPaquete(Paquete paquete) {
         paquetes.add(paquete);
         setChanged();
         notifyObservers();
     }
 
-    public Paquete obtenerPaquete(String nombre) {
+    public Paquete obtenerPaquete(String id) {
         Paquete p = new Paquete();
 
         for (int i = 0; i < paquetes.size(); i++) {
-            if (paquetes.get(i).getId().equalsIgnoreCase(nombre)) {
+            if (paquetes.get(i).getId().equalsIgnoreCase(id)) {
                 p = paquetes.get(i);
             }
         }
@@ -324,10 +321,10 @@ public class Sistema extends Observable implements Serializable {
     }
 
     public ArrayList<Paquete> ObtenerPaquetePen(String zona) {
-        ArrayList<Paquete> paquetesPendientes = new ArrayList<>(); 
+        ArrayList<Paquete> paquetesPendientes = new ArrayList<>();
 
         for (int i = 0; i < paquetes.size(); i++) {
-            if (paquetes.get(i).getDepartamento().getZona().getNombre().equalsIgnoreCase(zona) && paquetes.get(i).getEstado().equalsIgnoreCase("pendiente") ) {
+            if (paquetes.get(i).getDepartamento().getZona().getNombre().equalsIgnoreCase(zona) && paquetes.get(i).getEstado().equalsIgnoreCase("pendiente")) {
                 paquetesPendientes.add(paquetes.get(i));
             }
         }
@@ -345,11 +342,11 @@ public class Sistema extends Observable implements Serializable {
         }
         return existe;
     }
-    
-    public void cambiarEstadoPaquete(String[]lista){
-        for(int i=0; i <lista.length;i++){
-            for(int j = 0;j<paquetes.size();j++ ){
-                if (paquetes.get(j).getId().equalsIgnoreCase(lista[i])){
+
+    public void cambiarEstadoPaquete(String[] lista) {
+        for (int i = 0; i < lista.length; i++) {
+            for (int j = 0; j < paquetes.size(); j++) {
+                if (paquetes.get(j).getId().equalsIgnoreCase(lista[i])) {
                     paquetes.get(j).setEstado("Enviado");
                 }
             }
@@ -357,40 +354,66 @@ public class Sistema extends Observable implements Serializable {
         setChanged();
         notifyObservers();
     }
-            
-            
-      public int calcularPrecio(int pesoEnGramos, Departamento d){
-         int numero = 0;
-         int categoria = -1;
-          String zona = "";
-          if(pesoEnGramos< 1000){
-              zona=d.getZona().getNombre();
-              categoria = 0;
-          
-             
-          }else if(pesoEnGramos>= 1000 && pesoEnGramos< 5000){
-              zona = d.getZona().getNombre();
-               categoria = 1;
-              
-          }else if(pesoEnGramos>= 5000 && pesoEnGramos<10000){
-              zona = d.getZona().getNombre();
-               categoria = 2;
-              
-          } else if(pesoEnGramos>= 10000) {
-              zona = d.getZona().getNombre();
-               categoria = 3;
-              
-          }else{
-               System.out.println("Error");
-          }
-          
-          for (int i=0 ; i<tarifas.size();i++){
-                  if (tarifas.get(i).getZona().getNombre().equalsIgnoreCase(zona)){
-                      numero = tarifas.get(i).getPrecios()[categoria];
-                  }
-           }
-          return numero;
-      }
+
+    public boolean EliminarPaqueteEnvio(int idEnvio, String idPaquete) {
+        boolean correcto = true;
+        
+        Envio e = obtenerEnvio(idEnvio);
+        Paquete p = new Paquete();
+        for(int i = 0; i<e.getPaquetes().size(); i++){
+            p = e.getPaquetes().get(i);
+            if(p.getId().equalsIgnoreCase(idPaquete)){
+                e.getPaquetes().get(i).setEstado("Pendiente");
+                e.getPaquetes().remove(p);
+            }
+        }
+//        if (existePaquete(id)) {
+//            Paquete p = new Paquete();
+//            for (int i = 0; i < paquetes.size(); i++) {
+//                if (paquetes.get(i).getId().equalsIgnoreCase(id)) {
+//                    p = paquetes.get(i);
+//                    
+//                    setChanged();
+//                    notifyObservers();
+//                }
+//            }
+//        } else {
+//            correcto = false;
+//        }
+        return correcto;
+    }
+
+    public int calcularPrecio(int pesoEnGramos, Departamento d) {
+        int numero = 0;
+        int categoria = -1;
+        String zona = "";
+        if (pesoEnGramos < 1000) {
+            zona = d.getZona().getNombre();
+            categoria = 0;
+
+        } else if (pesoEnGramos >= 1000 && pesoEnGramos < 5000) {
+            zona = d.getZona().getNombre();
+            categoria = 1;
+
+        } else if (pesoEnGramos >= 5000 && pesoEnGramos < 10000) {
+            zona = d.getZona().getNombre();
+            categoria = 2;
+
+        } else if (pesoEnGramos >= 10000) {
+            zona = d.getZona().getNombre();
+            categoria = 3;
+
+        } else {
+            System.out.println("Error");
+        }
+
+        for (int i = 0; i < tarifas.size(); i++) {
+            if (tarifas.get(i).getZona().getNombre().equalsIgnoreCase(zona)) {
+                numero = tarifas.get(i).getPrecios()[categoria];
+            }
+        }
+        return numero;
+    }
 
     //------------------------------------------------------------
     // envios
@@ -404,25 +427,16 @@ public class Sistema extends Observable implements Serializable {
         }
         return e;
     }
-    
-    public void agregarEnvio(Envio envio){
+
+    public void agregarEnvio(Envio envio) {
         envios.add(envio);
         setChanged();
         notifyObservers();
-     
-        
-    }
-    
-    
-  //-----------------------------------------------------------------------
-    //RECEPCION
-    
-    
-    
-    
- 
-           
 
+    }
+
+    //-----------------------------------------------------------------------
+    //RECEPCION
     //-----------------------------------------------------------------------
     //TARIFAS
     public void cargarTarifas() {
@@ -447,9 +461,8 @@ public class Sistema extends Observable implements Serializable {
 
     }
 
-     //-----------------------------------------------------------------------
+    //-----------------------------------------------------------------------
     //LOG DE TRANSACCIONES
-
     public void registrarTransaccion(String descripcion) {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yy HH:mm");
         String fechaHora = formato.format(new Date());

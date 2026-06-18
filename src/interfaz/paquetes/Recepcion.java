@@ -5,10 +5,18 @@
 package interfaz.paquetes;
 
 import dominio.Envio;
+import dominio.Paquete;
 import dominio.Sistema;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.List;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -23,8 +31,10 @@ public class Recepcion extends javax.swing.JFrame implements Observer {
     public Recepcion(Sistema modelo) {
         this.modelo = modelo;
         initComponents();
+        liEnvios.setCellRenderer(new EnvioListRenderer());
         actualizarListas();
         modelo.addObserver(this);
+        liPaquetesEnvio.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
     }
 
     @SuppressWarnings("unchecked")
@@ -104,11 +114,34 @@ public class Recepcion extends javax.swing.JFrame implements Observer {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        if (liEnvios.getSelectedValue() != null) {
-            int id = Integer.parseInt(liEnvios.getSelectedValue().split(" - ")[0].replace("Envio ", "").trim());
-            modelo.registrarTransaccion("Recepción de envío número " + id);
+        if (liEnvios.getSelectedValue() != null && liPaquetesEnvio.getSelectedValue() != null) {
+
+            int idEnvio = Integer.parseInt(liEnvios.getSelectedValue().split(" - ")[0].replace("Envio ", "").trim());
+            Envio e = modelo.obtenerEnvio(idEnvio);
+            e.setRecepcionado(true);
+            java.util.List<String> paquetesSeleccionados = liPaquetesEnvio.getSelectedValuesList();
+
+            for (int i = 0; i < paquetesSeleccionados.size(); i++) {
+                String idPaq = paquetesSeleccionados.get(i);
+
+                Paquete p = modelo.obtenerPaquete(idPaq);
+                p.setEstado("Recibido");
+            }
+
+            for (int j = 0; j < liPaquetesEnvio.getModel().getSize(); j++) {
+                String idPaquete = liPaquetesEnvio.getModel().getElementAt(j);
+                if (!paquetesSeleccionados.contains(idPaquete)) {
+                    boolean estadoPaquete = modelo.EliminarPaqueteEnvio(idEnvio, idPaquete);
+                }
+            }
+
+            modelo.registrarTransaccion("Recepción de envío número " + idEnvio);
+            actualizarListas();
+
+        } else {
+
         }
-        this.dispose();
+
         // revisar
 //        if (liEnvios.getSelectedValue() == null) {
 //            JOptionPane.showMessageDialog(this, "Seleccione un envio");
@@ -125,7 +158,6 @@ public class Recepcion extends javax.swing.JFrame implements Observer {
 //
 //        }
 
-
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void liEnviosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_liEnviosValueChanged
@@ -133,7 +165,7 @@ public class Recepcion extends javax.swing.JFrame implements Observer {
 
             //OBTIENE TEXTO ENVIO X + REMPLAZA ENVIO DEJANDO SOLO EL NUMERO Y PARSEINT
             int id = Integer.parseInt(liEnvios.getSelectedValue().split(" - ")[0].replace("Envio ", "").trim());
-            
+
             System.out.println("Buscando envio con id: " + id);
             Envio e = modelo.obtenerEnvio(id);
             System.out.println("Envio encontrado: " + e);
@@ -161,9 +193,38 @@ public class Recepcion extends javax.swing.JFrame implements Observer {
             indice++;
         }
         liEnvios.setListData(envios);
+        
+        
+        liPaquetesEnvio.setListData(new String[0]);
 
     }
 
+    private class EnvioListRenderer extends DefaultListCellRenderer {
+
+        public Component getListCellRendererComponent(JList<?> list, Object value,
+                int index, boolean isSelected, boolean cellHasFocus) {
+
+            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+
+            if (value instanceof String) {
+                String texto = (String) value;
+                int id = Integer.parseInt(texto.split(" - ")[0].replace("Envio ", "").trim());
+                Envio envio = modelo.obtenerEnvio(id);
+
+                if (envio.isRecepcionado()) {
+                    setBackground(Color.GREEN);
+                } else {
+                    setBackground(Color.YELLOW);
+                }
+
+                if (isSelected) {
+                    setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                }
+            }
+
+            return this;
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
