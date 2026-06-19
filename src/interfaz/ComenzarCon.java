@@ -1,10 +1,16 @@
+/**
+ * Michelle Katz 220144 
+ * Samuel Alzamendi 355626
+ */
 package interfaz;
 
 import dominio.Sistema;
+import persistencia.ArchivoGrabacion;
 import persistencia.Persistencia;
 
 /**
- * Michelle Katz 220144 Samuel Alzamendi 355626
+ * Michelle Katz 220144 
+ * Samuel Alzamendi 355626
  */
 public class ComenzarCon extends javax.swing.JFrame {
 
@@ -76,6 +82,9 @@ public class ComenzarCon extends javax.swing.JFrame {
 
         Persistencia p = new Persistencia();
         p.borrarDatos();
+
+        ArchivoGrabacion grab = new ArchivoGrabacion("Transacciones.log");
+        grab.cerrar();
 
         modelo = new Sistema();
 

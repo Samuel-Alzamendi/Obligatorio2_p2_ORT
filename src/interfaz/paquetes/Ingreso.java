@@ -1,6 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+/**
+ * Michelle Katz 220144 
+ * Samuel Alzamendi 355626
  */
 package interfaz.paquetes;
 
@@ -195,133 +195,148 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
         String id = txtId.getText();
         boolean signos = id.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9]*");
 
-        if (signos) {
-            String destinatario = txtDestinatario.getText();
-            boolean letrasDes = destinatario.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ]*");
+        if (!txtDestinatario.getText().equalsIgnoreCase("")) {
 
-            if (letrasDes) {
-                if (!modelo.existePaquete(id)) {
-                    if (liClientes.getSelectedValue() == null) {
-                        JOptionPane.showMessageDialog(this, "Seleccione un cliente");
-                        clienteCumple = false;
-                    } else {
-                        String nombreSeleccionado = (String) liClientes.getSelectedValue();
-                        c = modelo.obtenerCliente(nombreSeleccionado);
-                    }
+            if (!txtDireccion.getText().equalsIgnoreCase("")) {
 
-                    if (clienteCumple) {
-                        Departamento d = new Departamento();
-                        d = modelo.obtenerDepartamento(cbDepartamentos.getSelectedItem().toString());
+                if (signos) {
+                    String destinatario = txtDestinatario.getText();
+                    boolean letrasDes = destinatario.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ]*");
 
-                        String fechaTexto = "";
-                        if (txtFecha.getText().trim().isEmpty()) {
-                            JOptionPane.showMessageDialog(this, "Error... Debe ingresar la fecha");
-                            cumpleFecha = false;
-                            cumple = false;
-                        } else {
-                            SimpleDateFormat formato = new SimpleDateFormat("d/M/yyyy");
-                            formato.setLenient(false);
+                    if (letrasDes) {
+                        if (!modelo.existePaquete(id)) {
+                            if (liClientes.getSelectedValue() == null) {
+                                JOptionPane.showMessageDialog(this, "Seleccione un cliente");
+                                clienteCumple = false;
+                            } else {
+                                String nombreSeleccionado = (String) liClientes.getSelectedValue();
+                                c = modelo.obtenerCliente(nombreSeleccionado);
+                            }
 
-                            try {
-                                Date fecha = formato.parse(txtFecha.getText().trim());
+                            if (clienteCumple) {
+                                Departamento d = new Departamento();
+                                d = modelo.obtenerDepartamento(cbDepartamentos.getSelectedItem().toString());
 
-                                Calendar cal = Calendar.getInstance();
-                                cal.setTime(fecha);
-                                int ano = cal.get(Calendar.YEAR);
-
-                                if (ano < 2026 || ano > 2080) {
-                                    JOptionPane.showMessageDialog(this, "Error... El año debe estar entre 2026 y 2080");
+                                String fechaTexto = "";
+                                if (txtFecha.getText().trim().isEmpty()) {
+                                    JOptionPane.showMessageDialog(this, "Error... Debe ingresar la fecha");
                                     cumpleFecha = false;
                                     cumple = false;
                                 } else {
-                                    // normalizamos el formato a dd/MM/yyyy para guardar
-                                    SimpleDateFormat formatoSalida = new SimpleDateFormat("dd/MM/yyyy");
-                                    fechaTexto = formatoSalida.format(fecha);
-                                }
-                            } catch (ParseException e) {
-                                JOptionPane.showMessageDialog(this, "Error... Fecha mal ingresada. Use el formato dd/MM/aaaa");
-                                cumpleFecha = false;
-                                cumple = false;
-                            }
+                                    SimpleDateFormat formato = new SimpleDateFormat("d/M/yyyy");
+                                    formato.setLenient(false);
 
-                            int peso = 0;
-
-                            try {
-                                peso = Integer.parseInt(txtPeso.getText());
-                                cumplePeso = true;
-                            } catch (NumberFormatException e) {
-                                JOptionPane.showMessageDialog(this, "el peso debe contener solo números");
-
-                            }
-                            if (cumpleFecha && cumple && cumplePeso) {
-
-                                Paquete p = new Paquete();
-                                p.setDepartamento(d);
-                                p.setDireccion(txtDireccion.getText());
-                                p.setFecha(fechaTexto);
-                                p.setId(id);
-                                p.setNombreDestinatario(destinatario);
-
-                                if (lblPrecioMuestra.getText().equals("_________")) {
-                                    JOptionPane.showMessageDialog(this, "Error... No se Calculo");
-                                    cumple = false;
-                                } else if (txtPeso.getText().trim().isEmpty()) {
-                                    JOptionPane.showMessageDialog(this, "Error... No se ingreso peso");
-                                    cumple = false;
-                                } else {
                                     try {
-                                        peso = Integer.parseInt(txtPeso.getText());
+                                        Date fecha = formato.parse(txtFecha.getText().trim());
 
-                                        if (peso < 0) {
-                                            JOptionPane.showMessageDialog(this, "Error... Se ingreso un peso negativo");
+                                        Calendar cal = Calendar.getInstance();
+                                        cal.setTime(fecha);
+                                        int ano = cal.get(Calendar.YEAR);
+
+                                        if (ano < 2026 || ano > 2080) {
+                                            JOptionPane.showMessageDialog(this, "Error... El año debe estar entre 2026 y 2080");
+                                            cumpleFecha = false;
                                             cumple = false;
                                         } else {
-                                            p.setPeso(peso);
+                                            // normalizamos el formato a dd/MM/yyyy para guardar
+                                            SimpleDateFormat formatoSalida = new SimpleDateFormat("dd/MM/yyyy");
+                                            fechaTexto = formatoSalida.format(fecha);
                                         }
-                                    } catch (NumberFormatException e) {
-                                        JOptionPane.showMessageDialog(this, "Error... El peso debe ser un número");
+                                    } catch (ParseException e) {
+                                        JOptionPane.showMessageDialog(this, "Error... Fecha mal ingresada. Use el formato dd/MM/aaaa");
+                                        cumpleFecha = false;
                                         cumple = false;
                                     }
+
+                                    int peso = 0;
+
+                                    try {
+                                        peso = Integer.parseInt(txtPeso.getText());
+                                        cumplePeso = true;
+                                    } catch (NumberFormatException e) {
+                                        JOptionPane.showMessageDialog(this, "el peso debe contener solo números");
+                                        
+                                        // correcion hecha
+                                        cumplePeso = false;
+                                    }
+                                    if (cumpleFecha && cumple && cumplePeso) {
+
+                                        Paquete p = new Paquete();
+                                        p.setDepartamento(d);
+                                        p.setDireccion(txtDireccion.getText());
+                                        p.setFecha(fechaTexto);
+                                        p.setId(id);
+                                        p.setNombreDestinatario(destinatario);
+
+                                        if (lblPrecioMuestra.getText().equals("_________")) {
+                                            JOptionPane.showMessageDialog(this, "Error... No se Calculo");
+                                            cumple = false;
+                                        } else if (txtPeso.getText().trim().isEmpty()) {
+                                            JOptionPane.showMessageDialog(this, "Error... No se ingreso peso");
+                                            cumple = false;
+                                        } else {
+                                            try {
+                                                peso = Integer.parseInt(txtPeso.getText());
+
+                                                if (peso < 0) {
+                                                    JOptionPane.showMessageDialog(this, "Error... Se ingreso un peso negativo");
+                                                    cumple = false;
+                                                } else {
+                                                    p.setPeso(peso);
+                                                }
+                                            } catch (NumberFormatException e) {
+                                                JOptionPane.showMessageDialog(this, "Error... El peso debe ser un número");
+                                                cumple = false;
+                                            }
+                                        }
+
+                                        p.setEstado("Pendiente");
+                                        // calcular
+                                        p.setPrecio(modelo.calcularPrecio(peso, d));
+                                        p.setCliente(c);
+
+                                        if (cumple) {
+                                            modelo.AgregarPaquete(p);
+                                            modelo.registrarTransaccion("Ingreso de paquete de cliente " + c.getNombre());
+
+                                        }
+                                        //actualizarListaPaquetes();
+                                    }
+
                                 }
-
-                                p.setEstado("Pendiente");
-                                // calcular
-                                p.setPrecio(modelo.calcularPrecio(peso, d));
-                                p.setCliente(c);
-
-                                if (cumple) {
-                                    modelo.AgregarPaquete(p);
-                                    modelo.registrarTransaccion("Ingreso de paquete de cliente " + c.getNombre());
-
-                                }
-                                //actualizarListaPaquetes();
                             }
 
+                            if (cumple && cumpleFecha && clienteCumple && cumplePeso) {
+                                JOptionPane.showMessageDialog(this, "Ingreso exitoso");
+                                cargarTabla();
+                                txtId.setText("");
+                                txtFecha.setText("");
+                                txtDestinatario.setText("");
+                                txtDireccion.setText("");
+                                txtPeso.setText("");
+                                lblPrecioMuestra.setText("_________");
+                            }
+                            //else {
+                            //JOptionPane.showMessageDialog(this, "Ingreso inválido");
+                            //  }
+                        } else if (modelo.existePaquete(id)) {
+                            JOptionPane.showMessageDialog(this, "Identificador de paquete ya existente\nIngreso inválido");
                         }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Destinatario invalido\nIngreso inválido");
                     }
 
-                    if (cumple && cumpleFecha && clienteCumple && cumplePeso) {
-                        JOptionPane.showMessageDialog(this, "Ingreso exitoso");
-                        cargarTabla();
-                        txtId.setText("");
-                        txtFecha.setText("");
-                        txtDestinatario.setText("");
-                        txtDireccion.setText("");
-                        txtPeso.setText("");
-                        lblPrecioMuestra.setText("_________");
-                    }
-                    //else {
-                    //JOptionPane.showMessageDialog(this, "Ingreso inválido");
-                    //  }
-                } else if (modelo.existePaquete(id)) {
-                    JOptionPane.showMessageDialog(this, "Identificador de paquete ya existente\nIngreso inválido");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Identificador de paquete invalido\nIngreso inválido");
                 }
+
             } else {
-                JOptionPane.showMessageDialog(this, "Destinatario invalido\nIngreso inválido");
+                JOptionPane.showMessageDialog(this, "Ingrese una direccion\nIngreso inválido");
+
             }
 
         } else {
-            JOptionPane.showMessageDialog(this, "Identificador de paquete invalido\nIngreso inválido");
+            JOptionPane.showMessageDialog(this, "Ingrese un destinatario\nIngreso inválido");
         }
 
 

@@ -1,13 +1,14 @@
+/**
+ * Michelle Katz 220144 
+ * Samuel Alzamendi 355626
+ */
 package interfaz;
 import dominio.Sistema;
 import interfaz.Reportes.*;
 import interfaz.datos.*;
 import interfaz.paquetes.*;
 import persistencia.Persistencia;
-/**
- * Michelle Katz 220144
- * Samuel Alzamendi 355626
- */
+
 public class Menu extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Menu.class.getName());

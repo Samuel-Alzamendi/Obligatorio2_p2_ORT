@@ -1,6 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+/**
+ * Michelle Katz 220144 
+ * Samuel Alzamendi 355626
  */
 package interfaz.Reportes;
 
@@ -10,12 +10,14 @@ import dominio.Sistema;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
  * @author samue
  */
-public class ConsultaPorCliente extends javax.swing.JFrame {
+public class ConsultaPorCliente extends javax.swing.JFrame implements Observer {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ConsultaPorCliente.class.getName());
 
@@ -24,6 +26,8 @@ public class ConsultaPorCliente extends javax.swing.JFrame {
     public ConsultaPorCliente(Sistema modelo) {
         initComponents();
         this.modelo = modelo;
+        // agregado completo
+        modelo.addObserver(this);
         actualizarLista();
     }
 
@@ -162,7 +166,7 @@ public class ConsultaPorCliente extends javax.swing.JFrame {
             datosOr.add(modelo.getClientes().get(i).toString());
         }
         Collections.sort(datosOr);
-        
+
         for (int i = 0; i < modelo.getClientes().size(); i++) {
             datos[i] = datosOr.get(i);
         }
@@ -197,4 +201,9 @@ public class ConsultaPorCliente extends javax.swing.JFrame {
     private javax.swing.JPanel pMain;
     private javax.swing.JScrollPane spClientes;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object arg) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

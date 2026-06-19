@@ -1,3 +1,7 @@
+/**
+ * Michelle Katz 220144 
+ * Samuel Alzamendi 355626
+ */
 package interfaz;
 
 import dominio.Sistema;

@@ -1,6 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+/**
+ * Michelle Katz 220144 
+ * Samuel Alzamendi 355626
  */
 package interfaz.paquetes;
 
@@ -287,83 +287,89 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
         boolean cumpleFecha = true;
         boolean cumple = true;
 
-        //CHECKEO DE QUE CAMPOS ESTEN LLENOS Y BIEN
-        if (liPaqueteEnvio.getModel().getSize() != 0) {
+        // verificacion hecha
+        if (liZonas.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(this, "Seleccione una zona");
+        } else {
+            if (liPaqueteEnvio.getModel().getSize() != 0) {
 
-            if (cbFuncionarios.getSelectedItem() != null) {
-                Funcionario f = modelo.obtenerFuncionario(cbFuncionarios.getSelectedItem().toString());
+                if (cbFuncionarios.getSelectedItem() != null) {
+                    Funcionario f = modelo.obtenerFuncionario(cbFuncionarios.getSelectedItem().toString());
 
-                String fechaTexto = "";
-                if (txtFecha.getText().trim().isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "Error... Debe ingresar la fecha");
-                    cumpleFecha = false;
-                    cumple = false;
-                } else {
-                    SimpleDateFormat formato = new SimpleDateFormat("d/M/yyyy");
-                    formato.setLenient(false);
-
-                    try {
-                        Date fecha = formato.parse(txtFecha.getText().trim());
-
-                        Calendar cal = Calendar.getInstance();
-                        cal.setTime(fecha);
-                        int ano = cal.get(Calendar.YEAR);
-
-                        if (ano < 2026 || ano > 2080) {
-                            JOptionPane.showMessageDialog(this, "Error... Fecha mal ingresada");
-                            cumpleFecha = false;
-                            cumple = false;
-                        } else {
-                            SimpleDateFormat formatoSalida = new SimpleDateFormat("dd/MM/yyyy");
-                            fechaTexto = formatoSalida.format(fecha);
-                        }
-                    } catch (ParseException e) {
-                        JOptionPane.showMessageDialog(this, "Error... Fecha mal ingresada. Use el formato dd/MM/aaaa");
+                    String fechaTexto = "";
+                    if (txtFecha.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(this, "Error... Debe ingresar la fecha");
                         cumpleFecha = false;
                         cumple = false;
+                    } else {
+                        SimpleDateFormat formato = new SimpleDateFormat("d/M/yyyy");
+                        formato.setLenient(false);
+
+                        try {
+                            Date fecha = formato.parse(txtFecha.getText().trim());
+
+                            Calendar cal = Calendar.getInstance();
+                            cal.setTime(fecha);
+                            int ano = cal.get(Calendar.YEAR);
+
+                            if (ano < 2026 || ano > 2080) {
+                                JOptionPane.showMessageDialog(this, "Error... Fecha mal ingresada");
+                                cumpleFecha = false;
+                                cumple = false;
+                            } else {
+                                SimpleDateFormat formatoSalida = new SimpleDateFormat("dd/MM/yyyy");
+                                fechaTexto = formatoSalida.format(fecha);
+                            }
+                        } catch (ParseException e) {
+                            JOptionPane.showMessageDialog(this, "Error... Fecha mal ingresada. Use el formato dd/MM/aaaa");
+                            cumpleFecha = false;
+                            cumple = false;
+                        }
                     }
+
+                    if (cumple) {
+                        //LLAMAR A SISTEMA
+                        Envio e = new Envio();
+                        e.setFechaEnvio(fechaTexto);
+                        e.setFuncionario(f);
+                        e.setId(Integer.parseInt(lblNumEnvio.getText()));
+                        z = modelo.obtenerZona(liZonas.getSelectedValue().toString());
+                        e.setZona(z);
+                        e.setrecepcionado(false);
+
+                        float pesoTotal = Float.parseFloat(lblPesoTNum.getText());
+                        e.setPesoTotalPaquetes(pesoTotal);
+
+                        float montoActual = Float.parseFloat(lblMontoTNum.getText());
+                        e.setPrecio(montoActual);
+
+                        //PASA LISTA DE PAQUETES DE ENVIOS(ID) A UN ARRAY PARA LLAMAR METODO cambiarEstadoPaquete()
+                        String[] ids = new String[liPaqueteEnvio.getModel().getSize()];
+                        for (int i = 0; i < ids.length; i++) {
+                            ids[i] = liPaqueteEnvio.getModel().getElementAt(i);
+                        }
+                        modelo.cambiarEstadoPaquete(ids);
+                        for (int i = 0; i < ids.length; i++) {
+                            Paquete pa = modelo.obtenerPaquete(ids[i]);
+                            e.agregarPaquete(pa);
+                        }
+                        modelo.agregarEnvio(e);
+                        modelo.registrarTransaccion("Ingreso de envío número " + e.getId());
+                        JOptionPane.showMessageDialog(this, "Envio confirmado exitosamente");
+                        this.dispose();
+
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Seleccione un funcionario");
+
                 }
-
-                if (cumple) {
-                    //LLAMAR A SISTEMA
-                    Envio e = new Envio();
-                    e.setFechaEnvio(fechaTexto);
-                    e.setFuncionario(f);
-                    e.setId(Integer.parseInt(lblNumEnvio.getText()));
-                    z = modelo.obtenerZona(liZonas.getSelectedValue().toString());
-                    e.setZona(z);
-                    e.setrecepcionado(false);
-
-                    float pesoTotal = Float.parseFloat(lblPesoTNum.getText());
-                    e.setPesoTotalPaquetes(pesoTotal);
-
-                    float montoActual = Float.parseFloat(lblMontoTNum.getText());
-                    e.setPrecio(montoActual);
-
-                    //PASA LISTA DE PAQUETES DE ENVIOS(ID) A UN ARRAY PARA LLAMAR METODO cambiarEstadoPaquete()
-                    String[] ids = new String[liPaqueteEnvio.getModel().getSize()];
-                    for (int i = 0; i < ids.length; i++) {
-                        ids[i] = liPaqueteEnvio.getModel().getElementAt(i);
-                    }
-                    modelo.cambiarEstadoPaquete(ids);
-                    for (int i = 0; i < ids.length; i++) {
-                        Paquete pa = modelo.obtenerPaquete(ids[i]);
-                        e.agregarPaquete(pa);
-                    }
-                    modelo.agregarEnvio(e);
-                    modelo.registrarTransaccion("Ingreso de envío número " + e.getId());
-                    JOptionPane.showMessageDialog(this, "Envio confirmado exitosamente");
-                    this.dispose();
-
-                }
-
             } else {
-                JOptionPane.showMessageDialog(this, "Seleccione un funcionario");
-
+                JOptionPane.showMessageDialog(this, "No hay ningun paquete seleccionado");
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "No hay ningun paquete seleccionado");
         }
+        //CHECKEO DE QUE CAMPOS ESTEN LLENOS Y BIEN
+
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
@@ -396,7 +402,7 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
 
                         // peso total de paquetes en envio
                         float pesoActual = Float.parseFloat(lblPesoTNum.getText());
-                        float pesoTotal = ((pesoActual*1000) + a.getPeso()) / 1000;
+                        float pesoTotal = ((pesoActual * 1000) + a.getPeso()) / 1000;
                         lblPesoTNum.setText(pesoTotal + "");
 
                         // monto actual

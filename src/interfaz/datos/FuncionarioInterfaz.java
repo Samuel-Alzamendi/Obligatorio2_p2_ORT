@@ -1,3 +1,7 @@
+/**
+ * Michelle Katz 220144 
+ * Samuel Alzamendi 355626
+ */
 package interfaz.datos;
 
 import dominio.Cliente;
@@ -9,9 +13,6 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JOptionPane;
 
-/**
- * Michelle Katz 220144 Samuel Alzamendi 355626
- */
 public class FuncionarioInterfaz extends javax.swing.JFrame implements Observer {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FuncionarioInterfaz.class.getName());

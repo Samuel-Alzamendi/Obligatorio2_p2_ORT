@@ -1,6 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+/**
+ * Michelle Katz 220144 
+ * Samuel Alzamendi 355626
  */
 package interfaz.paquetes;
 
@@ -166,9 +166,9 @@ public class Recepcion extends javax.swing.JFrame implements Observer {
             //OBTIENE TEXTO ENVIO X + REMPLAZA ENVIO DEJANDO SOLO EL NUMERO Y PARSEINT
             int id = Integer.parseInt(liEnvios.getSelectedValue().split(" - ")[0].replace("Envio ", "").trim());
 
-            System.out.println("Buscando envio con id: " + id);
+            //System.out.println("Buscando envio con id: " + id);
             Envio e = modelo.obtenerEnvio(id);
-            System.out.println("Envio encontrado: " + e);
+            //System.out.println("Envio encontrado: " + e);
 
             String[] paquetesLista = new String[e.getPaquetes().size()];
             for (int i = 0; i < e.getPaquetes().size(); i++) {
