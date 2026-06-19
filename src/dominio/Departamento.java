@@ -55,5 +55,8 @@ public class Departamento implements Serializable {
     }
 
     //metodos
-
+    @Override
+    public String toString() {
+        return this.nombre;
+    }
 }
