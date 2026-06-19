@@ -213,8 +213,13 @@ public class Recepcion extends javax.swing.JFrame implements Observer {
 
                 if (envio.isRecepcionado()) {
                     setBackground(Color.GREEN);
+                    setForeground(Color.BLACK);
                 } else {
                     setBackground(Color.YELLOW);
+                    setForeground(Color.BLACK);
+                     
+                   
+                  
                 }
 
                 if (isSelected) {
