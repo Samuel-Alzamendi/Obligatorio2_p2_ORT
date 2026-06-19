@@ -10,7 +10,8 @@ import java.io.Serializable;
  *
  * @author michellekatzzador
  */
-public class Departamento implements Serializable{
+public class Departamento implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     private int numero;
@@ -54,4 +55,8 @@ public class Departamento implements Serializable{
     }
 
     //metodos
+    @Override
+    public String toString() {
+        return this.nombre;
+    }
 }

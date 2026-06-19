@@ -50,4 +50,8 @@ public class Tarifa implements Serializable {
     }
 
     //metodos
+    @Override
+    public String toString() {
+        return this.zona.toString();
+    }
 }

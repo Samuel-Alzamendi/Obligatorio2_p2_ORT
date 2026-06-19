@@ -37,4 +37,8 @@ public class Zona implements Serializable {
     }
 
 //metodos
+    @Override
+    public String toString() {
+        return this.nombre;
+    }
 }

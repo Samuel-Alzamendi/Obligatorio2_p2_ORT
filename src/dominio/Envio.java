@@ -39,11 +39,10 @@ public class Envio implements Serializable {
         this.pesoTotalPaquetes = pesoTotalPaquetes;
         this.precio = precio;
         this.recepcionado = recepcionado;
-        
+
     }
 
     //getter y setter
-
     public boolean isRecepcionado() {
         return recepcionado;
     }
@@ -51,7 +50,7 @@ public class Envio implements Serializable {
     public void setRecepcionado(boolean recepcionado) {
         this.recepcionado = recepcionado;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -59,8 +58,8 @@ public class Envio implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
-    
-        public boolean getRecepcionado() {
+
+    public boolean getRecepcionado() {
         return recepcionado;
     }
 
@@ -115,10 +114,14 @@ public class Envio implements Serializable {
     public void setPrecio(float precio) {
         this.precio = precio;
     }
-    
-    
-    public void agregarPaquete(Paquete paquete) {
-    paquetes.add(paquete);
-}
 
+    public void agregarPaquete(Paquete paquete) {
+        paquetes.add(paquete);
+    }
+
+        @Override
+    public String toString(){
+        return this.id+"";
+    }
+    
 }

@@ -124,4 +124,8 @@ public class Paquete implements Serializable{
     }
 
     //metodos
+        @Override
+    public String toString(){
+        return this.id;
+    }
 }
