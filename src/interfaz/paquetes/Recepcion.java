@@ -126,6 +126,7 @@ public class Recepcion extends javax.swing.JFrame implements Observer {
 
                 Paquete p = modelo.obtenerPaquete(idPaq);
                 p.setEstado("Recibido");
+                
             }
 
             for (int j = 0; j < liPaquetesEnvio.getModel().getSize(); j++) {
@@ -137,6 +138,7 @@ public class Recepcion extends javax.swing.JFrame implements Observer {
 
             modelo.registrarTransaccion("Recepción de envío número " + idEnvio);
             actualizarListas();
+            
 
         } else {
 
@@ -162,19 +164,29 @@ public class Recepcion extends javax.swing.JFrame implements Observer {
 
     private void liEnviosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_liEnviosValueChanged
         if (liEnvios.getSelectedValue() != null) {
-
+            
             //OBTIENE TEXTO ENVIO X + REMPLAZA ENVIO DEJANDO SOLO EL NUMERO Y PARSEINT
             int id = Integer.parseInt(liEnvios.getSelectedValue().split(" - ")[0].replace("Envio ", "").trim());
 
             //System.out.println("Buscando envio con id: " + id);
             Envio e = modelo.obtenerEnvio(id);
             //System.out.println("Envio encontrado: " + e);
+            
+           
 
             String[] paquetesLista = new String[e.getPaquetes().size()];
             for (int i = 0; i < e.getPaquetes().size(); i++) {
                 paquetesLista[i] = e.getPaquetes().get(i).getId();
+                
             }
             liPaquetesEnvio.setListData(paquetesLista);
+            if(e.isRecepcionado()){
+                btnConfirmar.setEnabled(false);
+            }else{
+                btnConfirmar.setEnabled(true);
+            }
+            
+            
 
         }
     }//GEN-LAST:event_liEnviosValueChanged
@@ -214,6 +226,7 @@ public class Recepcion extends javax.swing.JFrame implements Observer {
                 if (envio.isRecepcionado()) {
                     setBackground(Color.GREEN);
                     setForeground(Color.BLACK);
+                    
                 } else {
                     setBackground(Color.YELLOW);
                     setForeground(Color.BLACK);
