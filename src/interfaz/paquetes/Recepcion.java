@@ -192,8 +192,8 @@ public class Recepcion extends javax.swing.JFrame implements Observer {
                     + " - Fecha: " + modelo.getEnvios().get(i).getFechaEnvio();
             indice++;
         }
-        liEnvios.setListData(envios);
         
+        liEnvios.setListData(envios);
         
         liPaquetesEnvio.setListData(new String[0]);
 

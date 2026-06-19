@@ -255,31 +255,37 @@ public class PaquetesPorEstado extends javax.swing.JFrame implements Observer {
                     nombreCliente = paquetes.get(i).getCliente().getNombre();
                     if (estado.equalsIgnoreCase(estadoRecibido)) {
 
+                        boolean clienteNom = true;
                         // clientes
                         if (cont == -1) {
                             nombresClientes.add(nombreCliente);
-                            cont += 1;
+                            cont += 2;
                         } else {
                             for (int j = 0; j < nombresClientes.size(); j++) {
-                                if (!nombresClientes.get(j).equalsIgnoreCase(nombreCliente)) {
-                                    cont += 1;
-                                    if (cont == 1) {
-                                        cont = 2;
-                                    }
+                                if (nombresClientes.get(j).equalsIgnoreCase(nombreCliente)) {
+                                    clienteNom = false;
                                 }
+                            }
+                            if (clienteNom) {
+                                cont += 1;
+                                nombresClientes.add(nombreCliente);
                             }
                         }// if nombres clientes
 
                         // departamento
+                        boolean depaNom = true;
                         nombreDepa = paquetes.get(i).getDepartamento().getNombre();
                         if (contDepa == -1) {
                             nombresDepa.add(nombreDepa);
                             contDepa += 1;
                         } else {
-                            for (int j = 0; j < nombresDepa.size(); j++) {
-                                if (!nombresDepa.get(j).equalsIgnoreCase(nombreDepa)) {
-                                    nombresDepa.add(nombreDepa);
+                            for (int j = 0; j < nombresDepa.size() && depaNom; j++) {
+                                if (nombresDepa.get(j).equalsIgnoreCase(nombreDepa)) {
+                                    depaNom = false;
                                 }
+                            }
+                            if (depaNom) {
+                                nombresDepa.add(nombreDepa);
                             }
                         }// if departamentos
 
@@ -546,6 +552,6 @@ public class PaquetesPorEstado extends javax.swing.JFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        cargarTabla();
     }
 }
