@@ -1,5 +1,5 @@
 /**
- * Michelle Katz 220144 
+ * Michelle Katz 220144
  * Samuel Alzamendi 355626
  */
 package interfaz;
@@ -10,6 +10,7 @@ import interfaz.Reportes.PaquetesPorEstado;
 public class Programa {
 
     public static void main(String[] args) {
+
         Sistema modelo = new Sistema();
         ComenzarCon ventana = new ComenzarCon(modelo);
         ventana.setVisible(true);
@@ -19,6 +20,5 @@ public class Programa {
 //        Sistema modelo = new Sistema();
 //        PaquetesPorEstado v = new PaquetesPorEstado(modelo);
 //        v.setVisible(true);
-        
     }
 }
