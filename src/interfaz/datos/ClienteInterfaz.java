@@ -144,9 +144,8 @@ public class ClienteInterfaz extends javax.swing.JFrame implements Observer {
         String telefono = txtTel.getText();
         String email = txtEmail.getText();
 
-        boolean letrasNombre = nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ]*");
+        boolean letrasNombre = nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*");
         if (letrasNombre) {
-            
             boolean correcto = modelo.agregarCliente(nombre, email, telefono);
             // se borran datos y se actualiza lista
             if (correcto) {
@@ -157,7 +156,7 @@ public class ClienteInterfaz extends javax.swing.JFrame implements Observer {
                 JOptionPane.showMessageDialog(this, "Se agrego exitosamente");
                 modelo.registrarTransaccion("Ingreso de cliente " + nombre);
             } else {
-                JOptionPane.showMessageDialog(this, "Faltan datos");
+                JOptionPane.showMessageDialog(this, "El nombre ya existe");
             }
         } else {
             JOptionPane.showMessageDialog(this, "El nombre no es valido");
@@ -192,13 +191,12 @@ public class ClienteInterfaz extends javax.swing.JFrame implements Observer {
             JOptionPane.showMessageDialog(this, "Seleccione un cliente");
         } else if(telefono.equals("")|| nombre.equals("")|| mail.equals("")) {
              JOptionPane.showMessageDialog(this, "Datos incompletos");
-        }
-        else if (!nombre.equalsIgnoreCase(nombreSeleccionado)) {
+        } else if (!nombre.equalsIgnoreCase(nombreSeleccionado)) {
             Cliente otro = modelo.obtenerCliente(nombre);
             if (otro.toString() != null && otro.toString().equalsIgnoreCase(nombre)) {
                 JOptionPane.showMessageDialog(this, "El nombre ya existe");
             } else {
-                boolean letrasNombre = nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ]*");
+                boolean letrasNombre = nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*");
                 if (letrasNombre) {
                     boolean correcto = modelo.eliminarCliente(nombreSeleccionado);
                     correcto = modelo.agregarCliente(nombre, mail, telefono);

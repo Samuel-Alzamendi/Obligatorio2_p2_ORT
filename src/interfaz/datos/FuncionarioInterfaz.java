@@ -147,7 +147,7 @@ public class FuncionarioInterfaz extends javax.swing.JFrame implements Observer 
         int id = 0;
         boolean cumple = false;
         boolean cumpleId = true;
-        boolean letrasNombre = nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ]*");
+        boolean letrasNombre = nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*");
         if (letrasNombre) {
             try {
                 ano = Integer.parseInt(txtAñoIngreso.getText());
@@ -233,7 +233,7 @@ public class FuncionarioInterfaz extends javax.swing.JFrame implements Observer 
         } else if (telefono.equals("") || nombre.equals("") || ano == 0 || id == 0) {
             JOptionPane.showMessageDialog(this, "Datos incompletos");
         } else {
-            boolean letrasNombre = nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ]*");
+            boolean letrasNombre = nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*");
             if (letrasNombre && cumple) {
                 Funcionario f = new Funcionario();
                 f = modelo.obtenerFuncionario(nombreSeleccionado);

@@ -300,7 +300,7 @@ public class PaquetesPorEstado extends javax.swing.JFrame implements Observer {
                 cont = 0;
             }
 
-            String mostrar = "Clientes distintos: " + cont + "\n Departmentos: " + depas;
+            String mostrar = "Clientes distintos: " + cont + "\n Departamentos: " + depas;
             JOptionPane.showMessageDialog(this, mostrar);
 
         }

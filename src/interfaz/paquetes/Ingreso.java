@@ -201,7 +201,7 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
 
                 if (signos) {
                     String destinatario = txtDestinatario.getText();
-                    boolean letrasDes = destinatario.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ]*");
+                    boolean letrasDes = destinatario.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*");
 
                     if (letrasDes) {
                         if (!modelo.existePaquete(id)) {

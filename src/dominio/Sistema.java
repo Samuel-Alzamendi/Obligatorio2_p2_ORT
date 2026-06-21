@@ -302,10 +302,7 @@ public class Sistema extends Observable implements Serializable {
 
     // ----------------------------------------------
     // paquetes
-//    public float calcularPrecio() {
-//
-//        return 0;
-//    }
+
     public void AgregarPaquete(Paquete paquete) {
         paquetes.add(paquete);
         setChanged();
@@ -396,23 +393,16 @@ public class Sistema extends Observable implements Serializable {
         if (pesoEnGramos < 1000) {
             zona = d.getZona().getNombre();
             categoria = 0;
-
         } else if (pesoEnGramos >= 1000 && pesoEnGramos < 5000) {
             zona = d.getZona().getNombre();
             categoria = 1;
-
         } else if (pesoEnGramos >= 5000 && pesoEnGramos < 10000) {
             zona = d.getZona().getNombre();
             categoria = 2;
-
         } else if (pesoEnGramos >= 10000) {
             zona = d.getZona().getNombre();
             categoria = 3;
-
-        } 
-//        else {
-//            System.out.println("Error");
-//        }
+        }
 
         for (int i = 0; i < tarifas.size(); i++) {
             if (tarifas.get(i).getZona().getNombre().equalsIgnoreCase(zona)) {
