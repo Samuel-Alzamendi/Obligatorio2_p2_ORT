@@ -409,9 +409,10 @@ public class Sistema extends Observable implements Serializable {
             zona = d.getZona().getNombre();
             categoria = 3;
 
-        } else {
-            System.out.println("Error");
-        }
+        } 
+//        else {
+//            System.out.println("Error");
+//        }
 
         for (int i = 0; i < tarifas.size(); i++) {
             if (tarifas.get(i).getZona().getNombre().equalsIgnoreCase(zona)) {
@@ -446,6 +447,7 @@ public class Sistema extends Observable implements Serializable {
     //-----------------------------------------------------------------------
     //TARIFAS
     public void cargarTarifas() {
+        tarifas.clear();
         ArchivoLectura archivo = new ArchivoLectura("TARIFAS.TXT");
 
         while (archivo.hayMasLineas()) {

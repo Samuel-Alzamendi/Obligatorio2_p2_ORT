@@ -181,6 +181,7 @@ public class VerTarifa extends javax.swing.JFrame {
                         t.getPrecios()[j] = calculo;
                     }
                 }
+                tfporcentaje.setText("");
             }
         }
 

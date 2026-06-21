@@ -69,7 +69,7 @@ public class ComenzarCon extends javax.swing.JFrame {
         modelo = p.deserializar();
         if (modelo == null) {
             modelo = new Sistema();
-            modelo.cargarTarifas();
+            //modelo.cargarTarifas();
         }
 
         Menu menu = new Menu(modelo);
