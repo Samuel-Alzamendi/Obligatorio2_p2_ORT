@@ -265,7 +265,6 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
                 ArrayList<Paquete> paquetesPendientes = modelo.ObtenerPaquetePen(zona);
                 for (Paquete p : paquetesPendientes) {
                     modeloPendientes.addElement(p.getId());
-
                 }
             } else {
                 liPendientes.clearSelection();
@@ -354,7 +353,7 @@ public class IngresarEnvio extends javax.swing.JFrame implements Observer {
                             e.agregarPaquete(pa);
                         }
                         modelo.agregarEnvio(e);
-                        modelo.registrarTransaccion("Ingreso de envío número " + e.getId());
+                        modelo.registrarTransaccion("Ingreso de envío número " + e.toString());
                         JOptionPane.showMessageDialog(this, "Envio confirmado exitosamente");
                         this.dispose();
 

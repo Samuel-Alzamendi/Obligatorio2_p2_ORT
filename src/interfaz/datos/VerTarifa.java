@@ -195,7 +195,7 @@ public class VerTarifa extends javax.swing.JFrame {
 
         for (int i = 0; i < modelo.getTarifas().size(); i++) {
             Tarifa t = modelo.getTarifas().get(i);
-            String linea = t.getZona().getNombre() + "#";
+            String linea = t.getZona().toString() + "#";
             for (int j = 0; j < 4; j++) {
                 linea += t.getPrecios()[j];
                 if (j < 3) {

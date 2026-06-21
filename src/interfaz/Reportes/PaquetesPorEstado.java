@@ -248,11 +248,11 @@ public class PaquetesPorEstado extends javax.swing.JFrame implements Observer {
         if (columna < 3) {
             for (int i = 0; i < paquetes.size(); i++) {
 
-                zona = paquetes.get(i).getDepartamento().getZona().getNombre();
+                zona = paquetes.get(i).getDepartamento().getZona().toString();
                 estado = paquetes.get(i).getEstado();
 
                 if (zona.equalsIgnoreCase(zonaRecibida)) {
-                    nombreCliente = paquetes.get(i).getCliente().getNombre();
+                    nombreCliente = paquetes.get(i).getCliente().toString();
                     if (estado.equalsIgnoreCase(estadoRecibido)) {
 
                         boolean clienteNom = true;
@@ -274,7 +274,7 @@ public class PaquetesPorEstado extends javax.swing.JFrame implements Observer {
 
                         // departamento
                         boolean depaNom = true;
-                        nombreDepa = paquetes.get(i).getDepartamento().getNombre();
+                        nombreDepa = paquetes.get(i).getDepartamento().toString();
                         if (contDepa == -1) {
                             nombresDepa.add(nombreDepa);
                             contDepa += 1;
@@ -315,7 +315,7 @@ public class PaquetesPorEstado extends javax.swing.JFrame implements Observer {
         ArrayList<Paquete> paquetes = modelo.getPaquetes();
 
         for (int h = 0; h < paquetes.size(); h++) {
-            String zona = paquetes.get(h).getDepartamento().getZona().getNombre();
+            String zona = paquetes.get(h).getDepartamento().getZona().toString();
             String estado = paquetes.get(h).getEstado();
 
             if (zona.equalsIgnoreCase("Norte")) {
@@ -345,7 +345,7 @@ public class PaquetesPorEstado extends javax.swing.JFrame implements Observer {
         int eE = 0;
         int eR = 0;
         for (int h = 0; h < paquetes.size(); h++) {
-            String zona = paquetes.get(h).getDepartamento().getZona().getNombre();
+            String zona = paquetes.get(h).getDepartamento().getZona().toString();
             String estado = paquetes.get(h).getEstado();
             if (zona.equalsIgnoreCase("Este")) {
 
@@ -372,7 +372,7 @@ public class PaquetesPorEstado extends javax.swing.JFrame implements Observer {
         ArrayList<Paquete> paquetes = modelo.getPaquetes();
 
         for (int h = 0; h < paquetes.size(); h++) {
-            String zona = paquetes.get(h).getDepartamento().getZona().getNombre();
+            String zona = paquetes.get(h).getDepartamento().getZona().toString();
             String estado = paquetes.get(h).getEstado();
 
             if (zona.equalsIgnoreCase("Sur")) {
@@ -401,7 +401,7 @@ public class PaquetesPorEstado extends javax.swing.JFrame implements Observer {
         ArrayList<Paquete> paquetes = modelo.getPaquetes();
 
         for (int h = 0; h < paquetes.size(); h++) {
-            String zona = paquetes.get(h).getDepartamento().getZona().getNombre();
+            String zona = paquetes.get(h).getDepartamento().getZona().toString();
             String estado = paquetes.get(h).getEstado();
             if (zona.equalsIgnoreCase("Oeste")) {
 
@@ -457,7 +457,7 @@ public class PaquetesPorEstado extends javax.swing.JFrame implements Observer {
         }
 
         for (int h = 0; h < paquetes.size(); h++) {
-            String zona = paquetes.get(h).getDepartamento().getZona().getNombre();
+            String zona = paquetes.get(h).getDepartamento().getZona().toString();
             String estado = paquetes.get(h).getEstado();
 //            for (int i = 0; i < 4; i++) {
 //                for (int j = 0; j < 4; j++) {

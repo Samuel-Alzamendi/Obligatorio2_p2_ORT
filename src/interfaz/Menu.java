@@ -17,7 +17,6 @@ public class Menu extends javax.swing.JFrame {
     
     public Menu(Sistema modelo) {
         this.modelo = modelo;
-        objetoAPantalla();
         initComponents();
     }
 
@@ -178,15 +177,7 @@ public class Menu extends javax.swing.JFrame {
         Persistencia p = new Persistencia();
         p.serializar(modelo);
     }//GEN-LAST:event_formWindowClosing
-
-
-    
-    
-    
-    private void objetoAPantalla(){
-        
-    }
-    
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane jLayeredPane1;

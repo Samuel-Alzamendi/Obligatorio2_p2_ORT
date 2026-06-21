@@ -176,7 +176,7 @@ public class Recepcion extends javax.swing.JFrame implements Observer {
 
             String[] paquetesLista = new String[e.getPaquetes().size()];
             for (int i = 0; i < e.getPaquetes().size(); i++) {
-                paquetesLista[i] = e.getPaquetes().get(i).getId();
+                paquetesLista[i] = e.getPaquetes().get(i).toString();
                 
             }
             liPaquetesEnvio.setListData(paquetesLista);
@@ -200,7 +200,7 @@ public class Recepcion extends javax.swing.JFrame implements Observer {
         String[] envios = new String[modelo.getEnvios().size()];
         int indice = 0;
         for (int i = modelo.getEnvios().size() - 1; i >= 0; i--) {
-            envios[indice] = "Envio " + modelo.getEnvios().get(i).getId()
+            envios[indice] = "Envio " + modelo.getEnvios().get(i).toString()
                     + " - Fecha: " + modelo.getEnvios().get(i).getFechaEnvio();
             indice++;
         }
@@ -230,16 +230,12 @@ public class Recepcion extends javax.swing.JFrame implements Observer {
                 } else {
                     setBackground(Color.YELLOW);
                     setForeground(Color.BLACK);
-                     
-                   
-                  
                 }
 
                 if (isSelected) {
                     setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 }
             }
-
             return this;
         }
     }

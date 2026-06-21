@@ -177,7 +177,7 @@ public class FuncionarioInterfaz extends javax.swing.JFrame implements Observer 
             if (cumple && !idRepetido && cumpleId) {
                 correcto = modelo.agregarFuncionario(nombre, ano, telefono, id);
             } else {
-                JOptionPane.showMessageDialog(this, "El ID ya existe o está vacío");
+                JOptionPane.showMessageDialog(this, "El ID ya existe, está vacío o es invalido");
             }
             if (correcto && cumple && !idRepetido && cumpleId) {
                 actualizarLista();
@@ -253,7 +253,7 @@ public class FuncionarioInterfaz extends javax.swing.JFrame implements Observer 
                     txtAñoIngreso.setText("");
                     actualizarLista();
                 } else {
-                    modelo.agregarFuncionario(f.getNombre(), f.getAnoIngreso(), f.getCelular(), f.getNumeroFuncionario());
+                    modelo.agregarFuncionario(f.toString(), f.getAnoIngreso(), f.getCelular(), f.getNumeroFuncionario());
                     JOptionPane.showMessageDialog(this, "No se pudo modificar funcionario");
                 }
 
@@ -315,9 +315,9 @@ public class FuncionarioInterfaz extends javax.swing.JFrame implements Observer 
         String nombreSeleccionado = (String) liFun.getSelectedValue();
         if (nombreSeleccionado != null) {
             for (int i = 0; i < modelo.getFuncionarios().size(); i++) {
-                if (modelo.getFuncionarios().get(i).getNombre().equalsIgnoreCase(nombreSeleccionado)) {
+                if (modelo.getFuncionarios().get(i).toString().equalsIgnoreCase(nombreSeleccionado)) {
                     txtId.setText(String.valueOf(modelo.getFuncionarios().get(i).getNumeroFuncionario()));
-                    txtNombre.setText(modelo.getFuncionarios().get(i).getNombre());
+                    txtNombre.setText(modelo.getFuncionarios().get(i).toString());
                     txtTel.setText(modelo.getFuncionarios().get(i).getCelular());
                     txtAñoIngreso.setText(String.valueOf(modelo.getFuncionarios().get(i).getAnoIngreso()));
                 }
@@ -339,7 +339,7 @@ public class FuncionarioInterfaz extends javax.swing.JFrame implements Observer 
 
         String[] datos = new String[lista.size()];
         for (int i = 0; i < lista.size(); i++) {
-            datos[i] = lista.get(i).getNombre();
+            datos[i] = lista.get(i).toString();
         }
 
         liFun.setListData(datos);

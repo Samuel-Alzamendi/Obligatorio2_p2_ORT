@@ -171,8 +171,8 @@ public class ClienteInterfaz extends javax.swing.JFrame implements Observer {
         String nombreSeleccionado = (String) liClientes.getSelectedValue();
         if (nombreSeleccionado != null) {
             for (int i = 0; i < modelo.getClientes().size(); i++) {
-                if (modelo.getClientes().get(i).getNombre().equalsIgnoreCase(nombreSeleccionado)) {
-                    txtNombre.setText(modelo.getClientes().get(i).getNombre());
+                if (modelo.getClientes().get(i).toString().equalsIgnoreCase(nombreSeleccionado)) {
+                    txtNombre.setText(modelo.getClientes().get(i).toString());
                     txtEmail.setText(modelo.getClientes().get(i).getMail());
                     txtTel.setText(modelo.getClientes().get(i).getTelefono());
                 }
@@ -195,7 +195,7 @@ public class ClienteInterfaz extends javax.swing.JFrame implements Observer {
         }
         else if (!nombre.equalsIgnoreCase(nombreSeleccionado)) {
             Cliente otro = modelo.obtenerCliente(nombre);
-            if (otro.getNombre() != null && otro.getNombre().equalsIgnoreCase(nombre)) {
+            if (otro.toString() != null && otro.toString().equalsIgnoreCase(nombre)) {
                 JOptionPane.showMessageDialog(this, "El nombre ya existe");
             } else {
                 boolean letrasNombre = nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ]*");

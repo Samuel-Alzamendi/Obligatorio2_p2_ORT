@@ -382,7 +382,7 @@ public class Ingreso extends javax.swing.JFrame implements Observer {
             nuevaFila.addRow(new Object[]{null, null, null, null, null, null, null, null, null});
 
             Paquete p = modelo.getPaquetes().get(i);
-            tbPaquetes.setValueAt(p.getId(), i, 0);
+            tbPaquetes.setValueAt(p.toString(), i, 0);
             tbPaquetes.setValueAt(p.getCliente().getNombre(), i, 1);
             tbPaquetes.setValueAt(p.getNombreDestinatario(), i, 2);
 

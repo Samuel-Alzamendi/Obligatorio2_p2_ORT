@@ -113,7 +113,7 @@ public class ConsultaPorCliente extends javax.swing.JFrame implements Observer {
         String clienteElegido = liClientes.getSelectedValue();
         Cliente clienteEncontrado = null;
         for (int i = 0; i < modelo.getClientes().size(); i++) {
-            if (modelo.getClientes().get(i).getNombre().equalsIgnoreCase(clienteElegido)) {
+            if (modelo.getClientes().get(i).toString().equalsIgnoreCase(clienteElegido)) {
                 clienteEncontrado = modelo.getClientes().get(i);
             }
         }
@@ -122,7 +122,7 @@ public class ConsultaPorCliente extends javax.swing.JFrame implements Observer {
         int cantPendiente = 0;
 
         for (int i = 0; i < modelo.getPaquetes().size(); i++) {
-            Paquete p = modelo.getPaquetes().get(i);;
+            Paquete p = modelo.getPaquetes().get(i);
             if (p.getCliente().equals(clienteEncontrado) && p.getEstado().equalsIgnoreCase("Pendiente")) {
                 cantPendiente++;
             }

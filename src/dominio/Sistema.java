@@ -1,5 +1,5 @@
 /**
- * Michelle Katz 220144 
+ * Michelle Katz 220144
  * Samuel Alzamendi 355626
  */
 package dominio;
@@ -361,16 +361,18 @@ public class Sistema extends Observable implements Serializable {
 
     public boolean EliminarPaqueteEnvio(int idEnvio, String idPaquete) {
         boolean correcto = true;
-        
+
         Envio e = obtenerEnvio(idEnvio);
         Paquete p = new Paquete();
-        for(int i = 0; i<e.getPaquetes().size(); i++){
+        for (int i = 0; i < e.getPaquetes().size(); i++) {
             p = e.getPaquetes().get(i);
-            if(p.getId().equalsIgnoreCase(idPaquete)){
+            if (p.getId().equalsIgnoreCase(idPaquete)) {
                 e.getPaquetes().get(i).setEstado("Pendiente");
                 e.getPaquetes().remove(p);
             }
         }
+        setChanged();
+        notifyObservers();
 //        if (existePaquete(id)) {
 //            Paquete p = new Paquete();
 //            for (int i = 0; i < paquetes.size(); i++) {
